@@ -1,0 +1,7 @@
+C:\Users\ASUS\Desktop\VSC_PRO\الكورس رقم 19\8_DVLD_UI\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.dll.config
+C:\Users\ASUS\Desktop\VSC_PRO\الكورس رقم 19\8_DVLD_UI\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.dll
+C:\Users\ASUS\Desktop\VSC_PRO\الكورس رقم 19\8_DVLD_UI\DVLD_DataAccess\bin\Debug\DVLD_DataAccess.pdb
+C:\Users\ASUS\Desktop\VSC_PRO\الكورس رقم 19\8_DVLD_UI\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.AssemblyReference.cache
+C:\Users\ASUS\Desktop\VSC_PRO\الكورس رقم 19\8_DVLD_UI\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\Desktop\VSC_PRO\الكورس رقم 19\8_DVLD_UI\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.dll
+C:\Users\ASUS\Desktop\VSC_PRO\الكورس رقم 19\8_DVLD_UI\DVLD_DataAccess\obj\Debug\DVLD_DataAccess.pdb
