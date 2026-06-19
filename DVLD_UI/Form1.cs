@@ -27,82 +27,82 @@ namespace DVLD_UI
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmPeopleList frm = new frmPeopleList();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (frmPeopleList frm = new frmPeopleList())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmUsersList frm = new frmUsersList();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (frmUsersList frm = new frmUsersList())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ManageApplicationTypes.frmManageApplicationTypesList frm = new frmManageApplicationTypesList();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (ManageApplicationTypes.frmManageApplicationTypesList frm = new frmManageApplicationTypesList())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Manage_Test_Types.frmManageTestTypes frm = new Manage_Test_Types.frmManageTestTypes();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (Manage_Test_Types.frmManageTestTypes frm = new Manage_Test_Types.frmManageTestTypes())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmNewDrivingLicenseApplication frm = new frmNewDrivingLicenseApplication();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (frmNewDrivingLicenseApplication frm = new frmNewDrivingLicenseApplication())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmLocalDrivingLicenseApplicationsList frm = new frmLocalDrivingLicenseApplicationsList();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (frmLocalDrivingLicenseApplicationsList frm = new frmLocalDrivingLicenseApplicationsList())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmInternational_Licenses_Applications frm = new frmInternational_Licenses_Applications();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (frmInternational_Licenses_Applications frm = new frmInternational_Licenses_Applications())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void internationalDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmInternationalLicenseList frm = new frmInternationalLicenseList();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (frmInternationalLicenseList frm = new frmInternationalLicenseList())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void rENewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Renew_Driving_License.frmRenewLicense frm = new Renew_Driving_License.frmRenewLicense();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (Renew_Driving_License.frmRenewLicense frm = new Renew_Driving_License.frmRenewLicense())
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void replaceDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmReplaceLicense frm = new frmReplaceLicense();
-            frm.ShowDialog();
-
-            frm.Dispose();
+            using (frmReplaceLicense frm = new frmReplaceLicense())
+            {
+                frm.ShowDialog();
+            }
         }
     }
 }
