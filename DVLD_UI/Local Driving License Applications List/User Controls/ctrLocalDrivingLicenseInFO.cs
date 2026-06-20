@@ -33,10 +33,10 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
 
             FullName = clsDrivers.GetDriverNameByPersonID(Driver.PersonID);
 
-            NationalNo = clsPeople.GetPersonNationalNoByID(Driver.PersonID);
+            NationalNo = clsPerson.GetPersonNationalNoByID(Driver.PersonID);
 
 
-            if (clsPeople.GetPersonGendorByID(Driver.PersonID) == 0)
+            if (clsPerson.GetPersonGendorByID(Driver.PersonID) == 0)
                 Gendor = "Male";
 
             else
@@ -53,7 +53,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
 
 
             ISDetained = "No";//Only For Now!!!, I didn't made The Detained Classess Yet!, So Only For No, Teasting I mean, The Anwer Well Be No.
-            DateOfBirth = clsPeople.GetPersonDateOfBirthByID(Driver.PersonID);
+            DateOfBirth = clsPerson.GetPersonDateOfBirthByID(Driver.PersonID);
 
         }
 

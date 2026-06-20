@@ -26,7 +26,7 @@ namespace DVLD_UI.International_License_Applications.User_Controls
 
         clsDrivers Driver = new clsDrivers();
 
-        clsPeople Person = new clsPeople();
+        clsPerson Person = new clsPerson();
 
         clsInternationalLicenses InternationalLicense = new clsInternationalLicenses();
 
@@ -41,14 +41,14 @@ namespace DVLD_UI.International_License_Applications.User_Controls
 
             Driver = clsDrivers.FindByDriverID(DriverID);
 
-            Person = clsPeople.Find(Driver.PersonID);
+            Person = clsPerson.Find(Driver.PersonID);
 
             InternationalLicense = clsInternationalLicenses.FindByInternationalLicenseID(IntLicenseID);
 
-            lblFullName.Text = clsPeople.GetPersonNameByID(Person.PersonID);
+            lblFullName.Text = clsPerson.GetPersonNameByID(Person.PersonID);
             lblIntLicenseID.Text = Convert.ToString(IntLicenseID);
             lblLocalLicense.Text = Convert.ToString(LicenseID);
-            lblNationalNo.Text = clsPeople.GetPersonNationalNoByID(Person.PersonID);
+            lblNationalNo.Text = clsPerson.GetPersonNationalNoByID(Person.PersonID);
 
             if (Person.Gendor == 0)
                 lblGendor.Text = "Male";

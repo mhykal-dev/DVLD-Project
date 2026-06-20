@@ -17,7 +17,7 @@ namespace DVLD_UI.People.User_Controls
     {
         public int PersonID { get; set; }
 
-        clsPeople Person = new clsPeople();
+        clsPerson Person = new clsPerson();
 
         public PersonCardWithFilters()
         {
@@ -36,7 +36,7 @@ namespace DVLD_UI.People.User_Controls
 
         private void _updateCountries()
         {
-            cmboxCountries.DataSource = clsCountries.GetAllCountries();
+            cmboxCountries.DataSource = clsCountry.GetAllCountries();
             cmboxCountries.DisplayMember = "CountryName";
 
             cmboxCountries.ValueMember = "CountryID";
@@ -48,7 +48,7 @@ namespace DVLD_UI.People.User_Controls
 
             int ID = PersonID;
 
-            clsPeople LocalPerson = clsPeople.Find(ID);
+            clsPerson LocalPerson = clsPerson.Find(ID);
 
             if(LocalPerson != null)
             {
@@ -121,7 +121,7 @@ namespace DVLD_UI.People.User_Controls
     }
 }
 
-//cmboxCountries.DataSource = clsCountries.GetAllCountries();
+//cmboxCountries.DataSource = clsCountry.GetAllCountries();
 //cmboxCountries.DisplayMember = "CountryName";
 
 //cmboxCountries.ValueMember = "CountryID";

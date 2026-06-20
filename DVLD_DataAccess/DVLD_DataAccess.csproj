@@ -48,7 +48,7 @@
   <ItemGroup>
     <Compile Include="clsApplicationsData.cs" />
     <Compile Include="clsApplicationsTypesData.cs" />
-    <Compile Include="clsCountriesData.cs" />
+    <Compile Include="clsCountryData.cs" />
     <Compile Include="clsDetainedLicensesData.cs" />
     <Compile Include="clsDriversData.cs" />
     <Compile Include="clsInternationalLicensesData.cs" />
@@ -56,7 +56,7 @@
     <Compile Include="clsLicensesData.cs" />
     <Compile Include="clsLocalDrivingLicenseApplicationsData.cs" />
     <Compile Include="clsLicenseClassesData.cs" />
-    <Compile Include="clsPeopleData.cs" />
+    <Compile Include="clsPersonData.cs" />
     <Compile Include="clsDataAccessSettings.cs" />
     <Compile Include="clsTestAppointmentsData.cs" />
     <Compile Include="clsTestsData.cs" />

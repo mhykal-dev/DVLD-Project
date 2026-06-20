@@ -26,7 +26,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
         clsApplications application = new clsApplications();
 
-        clsPeople Person = new clsPeople();
+        clsPerson Person = new clsPerson();
 
         clsDrivers Driver = new clsDrivers();
 
@@ -43,7 +43,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
             Driver = clsDrivers.FindByDriverID(DriverID);
 
-            Person = clsPeople.Find(Driver.PersonID);
+            Person = clsPerson.Find(Driver.PersonID);
 
             lblApplicationDate.Text = DateTime.Now.ToString();
             lblIssueDate.Text = DateTime.Now.ToString();

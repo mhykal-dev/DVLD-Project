@@ -20,7 +20,7 @@ namespace DVLD_UI.People
 
         private void _RefreshPeopleList()
         {
-            dgvPeopleList.DataSource = clsPeople.GetAllPeople();
+            dgvPeopleList.DataSource = clsPerson.GetAllPeople();
         }
 
         private void frmPeopleList_Load(object sender, EventArgs e)
@@ -69,7 +69,7 @@ namespace DVLD_UI.People
             {
                 int PersonID = Convert.ToInt32(dgvPeopleList.SelectedRows[0].Cells[0].Value);
 
-                if(clsPeople.DeletePerson(PersonID))
+                if(clsPerson.DeletePerson(PersonID))
                 {
                     MessageBox.Show("Person Deleted Successfuly!");
                     _RefreshPeopleList();
@@ -115,7 +115,7 @@ namespace DVLD_UI.People
 
         private void txtboxFilterField_TextChanged(object sender, EventArgs e)
         {
-            dgvPeopleList.DataSource = clsPeople.GetPeopleByFilter(cmbFilterBy.SelectedItem.ToString(), txtboxFilterField.Text.ToString());
+            dgvPeopleList.DataSource = clsPerson.GetPeopleByFilter(cmbFilterBy.SelectedItem.ToString(), txtboxFilterField.Text.ToString());
         }
     }
 }

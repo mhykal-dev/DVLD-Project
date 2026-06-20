@@ -27,7 +27,7 @@ namespace DVLD_UI.People.User_Controls
 
         private void _UpdateCountries()
         {
-            cmboxCountries.DataSource = clsCountries.GetAllCountries();
+            cmboxCountries.DataSource = clsCountry.GetAllCountries();
             cmboxCountries.DisplayMember = "CountryName";
 
             cmboxCountries.ValueMember = "CountryID";
@@ -37,7 +37,7 @@ namespace DVLD_UI.People.User_Controls
         {
             _UpdateCountries();
 
-            clsPeople Person = clsPeople.Find(PersonID);
+            clsPerson Person = clsPerson.Find(PersonID);
 
             if (Person != null)
             {
@@ -70,7 +70,7 @@ namespace DVLD_UI.People.User_Controls
         {
             _UpdateCountries();
 
-            clsPeople Person = clsPeople.FindByNationalNo(NationalNo);
+            clsPerson Person = clsPerson.FindByNationalNo(NationalNo);
 
             if (Person != null)
             {
@@ -119,7 +119,7 @@ namespace DVLD_UI.People.User_Controls
         {
             try
             {
-                PersonID = clsPeople.GetPersonIDByFilter(cmbFilterBy.SelectedItem.ToString(), txtboxFilterField.Text);
+                PersonID = clsPerson.GetPersonIDByFilter(cmbFilterBy.SelectedItem.ToString(), txtboxFilterField.Text);
 
                 if (PersonID != -1)
                 {

@@ -59,7 +59,7 @@ namespace DVLD_UI.Tests.User_Controls
                         lblType.Text = ApplicationType.ApplicationTypeTitle;
                     }
 
-                    lblApplicant.Text = clsPeople.GetPersonNameByID(Application.ApplicationID);
+                    lblApplicant.Text = clsPerson.GetPersonNameByID(Application.ApplicationID);
                     lblDate.Text = Application.ApplicationDate.ToString();
                     lblStatusDate.Text = Application.ApplicationStatus.ToString();//it's worng Untill i Find A Fix. 
                     lblApplicant.Text = NationalNo;
@@ -71,7 +71,7 @@ namespace DVLD_UI.Tests.User_Controls
 
         private void linklblPersonInFo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            clsPeople PersonInFo = clsPeople.FindByNationalNo(NationalNo);
+            clsPerson PersonInFo = clsPerson.FindByNationalNo(NationalNo);
 
             if(PersonInFo != null)
             {

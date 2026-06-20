@@ -26,7 +26,7 @@ namespace DVLD_UI.Renew_Driving_License
 
         clsApplications application = new clsApplications();
 
-        clsPeople Person = new clsPeople();
+        clsPerson Person = new clsPerson();
 
         clsDrivers Driver = new clsDrivers();
 
@@ -43,7 +43,7 @@ namespace DVLD_UI.Renew_Driving_License
 
             Driver = clsDrivers.FindByDriverID(DriverID);
 
-            Person = clsPeople.Find(Driver.PersonID);
+            Person = clsPerson.Find(Driver.PersonID);
 
             lblApplicationDate.Text = DateTime.Now.ToString();
             lblIssueDate.Text = DateTime.Now.ToString();

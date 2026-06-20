@@ -142,7 +142,7 @@ namespace Drivers_Business
 
         public static string GetDriverNameByPersonID(int PersonID)
         {
-            return clsPeople.GetPersonNameByID(PersonID);
+            return clsPerson.GetPersonNameByID(PersonID);
         }
 
         public static int GetDriverPersonIDoByDriverID(int DriverID)

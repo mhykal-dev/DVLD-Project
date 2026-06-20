@@ -58,7 +58,7 @@ namespace DVLD_UI.Tests.User_Controls
                 
                 gbRetakeTest.Enabled = true;
 
-                applications.ApplicantPersonID = clsPeople.GetPersonIDByNationalNo(NationalNo);
+                applications.ApplicantPersonID = clsPerson.GetPersonIDByNationalNo(NationalNo);
                 applications.ApplicationDate = dateTimePicker1.Value;
                 applications.ApplicationTypeID = 7;
                 applications.ApplicationStatus = 1;

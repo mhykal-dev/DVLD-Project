@@ -5,11 +5,11 @@ using AccessSettings_DataAccess;
 
 namespace PEOPLE_DataAccess
 {
-    public class clsPeopleData
+    public class clsPersonData
     {
-        public static bool GetPersonInFoByID(int ID, ref string NationalNo, ref string FirstName,
+        public static bool GetPersonInFoByID(int PersonID, ref string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
-            ref int Gendor, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
+            ref short Gendor, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool IsFound = false;
 
@@ -19,7 +19,7 @@ namespace PEOPLE_DataAccess
 
             SqlCommand command = new SqlCommand(query, connection);
 
-            command.Parameters.AddWithValue("@PersonID", ID);
+            command.Parameters.AddWithValue("@PersonID", PersonID);
 
             try
             {
@@ -29,17 +29,24 @@ namespace PEOPLE_DataAccess
 
                 if (reader.Read())
                 {
+                    // The record was found.
                     IsFound = true;
                     NationalNo = reader["NationalNo"] as string;
                     FirstName = reader["FirstName"] as string;
                     SecondName = reader["SecondName"] as string;
-                    ThirdName = reader["ThirdName"] as string;
+
+                    //ThirdName: allows null in database so we should handle null.
+                    ThirdName = reader["ThirdName"] as string ?? "";
+
                     LastName = reader["LastName"] as string;
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = Convert.ToInt32(reader["Gendor"]);
+                    Gendor = Convert.ToInt16(reader["Gendor"]);
                     Address = reader["Address"] as string;
                     Phone = reader["Phone"] as string;
-                    Email = reader["Email"] as string;
+
+                    //Email: allows null in database so we should handle null.
+                    Email = reader["Email"] as string ?? "";
+
                     NationalityCountryID = Convert.ToInt32(reader["NationalityCountryID"]);
 
                     //ImagePath: allows null in database so we should handle null
@@ -68,9 +75,9 @@ namespace PEOPLE_DataAccess
             return IsFound;
         }
 
-        public static bool GetPersonInFoByNationalNo(ref int ID, string NationalNo, ref string FirstName,
+        public static bool GetPersonInFoByNationalNo(ref int PersonID, string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
-            ref int Gendor, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
+            ref short Gendor, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool IsFound = false;
 
@@ -90,17 +97,25 @@ namespace PEOPLE_DataAccess
 
                 if (reader.Read())
                 {
+                    // The record was found.
                     IsFound = true;
-                    ID = (int)reader["PersonID"];
+
+                    PersonID = Convert.ToInt32(reader["PersonID"]);
                     FirstName = reader["FirstName"] as string;
                     SecondName = reader["SecondName"] as string;
-                    ThirdName = reader["ThirdName"] as string;    
+
+                    //ThirdName: allows null in database so we should handle null.
+                    ThirdName = reader["ThirdName"] as string ?? "";
+
                     LastName = reader["LastName"] as string     ;
                     DateOfBirth = (DateTime)reader["DateOfBirth"];
-                    Gendor = Convert.ToInt32(reader["Gendor"]);
+                    Gendor = Convert.ToInt16(reader["Gendor"]);
                     Address = reader["Address"] as string;
                     Phone = reader["Phone"] as string;
-                    Email = reader["Email"] as string;
+
+                    //Email: allows null in database so we should handle null.
+                    Email = reader["Email"] as string ?? "";
+
                     NationalityCountryID = (int)reader["NationalityCountryID"];
 
                     //ImagePath: allows null in database so we should handle null
@@ -131,7 +146,7 @@ namespace PEOPLE_DataAccess
 
         public static int AddNewPerson(string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
-            int Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+            short Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             //this function will return the new contact id if succeeded and -1 if not.
             int PersonID = -1;
@@ -149,19 +164,20 @@ namespace PEOPLE_DataAccess
             command.Parameters.AddWithValue("@NationalNo", NationalNo);
             command.Parameters.AddWithValue("@FirstName", FirstName);
             command.Parameters.AddWithValue("@SecondName", SecondName);
-            command.Parameters.AddWithValue("@ThirdName", ThirdName);
+
+            command.Parameters.AddWithValue("@ThirdName", string.IsNullOrEmpty(ThirdName) ? (object)DBNull.Value : ThirdName);
+
             command.Parameters.AddWithValue("@LastName", LastName);
             command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
             command.Parameters.AddWithValue("@Gendor", Gendor);
             command.Parameters.AddWithValue("@Address", Address);
             command.Parameters.AddWithValue("@Phone", Phone);
-            command.Parameters.AddWithValue("@Email", Email);
+
+            command.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(Email) ? (object)DBNull.Value : Email);
+
             command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
 
-            if (ImagePath != "" && ImagePath != null)
-                command.Parameters.AddWithValue("@ImagePath", ImagePath);
-            else
-                command.Parameters.AddWithValue("@ImagePath", System.DBNull.Value);
+            command.Parameters.AddWithValue("@ImagePath", string.IsNullOrEmpty(ImagePath) ? (object)DBNull.Value : ImagePath);
 
             try
             {
@@ -188,6 +204,7 @@ namespace PEOPLE_DataAccess
             return PersonID;
         }
 
+        //didn't use it.
         public static int GetPersonIDByFilter(string KeyWord, string Value)
         {
             int PersonID = -1;
@@ -226,7 +243,7 @@ namespace PEOPLE_DataAccess
 
         public static bool updatePerson(int ID, string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
-            int Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+            short Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int rowsAffected = 0;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
@@ -251,20 +268,20 @@ namespace PEOPLE_DataAccess
             command.Parameters.AddWithValue("@NationalNo", NationalNo);
             command.Parameters.AddWithValue("@FirstName", FirstName);
             command.Parameters.AddWithValue("@SecondName", SecondName);
-            command.Parameters.AddWithValue("@ThirdName", ThirdName);
+
+            command.Parameters.AddWithValue("@ThirdName", string.IsNullOrEmpty(ThirdName) ? (object)DBNull.Value : ThirdName);
+
             command.Parameters.AddWithValue("@LastName", LastName);
             command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
             command.Parameters.AddWithValue("@Gendor", Gendor);
             command.Parameters.AddWithValue("@Address", Address);
             command.Parameters.AddWithValue("@Phone", Phone);
-            command.Parameters.AddWithValue("@Email", Email);
-            command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
-            command.Parameters.AddWithValue("@PersonID", ID);
 
-            if (ImagePath != "" && ImagePath != null)
-                command.Parameters.AddWithValue("@ImagePath", ImagePath);
-            else
-                command.Parameters.AddWithValue("@ImagePath", System.DBNull.Value);
+            command.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(Email) ? (object)DBNull.Value : Email);
+
+            command.Parameters.AddWithValue("@NationalityCountryID", NationalityCountryID);
+
+            command.Parameters.AddWithValue("@ImagePath", string.IsNullOrEmpty(ImagePath) ? (object)DBNull.Value : ImagePath);
 
             try
             {
@@ -292,7 +309,21 @@ namespace PEOPLE_DataAccess
             DataTable dt = new DataTable();
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
-            string query = "SELECT * FROM People";
+            string query =
+              @"SELECT People.PersonID, People.NationalNo,
+              People.FirstName, People.SecondName, People.ThirdName, People.LastName,
+			  People.DateOfBirth, People.Gendor,  
+				  CASE
+                  WHEN People.Gendor = 0 THEN 'Male'
+
+                  ELSE 'Female'
+
+                  END as GendorCaption ,
+			  People.Address, People.Phone, People.Email, 
+              People.NationalityCountryID, Countries.CountryName, People.ImagePath
+              FROM            People INNER JOIN
+                         Countries ON People.NationalityCountryID = Countries.CountryID
+                ORDER BY People.FirstName";
 
             SqlCommand command = new SqlCommand(query, connection);
 
@@ -326,6 +357,7 @@ namespace PEOPLE_DataAccess
 
         }
 
+        //didn't use it.
         public static DataTable GetPeopleByFilter(string KeyWord, string Value)
         {
 
@@ -471,6 +503,7 @@ namespace PEOPLE_DataAccess
             return isFound;
         }
 
+        //didn't use it.
         public static string GetPersonNameByID(int PersonID)
         {
             string FullName = "";
@@ -590,7 +623,7 @@ namespace PEOPLE_DataAccess
 
         public static int GetPersonGendorByID(int PersonID)
         {
-            int Gendor = -1;
+            short Gendor = -1;
 
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);
 
@@ -607,7 +640,7 @@ namespace PEOPLE_DataAccess
 
                 if (reader.Read())
                 {
-                    Gendor = Convert.ToInt32(reader["Gendor"]);
+                    Gendor = Convert.ToInt16(reader["Gendor"]);
                 }
 
                 reader.Close();
@@ -663,6 +696,6 @@ namespace PEOPLE_DataAccess
             return DateOfBirth;
 
         }
-
+        //didn't use it.
     }
 }

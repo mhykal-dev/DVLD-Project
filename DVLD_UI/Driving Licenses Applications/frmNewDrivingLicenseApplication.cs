@@ -37,7 +37,7 @@ namespace DVLD_UI.Driving_Licenses_Applications
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if (!(clsPeople.isPersonExist(ctrPersonCard1.PersonID)))
+            if (!(clsPerson.isPersonExist(ctrPersonCard1.PersonID)))
             {
                 MessageBox.Show("This Person Dosen't Exist!");
                 AllowChange = false;
