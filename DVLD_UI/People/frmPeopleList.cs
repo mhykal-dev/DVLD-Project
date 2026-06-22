@@ -42,7 +42,7 @@ namespace DVLD_UI.People
             {
                 int PersonID = Convert.ToInt32(dgvPeopleList.SelectedRows[0].Cells[0].Value);
 
-                frmPersonCard frmPerson = new frmPersonCard(PersonID);
+                frmShowPersonInFo frmPerson = new frmShowPersonInFo(PersonID);
                 frmPerson.ShowDialog();
 
                 frmPerson.Dispose();
@@ -57,7 +57,7 @@ namespace DVLD_UI.People
 
         private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddUpdatePerson frm = new frmAddUpdatePerson(-1);
+            frmAddUpdatePerson frm = new frmAddUpdatePerson();
             frm.ShowDialog();
 
             _RefreshPeopleList();

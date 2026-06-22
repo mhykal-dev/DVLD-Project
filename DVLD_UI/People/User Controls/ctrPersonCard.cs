@@ -70,7 +70,7 @@ namespace DVLD_UI.People.User_Controls
         {
             _UpdateCountries();
 
-            clsPerson Person = clsPerson.FindByNationalNo(NationalNo);
+            clsPerson Person = clsPerson.Find(NationalNo);
 
             if (Person != null)
             {

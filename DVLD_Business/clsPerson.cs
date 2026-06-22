@@ -116,7 +116,7 @@ namespace PEOPLE_Business
                 return null;
         }
 
-        public static clsPerson FindByNationalNo(string NationalNo)
+        public static clsPerson Find(string NationalNo)
         {
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Email = "", Phone = "", Address = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
@@ -190,6 +190,11 @@ namespace PEOPLE_Business
         public static bool isPersonExist(int ID)
         {
             return clsPersonData.IsPersonExist(ID);
+        }
+
+        public static bool isPersonExist(string NationalNo)
+        {
+            return clsPersonData.IsPersonExist(NationalNo);
         }
 
         public static int GetPersonIDByFilter(string KeyWord, string Value)

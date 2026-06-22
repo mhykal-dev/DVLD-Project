@@ -71,11 +71,11 @@ namespace DVLD_UI.Tests.User_Controls
 
         private void linklblPersonInFo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            clsPerson PersonInFo = clsPerson.FindByNationalNo(NationalNo);
+            clsPerson PersonInFo = clsPerson.Find(NationalNo);
 
             if(PersonInFo != null)
             {
-                frmPersonCard frm = new frmPersonCard(PersonInFo.PersonID);
+                frmShowPersonInFo frm = new frmShowPersonInFo(PersonInFo.PersonID);
                 frm.ShowDialog();
 
                 frm.Dispose();
