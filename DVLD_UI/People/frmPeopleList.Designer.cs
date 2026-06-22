@@ -44,6 +44,8 @@
             this.cmbFilterBy = new System.Windows.Forms.ComboBox();
             this.txtboxFilterField = new System.Windows.Forms.TextBox();
             this.btnAddNewPerson = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblrecords = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeopleList)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -78,12 +80,11 @@
             this.dgvPeopleList.BackgroundColor = System.Drawing.Color.White;
             this.dgvPeopleList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPeopleList.ContextMenuStrip = this.contextMenuStrip1;
-            this.dgvPeopleList.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvPeopleList.Location = new System.Drawing.Point(0, 261);
             this.dgvPeopleList.Name = "dgvPeopleList";
             this.dgvPeopleList.ReadOnly = true;
             this.dgvPeopleList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvPeopleList.Size = new System.Drawing.Size(1349, 370);
+            this.dgvPeopleList.Size = new System.Drawing.Size(1349, 305);
             this.dgvPeopleList.TabIndex = 2;
             // 
             // contextMenuStrip1
@@ -168,12 +169,12 @@
             this.cmbFilterBy.FormattingEnabled = true;
             this.cmbFilterBy.Items.AddRange(new object[] {
             "None",
-            "PersonID",
-            "NationalNo",
-            "FirstName",
-            "SecondName",
-            "ThirdName",
-            "LastName",
+            "Person ID",
+            "National No.",
+            "First Name",
+            "Second Name",
+            "Third Name",
+            "Last Name",
             "Nationality",
             "Gendor",
             "Phone",
@@ -182,6 +183,7 @@
             this.cmbFilterBy.Name = "cmbFilterBy";
             this.cmbFilterBy.Size = new System.Drawing.Size(247, 21);
             this.cmbFilterBy.TabIndex = 4;
+            this.cmbFilterBy.SelectedIndexChanged += new System.EventHandler(this.cmbFilterBy_SelectedIndexChanged);
             // 
             // txtboxFilterField
             // 
@@ -190,6 +192,7 @@
             this.txtboxFilterField.Size = new System.Drawing.Size(247, 20);
             this.txtboxFilterField.TabIndex = 5;
             this.txtboxFilterField.TextChanged += new System.EventHandler(this.txtboxFilterField_TextChanged);
+            this.txtboxFilterField.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtboxFilterField_KeyPress);
             // 
             // btnAddNewPerson
             // 
@@ -202,11 +205,33 @@
             this.btnAddNewPerson.UseVisualStyleBackColor = true;
             this.btnAddNewPerson.Click += new System.EventHandler(this.btnAddNewPerson_Click);
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(12, 598);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 24);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "# Records:";
+            // 
+            // lblrecords
+            // 
+            this.lblrecords.AutoSize = true;
+            this.lblrecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrecords.Location = new System.Drawing.Point(119, 598);
+            this.lblrecords.Name = "lblrecords";
+            this.lblrecords.Size = new System.Drawing.Size(50, 24);
+            this.lblrecords.TabIndex = 8;
+            this.lblrecords.Text = "[???]";
+            // 
             // frmPeopleList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1349, 631);
+            this.Controls.Add(this.lblrecords);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddNewPerson);
             this.Controls.Add(this.txtboxFilterField);
             this.Controls.Add(this.cmbFilterBy);
@@ -241,5 +266,7 @@
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phoneCallToolStripMenuItem;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label lblrecords;
     }
 }

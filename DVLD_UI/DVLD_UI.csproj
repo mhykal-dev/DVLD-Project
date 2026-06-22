@@ -66,7 +66,7 @@
     </Compile>
     <Compile Include="Global Classes\clsFormat.cs" />
     <Compile Include="Global Classes\clsGlobal.cs" />
-    <Compile Include="Global Classes\clsValidatoin.cs" />
+    <Compile Include="Global Classes\clsValidation.cs" />
     <Compile Include="Global Classes\util.cs" />
     <Compile Include="International License Applications\frmInternational Licenses Applications.cs">
       <SubType>Form</SubType>

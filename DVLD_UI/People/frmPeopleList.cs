@@ -13,92 +13,134 @@ namespace DVLD_UI.People
 {
     public partial class frmPeopleList : Form
     {
+        private static DataTable _dtAllPeople = clsPerson.GetAllPeople();
+
+        //only select the columns that you want to show in the grid.
+        private DataTable _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
+                                                       "FirstName", "SecondName", "ThirdName", "LastName",
+                                                       "GendorCaption", "DateOfBirth", "CountryName",
+                                                       "Phone", "Email");
+
         public frmPeopleList()
         {
             InitializeComponent();
         }
 
-        private void _RefreshPeopleList()
-        {
-            dgvPeopleList.DataSource = clsPerson.GetAllPeople();
-        }
-
         private void frmPeopleList_Load(object sender, EventArgs e)
         {
-            _RefreshPeopleList();
+            dgvPeopleList.DataSource = _dtPeople;
+            cmbFilterBy.SelectedIndex = 0; //None!.
+
+            _SetupDataGridViewColumns();
+            _UpdateRecordsCount();
+        }
+
+        private void _SetupDataGridViewColumns()
+        {
+            if (dgvPeopleList.Rows.Count == 0) return;
+
+            string[] headers = { "Person ID", "National No.", "First Name", "Second Name", "Third Name", "Last Name", "Gender", "Date Of Birth", "Nationality", "Phone", "Email" };
+            int[] widths = { 110, 120, 120, 140, 120, 120, 120, 140, 120, 120, 170 };
+
+            for(int i = 0; i < dgvPeopleList.Columns.Count; i++)
+            {
+                if(i < headers.Length)
+                {
+                    dgvPeopleList.Columns[i].HeaderText = headers[i];
+                    dgvPeopleList.Columns[i].Width = widths[i];
+                }
+            }
+        }
+
+        private void _RefreshPeopleList()
+        {
+            _dtAllPeople = clsPerson.GetAllPeople();
+            _dtPeople = _dtAllPeople.DefaultView.ToTable(false,
+                "PersonID", "NationalNo", "FirstName", "SecondName", "ThirdName",
+                "LastName", "GendorCaption", "DateOfBirth", "CountryName", "Phone", "Email");
+
+            dgvPeopleList.DataSource = _dtPeople;
+            _UpdateRecordsCount();
+        }
+
+        private void _UpdateRecordsCount()
+        {
+            lblrecords.Text = dgvPeopleList.Rows.Count.ToString();
+        }
+
+        private void cmbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtboxFilterField.Visible = (cmbFilterBy.Text != "None");
+
+            if (txtboxFilterField.Visible)
+            {
+                txtboxFilterField.Clear();
+                txtboxFilterField.Focus();
+            }
+
+            else
+            {
+                _dtPeople.DefaultView.RowFilter = "";
+                _UpdateRecordsCount();
+            }
         }
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            frmAddUpdatePerson frm = new frmAddUpdatePerson(-1);
-            frm.ShowDialog();
+            using (Form frm = new frmAddUpdatePerson())
+            {
+                frm.ShowDialog();
+            }
 
             _RefreshPeopleList();
         }
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(dgvPeopleList.SelectedRows.Count > 0)
+            int PersonID = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
+            using (Form frmPerson = new frmShowPersonInFo(PersonID))
             {
-                int PersonID = Convert.ToInt32(dgvPeopleList.SelectedRows[0].Cells[0].Value);
-
-                frmShowPersonInFo frmPerson = new frmShowPersonInFo(PersonID);
                 frmPerson.ShowDialog();
-
-                frmPerson.Dispose();
-                _RefreshPeopleList();
-            }
-
-            else
-            {
-                MessageBox.Show("Please Select A Row first!");
             }
         }
 
         private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddUpdatePerson frm = new frmAddUpdatePerson();
-            frm.ShowDialog();
+            using (Form frm = new frmAddUpdatePerson())
+            {
+                frm.ShowDialog();
+            }
 
             _RefreshPeopleList();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvPeopleList.SelectedRows.Count > 0)
-            {
-                int PersonID = Convert.ToInt32(dgvPeopleList.SelectedRows[0].Cells[0].Value);
+            if (MessageBox.Show("Are you sure you want to delete Person [" + dgvPeopleList.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
 
-                if(clsPerson.DeletePerson(PersonID))
+            {
+
+                //Perform Delele and refresh
+                if (clsPerson.DeletePerson((int)dgvPeopleList.CurrentRow.Cells[0].Value))
                 {
-                    MessageBox.Show("Person Deleted Successfuly!");
+                    MessageBox.Show("Person Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _RefreshPeopleList();
                 }
-            }
 
-            else
-            {
-                MessageBox.Show("Please Select A Row first!");
-                _RefreshPeopleList();
+                else
+                    MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvPeopleList.SelectedRows.Count > 0)
-            {
-                int PersonID = Convert.ToInt32(dgvPeopleList.SelectedRows[0].Cells[0].Value);
+            int PersonID = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
 
-                frmAddUpdatePerson frm = new frmAddUpdatePerson(PersonID);
+            using (Form frm = new frmAddUpdatePerson(PersonID))
+            {
                 frm.ShowDialog();
 
-                frm.Dispose();
-                _RefreshPeopleList();
-            }
-
-            else
-            {
-                MessageBox.Show("Please Select A Row first!");
                 _RefreshPeopleList();
             }
         }
@@ -115,7 +157,81 @@ namespace DVLD_UI.People
 
         private void txtboxFilterField_TextChanged(object sender, EventArgs e)
         {
-            dgvPeopleList.DataSource = clsPerson.GetPeopleByFilter(cmbFilterBy.SelectedItem.ToString(), txtboxFilterField.Text.ToString());
+            string filterColumn = "";
+            //Map Selected Filter to real Column name 
+            switch (cmbFilterBy.Text)
+            {
+                case "Person ID":
+                    filterColumn = "PersonID";
+                    break;
+
+                case "National No.":
+                    filterColumn = "NationalNo";
+                    break;
+
+                case "First Name":
+                    filterColumn = "FirstName";
+                    break;
+
+                case "Second Name":
+                    filterColumn = "SecondName";
+                    break;
+
+                case "Third Name":
+                    filterColumn = "ThirdName";
+                    break;
+
+                case "Last Name":
+                    filterColumn = "LastName";
+                    break;
+
+                case "Nationality":
+                    filterColumn = "CountryName";
+                    break;
+
+                case "Gendor":
+                    filterColumn = "GendorCaption";
+                    break;
+
+                case "Phone":
+                    filterColumn = "Phone";
+                    break;
+
+                case "Email":
+                    filterColumn = "Email";
+                    break;
+
+                default:
+                    filterColumn = "None";
+                    break;
+
+            }
+
+            if (string.IsNullOrWhiteSpace(txtboxFilterField.Text) || filterColumn == "None")
+            {
+                _dtPeople.DefaultView.RowFilter = "";
+                _UpdateRecordsCount();
+                return;
+            }
+
+
+            string filterValue = txtboxFilterField.Text.Trim().Replace("'", "''");
+
+            if (filterColumn == "PersonID")
+                _dtPeople.DefaultView.RowFilter = $"{filterColumn} = {filterValue}";
+
+            else
+                _dtPeople.DefaultView.RowFilter = $"{filterColumn} LIKE '{filterValue}%'";
+
+            _UpdateRecordsCount();
+        }
+
+        private void txtboxFilterField_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(cmbFilterBy.Text == "Person ID")
+            {
+                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            }
         }
     }
 }

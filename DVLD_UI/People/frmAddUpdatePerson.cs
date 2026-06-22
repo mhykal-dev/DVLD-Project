@@ -94,12 +94,10 @@ namespace DVLD_UI.People
 
         private void _FillCountriesInComoboBox()
         {
-            DataTable dtCountries = clsCountry.GetAllCountries();
+            cbCountry.DataSource = clsCountry.GetAllCountries();
+            cbCountry.DisplayMember = "CountryName";
 
-            foreach(DataRow row in dtCountries.Rows)
-            {
-                cbCountry.Items.Add(row["CountryName"]);
-            }
+            cbCountry.ValueMember = "CountryID";
         }
 
         private void _LoadData()
