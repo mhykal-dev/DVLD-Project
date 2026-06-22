@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DVLD_UI.Global_Classes
 {
-    public class clsValidatoin
+    public class clsValidation
     {
 
         public static bool ValidateEmail(string emailAddress)
