@@ -1,4 +1,4 @@
-﻿using TestTypes_Business;
+﻿using DVLD_UI.Global_Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,64 +9,120 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTypes_Business;
+using TestTypes_Business;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_UI.Manage_Test_Types
 {
     public partial class frmEditTestTypes : Form
     {
-        private int _TestTypeID;
-        public frmEditTestTypes(int TestTypeID)
+        private clsTestType.enTestType _TestTypeID = clsTestType.enTestType.VisionTest;
+        private clsTestType _TestType;
+
+        public frmEditTestTypes(clsTestType.enTestType TestTypeID)
         {
             InitializeComponent();
 
             _TestTypeID = TestTypeID;
-
-            _ShowDetails();
-        }
-
-        private void _ShowDetails()
-        {
-            clsTestTypes TestType = clsTestTypes.Find(_TestTypeID);
-
-            if (TestType != null)
-            {
-                lblID.Text = TestType.TestTypeID.ToString();
-                txtboxTitle.Text = TestType.TestTypeTitle;
-                txtboxDescription.Text = TestType.TestTypeDescription;
-                txtboxFees.Text = TestType.TestTypeFees.ToString();
-            }
-
-            else
-            {
-                MessageBox.Show("This Type Is Not Found");
-            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            clsTestTypes TestType = clsTestTypes.Find(_TestTypeID);
-
-            if (TestType != null)
+            if(!this.ValidateChildren())
             {
-                TestType.TestTypeTitle = txtboxTitle.Text;
-                TestType.TestTypeDescription = txtboxDescription.Text;
-                TestType.TestTypeFees = Convert.ToInt32(txtboxFees.Text);
-
-                if (TestType.Save())
-                {
-                    MessageBox.Show("Saved!");
-                }
-                else
-                {
-                    MessageBox.Show("Not Saved!");
-                }
+                MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
+
+            _TestType.TestTypeTitle = txtboxTitle.Text;
+            _TestType.TestTypeDescription = txtboxDescription.Text;
+            _TestType.TestTypeFees = Convert.ToInt32(txtboxFees.Text);
+
+            if (_TestType.Save())
+            {
+                MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+                MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
         private void bntClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void frmEditTestTypes_Load(object sender, EventArgs e)
+        {
+            _TestType = clsTestType.Find(_TestTypeID);
+
+            if (_TestType != null)
+            {
+                lblID.Text = _TestType.TestTypeID.ToString();
+                txtboxTitle.Text = _TestType.TestTypeTitle;
+                txtboxDescription.Text = _TestType.TestTypeDescription;
+                txtboxFees.Text = _TestType.TestTypeFees.ToString();
+            }
+
+            else
+            {
+                MessageBox.Show("This Type Is Not Found");
+                this.Close();
+            }
+        }
+
+        private void txtboxTitle_Validating(object sender, CancelEventArgs e)
+        {
+            if(string.IsNullOrEmpty(txtboxTitle.Text.Trim()))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtboxTitle, "Title is required");
+            }
+
+            else
+            {
+                errorProvider1.SetError(txtboxTitle, null);
+            };
+        }
+
+        private void txtboxDescription_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtboxDescription.Text.Trim()))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtboxDescription, "Description cannot be empty!");
+            }
+            else
+            {
+                errorProvider1.SetError(txtboxDescription, null);
+            };
+        }
+
+        private void txtboxFees_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtboxFees.Text.Trim()))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtboxFees, "Fees cannot be empty!");
+                return;
+            }
+            else
+            {
+                errorProvider1.SetError(txtboxFees, null);
+
+            }
+            ;
+
+
+            if (!clsValidation.IsNumber(txtboxFees.Text))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtboxFees, "Invalid Number.");
+            }
+            else
+            {
+                errorProvider1.SetError(txtboxFees, null);
+            }
+            ;
         }
     }
 }

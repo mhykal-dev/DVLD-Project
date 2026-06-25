@@ -30,8 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUsersList));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnAddNewUsers = new System.Windows.Forms.Button();
             this.txtboxFilterField = new System.Windows.Forms.TextBox();
@@ -47,6 +47,8 @@
             this.sendEmailToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.phoneCallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
+            this.lblrecords = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsersList)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -66,7 +68,7 @@
             // 
             this.btnAddNewUsers.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAddNewUsers.BackgroundImage")));
             this.btnAddNewUsers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAddNewUsers.Location = new System.Drawing.Point(1175, 262);
+            this.btnAddNewUsers.Location = new System.Drawing.Point(1183, 235);
             this.btnAddNewUsers.Name = "btnAddNewUsers";
             this.btnAddNewUsers.Size = new System.Drawing.Size(56, 49);
             this.btnAddNewUsers.TabIndex = 12;
@@ -75,7 +77,7 @@
             // 
             // txtboxFilterField
             // 
-            this.txtboxFilterField.Location = new System.Drawing.Point(376, 290);
+            this.txtboxFilterField.Location = new System.Drawing.Point(384, 263);
             this.txtboxFilterField.Name = "txtboxFilterField";
             this.txtboxFilterField.Size = new System.Drawing.Size(247, 20);
             this.txtboxFilterField.TabIndex = 11;
@@ -89,7 +91,7 @@
             "UserID",
             "PersonID",
             "IsActive"});
-            this.cmbFilterBy.Location = new System.Drawing.Point(108, 290);
+            this.cmbFilterBy.Location = new System.Drawing.Point(116, 263);
             this.cmbFilterBy.Name = "cmbFilterBy";
             this.cmbFilterBy.Size = new System.Drawing.Size(247, 21);
             this.cmbFilterBy.TabIndex = 10;
@@ -98,7 +100,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(-5, 286);
+            this.label2.Location = new System.Drawing.Point(3, 259);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 25);
             this.label2.TabIndex = 9;
@@ -110,30 +112,29 @@
             this.dgvUsersList.AllowUserToDeleteRows = false;
             this.dgvUsersList.AllowUserToOrderColumns = true;
             this.dgvUsersList.BackgroundColor = System.Drawing.Color.White;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvUsersList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvUsersList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvUsersList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsersList.ContextMenuStrip = this.contextMenuStrip1;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvUsersList.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvUsersList.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvUsersList.Location = new System.Drawing.Point(0, 314);
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvUsersList.DefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvUsersList.Location = new System.Drawing.Point(-6, 290);
             this.dgvUsersList.Name = "dgvUsersList";
             this.dgvUsersList.ReadOnly = true;
             this.dgvUsersList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsersList.Size = new System.Drawing.Size(1401, 370);
+            this.dgvUsersList.Size = new System.Drawing.Size(1401, 395);
             this.dgvUsersList.TabIndex = 8;
             // 
             // contextMenuStrip1
@@ -222,17 +223,39 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Uighur", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Firebrick;
-            this.label1.Location = new System.Drawing.Point(1231, 266);
+            this.label1.Location = new System.Drawing.Point(1239, 239);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 38);
             this.label1.TabIndex = 7;
             this.label1.Text = "Manage Users";
             // 
+            // lblrecords
+            // 
+            this.lblrecords.AutoSize = true;
+            this.lblrecords.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblrecords.Location = new System.Drawing.Point(111, 698);
+            this.lblrecords.Name = "lblrecords";
+            this.lblrecords.Size = new System.Drawing.Size(50, 24);
+            this.lblrecords.TabIndex = 14;
+            this.lblrecords.Text = "[???]";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(4, 698);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(101, 24);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "# Records:";
+            // 
             // frmUsersList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1401, 684);
+            this.ClientSize = new System.Drawing.Size(1401, 731);
+            this.Controls.Add(this.lblrecords);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.btnAddNewUsers);
             this.Controls.Add(this.txtboxFilterField);
             this.Controls.Add(this.cmbFilterBy);
@@ -268,5 +291,7 @@
         private System.Windows.Forms.ToolStripMenuItem changePasswordToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sendEmailToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem phoneCallToolStripMenuItem;
+        private System.Windows.Forms.Label lblrecords;
+        private System.Windows.Forms.Label label3;
     }
 }

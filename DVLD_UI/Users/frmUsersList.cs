@@ -15,124 +15,175 @@ namespace DVLD_UI.Users
 {
     public partial class frmUsersList : Form
     {
+        private static DataTable _dtAllUsers = clsUser.GetAllUsers();
+
+        private DataTable _dtUsers = _dtAllUsers.DefaultView.ToTable(false, "UserID", "PersonID", "UserName", "Password", "IsActive");
         public frmUsersList()
         {
             InitializeComponent();
         }
 
-        private void _RefreshPeopleList()
+        private void _RefreshUsersList()
         {
-            dgvUsersList.DataSource = clsUsers.GetAllUsers();
+            _dtAllUsers = clsUser.GetAllUsers();
+            _dtUsers = _dtAllUsers.DefaultView.ToTable(false, "UserID", "PersonID", "UserName", "Password", "IsActive");
+
+            dgvUsersList.DataSource = _dtUsers;
+            _UpdateRecordsCount();
         }
 
         private void frmUsersList_Load(object sender, EventArgs e)
         {
-            _RefreshPeopleList();
+            dgvUsersList.DataSource = _dtUsers;
+            cmbFilterBy.SelectedIndex = 0;
+
+            _SetupDataGridViewColumns();
+            _UpdateRecordsCount();
+        }
+
+        private void _SetupDataGridViewColumns()
+        {
+            if (dgvUsersList.Rows.Count == 0) return;
+
+            string[] headers = { "User ID", "PersonID", "UserName", "Password", "IsActive" };
+            int[] widths = { 110, 120, 120, 140, 120 };
+
+            for (int i = 0; i < dgvUsersList.Columns.Count; i++)
+            {
+                if (i < headers.Length)
+                {
+                    dgvUsersList.Columns[i].HeaderText = headers[i];
+                    dgvUsersList.Columns[i].Width = widths[i];
+                }
+            }
+        }
+
+        private void _UpdateRecordsCount()
+        {
+            lblrecords.Text = dgvUsersList.Rows.Count.ToString();
         }
 
         private void btnAddNewUsers_Click(object sender, EventArgs e)
         {
-            frmAddNewUser frm = new frmAddNewUser();
-            frm.ShowDialog();
+            using (Form frm = new frmAddNewUser())
+            {
+                frm.ShowDialog();
+            }
 
-            frm.Dispose();
-            _RefreshPeopleList();
+            _RefreshUsersList();
         }
 
         private void txtboxFilterField_TextChanged(object sender, EventArgs e)
         {
-            dgvUsersList.DataSource = clsUsers.GetUsersByFilter(cmbFilterBy.SelectedItem.ToString(), txtboxFilterField.Text);
+            string FilterColumn = "";
+            //Map Selected Filter to real Column name 
+            switch (cmbFilterBy.Text)
+            {
+                case "User ID":
+                    FilterColumn = "UserID";
+                    break;
+                case "UserName":
+                    FilterColumn = "UserName";
+                    break;
+
+                case "Person ID":
+                    FilterColumn = "PersonID";
+                    break;
+
+
+                case "Full Name":
+                    FilterColumn = "FullName";
+                    break;
+
+                default:
+                    FilterColumn = "None";
+                    break;
+
+            }
+
+            //Reset the filters in case nothing selected or filter value conains nothing.
+            if (txtboxFilterField.Text.Trim() == "" || FilterColumn == "None")
+            {
+                _dtUsers.DefaultView.RowFilter = "";
+                _UpdateRecordsCount();
+                return;
+            }
+
+
+            if (FilterColumn != "FullName" && FilterColumn != "UserName")
+                //in this case we deal with numbers not string.
+                _dtUsers.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtboxFilterField.Text.Trim());
+            else
+                _dtUsers.DefaultView.RowFilter = string.Format("[{0}] LIKE '{1}%'", FilterColumn, txtboxFilterField.Text.Trim());
+
+            _UpdateRecordsCount();
         }
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvUsersList.SelectedRows.Count > 0)
+            if (dgvUsersList.CurrentRow == null) return;
+            int UserID = (int)dgvUsersList.CurrentRow.Cells[0].Value;
+            using (Form frmUser = new frmShowUserDetails(UserID))
             {
-                int UserID = Convert.ToInt32(dgvUsersList.SelectedRows[0].Cells[0].Value);
-
-                frmShowUserDetails frmUser = new frmShowUserDetails(UserID);
                 frmUser.ShowDialog();
-
-                frmUser.Dispose();
-                _RefreshPeopleList();
             }
 
-            else
-            {
-                MessageBox.Show("Please Select A Row first!");
-            }
+            _RefreshUsersList();
         }
-
+        
         private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAddNewUser frm = new frmAddNewUser();
-            frm.ShowDialog();
+            using (Form frm = new frmAddNewUser())
+            {
+                frm.ShowDialog();
+            }
 
-            frm.Dispose();
-            _RefreshPeopleList();
+            _RefreshUsersList();
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvUsersList.SelectedRows.Count > 0)
+            if (dgvUsersList.CurrentRow == null) return;
+            int UserID = (int)dgvUsersList.CurrentRow.Cells[0].Value;
+
+            using (Form frm = new frmUpdateUser(UserID))
             {
-                int UserID = Convert.ToInt32(dgvUsersList.SelectedRows[0].Cells[0].Value);
+                frm.ShowDialog();
 
-                frmUpdateUser frmUser = new frmUpdateUser(UserID);
-                frmUser.ShowDialog();
-
-                frmUser.Dispose();
-                _RefreshPeopleList();
-            }
-
-            else
-            {
-                MessageBox.Show("Please Select A Row first!");
+                _RefreshUsersList();
             }
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvUsersList.SelectedRows.Count > 0)
-            {
-                int UserID = Convert.ToInt32(dgvUsersList.SelectedRows[0].Cells[0].Value);
+            if (dgvUsersList.CurrentRow == null) return;
+            if (MessageBox.Show("Are you sure you want to delete Person [" + dgvUsersList.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
 
-                if(clsUsers.DeleteUser(UserID))
+            {
+
+                //Perform Delele and refresh
+                if (clsUser.DeleteUser((int)dgvUsersList.CurrentRow.Cells[0].Value))
                 {
-                    MessageBox.Show("User Deleted Successfuly!");
-                    _RefreshPeopleList();
+                    MessageBox.Show("Person Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    _RefreshUsersList();
                 }
 
                 else
-                {
-                    MessageBox.Show("Can't Delete This User Because He Has Linked To This System!!!");
-                    _RefreshPeopleList();
-                }
-            }
+                    MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-            else
-            {
-                MessageBox.Show("Please Select A Row first!");
-                _RefreshPeopleList();
             }
         }
 
         private void changePasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (dgvUsersList.SelectedRows.Count > 0)
-            {
-                int UserID = Convert.ToInt32(dgvUsersList.SelectedRows[0].Cells[0].Value);
+            if (dgvUsersList.CurrentRow == null) return;
+            int UserID = (int)dgvUsersList.CurrentRow.Cells[0].Value;
 
-                frmChangePassword frm = new frmChangePassword(UserID);
+            using (Form frm = new frmChangePassword(UserID))
+            {
                 frm.ShowDialog();
 
-                frm.Dispose();
-                _RefreshPeopleList();
-            }
-
-            else
-            {
-                MessageBox.Show("Please Select A Row first!");
+                _RefreshUsersList();
             }
         }
     }

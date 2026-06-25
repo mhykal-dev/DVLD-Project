@@ -14,37 +14,37 @@ namespace DVLD_UI.Users.User_Controls
 {
     public partial class ctrUserCard : UserControl
     {
-        public int UserID { get; set; }
+        clsUser _User = new clsUser();
 
         public ctrUserCard()
         {
             InitializeComponent();
         }
 
-        public void ShowDetails()
+        public void ShowDetails(int UserID)
         {
 
-            clsUsers User = clsUsers.Find(UserID);
+            _User = clsUser.Find(UserID);
 
-            ctrPersonCard1.PersonID = User.PersonID;
+            if(_User == null)
+    {
+                MessageBox.Show("User not found with ID: " + UserID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            ctrPersonCard1.ViewPersonInFo();
+            ctrNewPersonCard1.LoadPersonInfo(_User.PersonID);
 
-            ShowLogInFo(User);
+            ShowLogInFo();
         }
 
-        public void ShowLogInFo(clsUsers User)
+        public void ShowLogInFo()
         {         
-            if (User != null)
+            if (_User != null)
             {
-                lblUserID.Text = User.UserID.ToString();
-                lblUserName.Text = User.UserName.ToString();
+                lblUserID.Text = _User.UserID.ToString();
+                lblUserName.Text = _User.UserName.ToString();
 
-                if (User.IsActive == 1)
-                    lblIsActive.Text = "YES";
-
-                else
-                    lblIsActive.Text = "No";
+                lblIsActive.Text = _User.IsActive ? "Yes" : "No";
             }
         }
     }

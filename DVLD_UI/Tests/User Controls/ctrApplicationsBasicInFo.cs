@@ -30,43 +30,43 @@ namespace DVLD_UI.Tests.User_Controls
 
         public void ShowDetails()
         {
-            clsLocalDrivingLicenseApplications LDLApp = clsLocalDrivingLicenseApplications.FindByID(LDLApplicationID);
+            clsLocalDrivingLicenseApplication LDLApp = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LDLApplicationID);
 
-            if(LDLApp != null)
-            {
-                string AppliedForLicense = "";
-                int PassedTests = -1;
+            //if(LDLApp != null)
+            //{
+            //    string AppliedForLicense = "";
+            //    int PassedTests = -1;
 
-                if (clsLocalDrivingLicenseApplications.GetLDLApplicationsFromView(LDLApplicationID, ref PassedTests, ref AppliedForLicense))
-                {
-                    lblLDLAppID.Text = LDLApplicationID.ToString();
-                    lblClassName.Text = AppliedForLicense;
-                    lblPassedTests.Text = PassedTests.ToString();
-                }
+            //    if (clsLocalDrivingLicenseApplication.GetLDLApplicationsFromView(LDLApplicationID, ref PassedTests, ref AppliedForLicense))
+            //    {
+            //        lblLDLAppID.Text = LDLApplicationID.ToString();
+            //        lblClassName.Text = AppliedForLicense;
+            //        lblPassedTests.Text = PassedTests.ToString();
+            //    }
 
-                clsApplications Application = clsApplications.Find(LDLApp.ApplicationID);
+            //    clsApplication Application = clsApplication.Find(LDLApp.ApplicationID);
 
-                if (Application != null)
-                {
-                    lblID.Text = Application.ApplicationID.ToString();
-                    lblStatus.Text = Application.ApplicationStatus.ToString();
-                    lblFees.Text = Application.PaidFees.ToString();
+            //    if (Application != null)
+            //    {
+            //        lblID.Text = Application.ApplicationID.ToString();
+            //        lblStatus.Text = Application.ApplicationStatus.ToString();
+            //        lblFees.Text = Application.PaidFees.ToString();
 
-                    clsApplicationTypes ApplicationType = clsApplicationTypes.Find(Application.ApplicationTypeID);
+            //        clsApplicationType ApplicationType = clsApplicationType.Find(Application.ApplicationTypeID);
 
-                    if (ApplicationType != null)
-                    {
-                        lblType.Text = ApplicationType.ApplicationTypeTitle;
-                    }
+            //        if (ApplicationType != null)
+            //        {
+            //            lblType.Text = ApplicationType.ApplicationTypeTitle;
+            //        }
 
-                    lblApplicant.Text = clsPerson.GetPersonNameByID(Application.ApplicationID);
-                    lblDate.Text = Application.ApplicationDate.ToString();
-                    lblStatusDate.Text = Application.ApplicationStatus.ToString();//it's worng Untill i Find A Fix. 
-                    lblApplicant.Text = NationalNo;
+            //        lblApplicant.Text = clsPerson.GetPersonNameByID(Application.ApplicationID);
+            //        lblDate.Text = Application.ApplicationDate.ToString();
+            //        lblStatusDate.Text = Application.ApplicationStatus.ToString();//it's worng Untill i Find A Fix. 
+            //        lblApplicant.Text = NationalNo;
 
-                    lblCreatedBy.Text = clsUsers.GetUserNameByUserID(Application.CreatedByUserID);
-                }
-            }
+            //        //lblCreatedBy.Text = clsUser.GetUserNameByUserID(Application.CreatedByUserID);
+            //    }
+            //}
         }
 
         private void linklblPersonInFo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

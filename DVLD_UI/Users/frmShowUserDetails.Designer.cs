@@ -35,17 +35,18 @@
             // 
             this.ctrUserCard1.Location = new System.Drawing.Point(4, 7);
             this.ctrUserCard1.Name = "ctrUserCard1";
-            this.ctrUserCard1.Size = new System.Drawing.Size(1164, 662);
+            this.ctrUserCard1.Size = new System.Drawing.Size(1170, 579);
             this.ctrUserCard1.TabIndex = 0;
             // 
             // frmShowUserDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1174, 678);
+            this.ClientSize = new System.Drawing.Size(1186, 595);
             this.Controls.Add(this.ctrUserCard1);
             this.Name = "frmShowUserDetails";
             this.Text = "frmShowUserDetails";
+            this.Load += new System.EventHandler(this.frmShowUserDetails_Load);
             this.ResumeLayout(false);
 
         }

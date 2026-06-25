@@ -19,9 +19,7 @@ namespace DVLD_UI.Users
 
             UserID = userID;
 
-            ctrChangeUserPassword1.UserID = userID;
-
-            ctrChangeUserPassword1.ShowDetails();
+            ctrChangeUserPassword1.ShowDetails(UserID);
         }
     }
 }

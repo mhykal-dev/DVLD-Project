@@ -31,11 +31,11 @@ namespace DVLD_UI.Tests.User_Controls
 
         public bool Retaken { get; set; }
 
-        clsApplications applications = new clsApplications();
+        clsApplication applications = new clsApplication();
 
-        clsTestAppointments testAppointment = new clsTestAppointments();
+        clsTestAppointment testAppointment = new clsTestAppointment();
 
-        clsTests Test = new clsTests();
+        clsTest Test = new clsTest();
 
         public ctrScheduleTests()
         {          
@@ -54,14 +54,14 @@ namespace DVLD_UI.Tests.User_Controls
             if(Retaken)
             {
                 //(int ApplicationID, ref int ApplicantPersonID, ref DateTime ApplicationDate,
-                //ref int ApplicationTypeID, ref int ApplicationStatus, ref DateTime LastStatusDate, ref int PaidFees, ref int CreatedByUserID)
+                //ref int ApplicationTypeID, ref byte ApplicationStatus, ref DateTime LastStatusDate, ref float PaidFees, ref int CreatedByUserID)
                 
                 gbRetakeTest.Enabled = true;
 
                 applications.ApplicantPersonID = clsPerson.GetPersonIDByNationalNo(NationalNo);
                 applications.ApplicationDate = dateTimePicker1.Value;
                 applications.ApplicationTypeID = 7;
-                applications.ApplicationStatus = 1;
+                applications.ApplicationStatus = (clsApplication.enApplicationStatus)1;
                 applications.LastStatusDate = dateTimePicker1.Value;
                 applications.PaidFees = 15;
                 applications.CreatedByUserID = 1;
@@ -108,11 +108,11 @@ namespace DVLD_UI.Tests.User_Controls
             lblDrivingClassName.Text = ClassTypeName;
             lblFullName.Text = FullName;
             //lblTrial                                 Leve It Empty For Now!.
-            lblFees.Text = clsTestTypes.GetTestPriceByID(TestTypeID).ToString();
+            lblFees.Text = clsTestType.GetTestPriceByID(TestTypeID).ToString();
 
-            int fees1 = Convert.ToInt32(lblFees.Text);
-            int fees2 = Convert.ToInt32(applications.PaidFees);
-            int fees3 = fees1 + fees2;
+            float fees1 = Convert.ToSingle(lblFees.Text);
+            float fees2 = Convert.ToSingle(applications.PaidFees);
+            float fees3 = fees1 + fees2;
 
             lblTotalFees.Text = fees3.ToString();
 

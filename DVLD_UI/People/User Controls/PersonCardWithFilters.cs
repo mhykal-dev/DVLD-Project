@@ -98,7 +98,7 @@ namespace DVLD_UI.People.User_Controls
             Person.Email = txtboxEmail.Text;
             Person.DateOfBirth = dateTimePicker1.Value;
             Person.Phone = txtboxPhone.Text;
-            Person.NationalityCountryID = Convert.ToInt32(cmboxCountries.SelectedValue);
+            Person.NationalityCountryID = (int)cmboxCountries.SelectedValue;
             Person.Address = txtboxAddress.Text;
             Person.ImagePath = "";
         }

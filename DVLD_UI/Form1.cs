@@ -1,8 +1,10 @@
-﻿using DVLD_UI.Driving_Licenses_Applications;
+﻿
+using DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_Licenses_Applications.Driving_Licenses_Applications;
 using DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication;
 using DVLD_UI.International_License_Applications;
 using DVLD_UI.International_License_Lists;
 using DVLD_UI.Local_Driving_License_Applications_List;
+using DVLD_UI.Login;
 using DVLD_UI.ManageApplicationTypes;
 using DVLD_UI.People;
 using DVLD_UI.Users;
@@ -20,9 +22,12 @@ namespace DVLD_UI
 {
     public partial class Form1 : Form
     {
-        public Form1()
+        frmLogin _frmLogin;
+
+        public Form1(frmLogin frm)
         {
             InitializeComponent();
+            _frmLogin = frm;
         }
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
@@ -59,7 +64,7 @@ namespace DVLD_UI
 
         private void localLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (frmNewDrivingLicenseApplication frm = new frmNewDrivingLicenseApplication())
+            using (Form frm = new frmNewDrivingLicenseApplication())
             {
                 frm.ShowDialog();
             }

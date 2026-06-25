@@ -14,36 +14,27 @@ namespace DVLD_UI.Users.User_Controls
 {
     public partial class ctrUpdateUser : UserControl
     {
-        public int UserID { get; set; }
-
-        public int PersonID { get; set; }
+        clsUser _User = new clsUser();
         public ctrUpdateUser()
         {
             InitializeComponent();
         }
 
-        public void ShowDetails()
+        public void ShowDetails(int _UserID)
         {
-            clsUsers User = clsUsers.Find(UserID);
+            _User = clsUser.Find(_UserID);
 
-            PersonID = User.PersonID;
-
-            ShwoLoginInFo(User);           
+            ShowLoginInFo(_User);           
         }
 
-        public void ShwoLoginInFo(clsUsers User)
+        public void ShowLoginInFo(clsUser User)
         {
             if (User != null)
             {
                 lblID.Text = User.UserID.ToString();
                 txtboxUserName.Text = User.UserName;
-                txtboxPassword.Text = User.Password;
-                txtboxConfirmPassword.Text = txtboxPassword.Text;
 
-                if (User.IsActive == 1)
-                    chkIsActive.Checked = true;
-                else
-                    chkIsActive.Checked = false;
+                chkIsActive.Checked = User.IsActive;
             }
 
             else
@@ -52,28 +43,36 @@ namespace DVLD_UI.Users.User_Controls
             }
         }
 
-        private void btnUpdatePersonInFo_Click(object sender, EventArgs e)
-        {
-            frmAddUpdatePerson frm = new frmAddUpdatePerson(PersonID);
-            frm.ShowDialog();
-
-            frm.Dispose();
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
-        {         
-            clsUsers User = clsUsers.Find(UserID);
-            User.UserName = txtboxUserName.Text;
-            User.Password = txtboxPassword.Text;
+        {
+            errorProvider1.Clear();
+            bool HasError = false;
 
-            if (chkIsActive.Checked)
-                User.IsActive = 1;
-            else
-                User.IsActive = 0;
-
-            if (User.Save())
+            if (string.IsNullOrWhiteSpace(txtboxUserName.Text.Trim()))
             {
-                MessageBox.Show("User Added Successfuly!");
+                errorProvider1.SetError(txtboxUserName, "UserName Cannot be empty!");
+                HasError = true;
+            }
+
+            else if (txtboxUserName.Text.Trim() != _User.UserName && clsUser.IsUserExistByUserName(txtboxUserName.Text.Trim()))
+            {
+                errorProvider1.SetError(txtboxUserName, "UserName Is Already Used!");
+                HasError = true;
+            }
+
+            if (HasError)
+            {
+                MessageBox.Show("Please fix the highlighted errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            _User.UserName = txtboxUserName.Text;
+
+            _User.IsActive = chkIsActive.Checked;
+
+            if (_User.Save())
+            {
+                MessageBox.Show("User Updated Successfuly!");
             }
 
             else
@@ -82,43 +81,11 @@ namespace DVLD_UI.Users.User_Controls
             }
         }
 
-        private void txtboxPassword_TextChanged(object sender, EventArgs e)
+        private void lklblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            if (txtboxPassword.Text != txtboxConfirmPassword.Text)
+            using(Form frm = new frmChangePassword(_User.UserID))
             {
-                btnSave.Enabled = false;
-            }
-
-            else
-            {
-                btnSave.Enabled = true;
-            }
-        }
-
-        private void chkAllowPassword_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAllowPassword.Checked)
-            {
-                txtboxPassword.PasswordChar = '\0';
-                txtboxConfirmPassword.PasswordChar = '\0';
-            }
-            else
-            {
-                txtboxPassword.PasswordChar = '*';
-                txtboxConfirmPassword.PasswordChar = '*';
-            }
-        }
-
-        private void txtboxUserName_TextChanged(object sender, EventArgs e)
-        {
-            if(txtboxUserName.Text == "")
-            {
-                btnSave.Enabled = false;
-            }
-
-            else
-            {
-                btnSave.Enabled = true;
+                frm.ShowDialog();
             }
         }
     }

@@ -13,78 +13,98 @@ namespace DVLD_UI.Users.User_Controls
 {
     public partial class ctrChangeUserPassword : UserControl
     {
-        public int UserID { get; set; }
+        clsUser _User = new clsUser();
+
         public ctrChangeUserPassword()
         {
             InitializeComponent();
+
         }
 
-        public void ShowDetails()
+        public void ShowDetails(int UserID)
         {
-            clsUsers user = clsUsers.Find(UserID);
+            _User = clsUser.Find(UserID);
 
-            if(user == null)
+            if (_User == null)
             {
                 MessageBox.Show("Wrong UserID!");
             }
 
             else
             {
-                lblID.Text = user.UserID.ToString();
+                lblID.Text = _User.UserID.ToString();
             }
-        }
-
-        private void txtboxNewPassword_TextChanged(object sender, EventArgs e)
-        {
-            if(txtboxNewPassword.Text != txtboxConfirmNewPassword.Text)
-                btnSave.Enabled = false;
-
-            else
-                btnSave.Enabled = true;
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            clsUsers User = clsUsers.Find(UserID);
+            errorProvider1.Clear();
+            bool HasError = false;
 
-            if (User.Password != txtboxOldPassword.Text)
+            if (string.IsNullOrWhiteSpace(txtboxOldPassword.Text.Trim()))
             {
-                MessageBox.Show("Wrong Old Password!");
+                errorProvider1.SetError(txtboxOldPassword, "OldPassword Cannot be empty!");
+                HasError = true;
+            }
+
+            else if (_User.Password.Trim() != txtboxOldPassword.Text.Trim())
+            {
+                errorProvider1.SetError(txtboxOldPassword, "OldPassword Not Matched!");
+                HasError = true;
+            }
+
+            if(!string.IsNullOrWhiteSpace(txtboxNewPassword.Text) && txtboxNewPassword.Text.Trim() == txtboxOldPassword.Text.Trim())
+            {
+                errorProvider1.SetError(txtboxNewPassword, "New Password Cann't be OldPassword Matched!");
+                HasError = true;
+            }
+
+            if(txtboxNewPassword.Text != txtboxConfirmNewPassword.Text)
+            {
+                errorProvider1.SetError(txtboxConfirmNewPassword, "Password Confirmation does not match!");
+                HasError = true;
+            }
+
+            if (HasError)
+            {
+                MessageBox.Show("Please fix the highlighted errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            User.Password = txtboxNewPassword.Text;
+            _User.Password = txtboxNewPassword.Text;
 
-            if (User.Save())
-                MessageBox.Show("password Changed!");
+            if (_User.Save())
+            {
+                MessageBox.Show("Password changed Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            else
-                MessageBox.Show("New Error 😭😭😭😭😭😭");
-        }
-
-        private void txtboxConfirmNewPassword_TextChanged(object sender, EventArgs e)
-        {
-            if (txtboxNewPassword.Text != txtboxConfirmNewPassword.Text)
-                btnSave.Enabled = false;
+                txtboxOldPassword.Clear();
+                txtboxNewPassword.Clear();
+                txtboxConfirmNewPassword.Clear();
+            }
 
             else
-                btnSave.Enabled = true;
+            {
+                MessageBox.Show("An error occurred while Changing the user's Password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         private void chkAllowPassword_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAllowPassword.Checked)
-            {
-                txtboxOldPassword.PasswordChar = '\0';
-                txtboxNewPassword.PasswordChar = '\0';
-                txtboxConfirmNewPassword.PasswordChar = '\0';
-            }
-            else
-            {
-                txtboxOldPassword.PasswordChar = '*';
-                txtboxNewPassword.PasswordChar = '*';
-                txtboxConfirmNewPassword.PasswordChar = '*';
-            }
+                char passwordCahr = chkAllowPassword.Checked ? '\0' : '*';
+                txtboxOldPassword.PasswordChar = passwordCahr;
+                txtboxNewPassword.PasswordChar = passwordCahr;
+                txtboxConfirmNewPassword.PasswordChar = passwordCahr;
+        }
+
+        private void ctrChangeUserPassword_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void txtboxOldPassword_TextChanged(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(txtboxOldPassword, "");
         }
     }
 }

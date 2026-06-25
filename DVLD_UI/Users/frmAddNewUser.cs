@@ -15,44 +15,41 @@ namespace DVLD_UI.Users
 {
     public partial class frmAddNewUser : Form
     {
-        bool AllowChange = false;
+        bool _AllowChange = false;
+        clsUser _NewUser = new clsUser();
 
-        clsUsers NewUser = new clsUsers();
         public frmAddNewUser()
         {
+
             InitializeComponent();
-
-            btnSave.Enabled = false;
            
-        }   
-
-        private void btnAddPerson_Click(object sender, EventArgs e)
-        {
-            People.frmAddUpdatePerson frm = new frmAddUpdatePerson(-1);
-            frm.ShowDialog();
-
-            frm.Dispose();
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if(clsUsers.isUserExistByPersonID(ctrPersonCard1.PersonID))
+            if(ctrNewPersonCardWithFilter1.PersonID == -1)
             {
-                MessageBox.Show("This Person Is Already A User!");
-                AllowChange = false;
+                MessageBox.Show("Please select a person first!", "Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if(clsUser.IsUserExistForPersonID(ctrNewPersonCardWithFilter1.PersonID))
+            {
+                MessageBox.Show("This Person Is Already A User! Please choose another person.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _AllowChange = false;
             }
 
             else
             {
-                AllowChange = true;
+                _AllowChange = true;
                 tabControl1.SelectedTab = tabPage2;
-                AllowChange = false;
+                _AllowChange = false;
             }
         }
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            if(!AllowChange)
+            if(!_AllowChange)
             {
                 e.Cancel = true;
             }
@@ -63,74 +60,68 @@ namespace DVLD_UI.Users
             this.Close();
         }
 
-        private void txtboxConfirmPassword_TextChanged(object sender, EventArgs e)
-        {
-            if(txtboxConfirmPassword.Text == txtboxPassword.Text)
-            {
-                if(txtboxUserName.Text != null)
-                {
-                    btnSave.Enabled = true;
-                }
-            }
-        }
-
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(clsUsers.IsUserExistByUserName(txtboxUserName.Text))
+            errorProvider1.Clear();
+            bool HasError = false;
+
+            if(string.IsNullOrEmpty(txtboxUserName.Text.Trim()))
             {
-                MessageBox.Show("UserName Is Already Taken!");
+                errorProvider1.SetError(txtboxUserName, "UserName Cannot be empty!");
+                HasError = true;
             }
+
+            else if(clsUser.IsUserExistByUserName(txtboxUserName.Text.Trim()))
+            {
+                errorProvider1.SetError(txtboxUserName, "UserName Is Already Taken!");
+                HasError = true;
+            }
+
+            if(string.IsNullOrWhiteSpace(txtboxPassword.Text.Trim()))
+            {
+                errorProvider1.SetError(txtboxPassword, "Password Cannot be empty!");
+                HasError = true;
+            }
+
+            if(txtboxPassword.Text.Trim() != txtboxConfirmPassword.Text.Trim())
+            {
+                errorProvider1.SetError(txtboxConfirmPassword, "Password Confirmation does not match!");
+                HasError = true;
+            }
+
+            if(HasError)
+            {
+                MessageBox.Show("Please fix the highlighted errors before saving.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            _NewUser.PersonID = ctrNewPersonCardWithFilter1.PersonID;
+            _NewUser.UserName = txtboxUserName.Text.Trim();
+            _NewUser.Password = txtboxPassword.Text.Trim();
+            _NewUser.IsActive = chkIsActive.Checked;
+
+            if (_NewUser.Save())
+            {
+                MessageBox.Show("User Added Successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+
             else
             {
-                
-                NewUser.PersonID = ctrPersonCard1.PersonID;
-                NewUser.UserName = txtboxUserName.Text;
-                NewUser.Password = txtboxPassword.Text;
-
-                if (chkIsActive.Checked)
-                    NewUser.IsActive = 1;
-                else
-                    NewUser.IsActive = 0;
-
-
-
-                if (NewUser.Save())
-                {
-                    MessageBox.Show("User Added Successfuly!");
-                    this.Close();
-                }
-
-                else
-                {
-                    MessageBox.Show("New Error😭😭😭😭😭😭😭!");
-                }
+                MessageBox.Show("An error occurred while saving the user.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void chkAllowPassword_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkAllowPassword.Checked)
-            {
-                txtboxPassword.PasswordChar = '\0';
-                txtboxConfirmPassword.PasswordChar = '\0';
-            }
-            else
-            {
-                txtboxPassword.PasswordChar = '*';
-                txtboxConfirmPassword.PasswordChar = '*';
-            }
+            char passwordCahr = chkAllowPassword.Checked ? '\0' : '*';
+            txtboxPassword.PasswordChar = passwordCahr;
+            txtboxConfirmPassword.PasswordChar = passwordCahr;
         }
 
         private void chkIsActive_CheckedChanged(object sender, EventArgs e)
         {
-            if(chkIsActive.Checked)
-            {
-                NewUser.IsActive = 1;
-            }
-            else
-            {
-                NewUser.IsActive = 0;
-            }
+            _NewUser.IsActive = chkIsActive.Checked;
         }
     }
 }

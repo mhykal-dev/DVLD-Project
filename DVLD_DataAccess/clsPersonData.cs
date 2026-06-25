@@ -47,7 +47,7 @@ namespace PEOPLE_DataAccess
                     //Email: allows null in database so we should handle null.
                     Email = reader["Email"] as string ?? "";
 
-                    NationalityCountryID = Convert.ToInt32(reader["NationalityCountryID"]);
+                    NationalityCountryID = (int)reader["NationalityCountryID"];
 
                     //ImagePath: allows null in database so we should handle null
                     ImagePath = reader["ImagePath"] as string ?? "";
@@ -100,7 +100,7 @@ namespace PEOPLE_DataAccess
                     // The record was found.
                     IsFound = true;
 
-                    PersonID = Convert.ToInt32(reader["PersonID"]);
+                    PersonID = (int)reader["PersonID"];
                     FirstName = reader["FirstName"] as string;
                     SecondName = reader["SecondName"] as string;
 
@@ -565,7 +565,7 @@ namespace PEOPLE_DataAccess
 
                 if (reader.Read())
                 {
-                    PersonID = Convert.ToInt32(reader["PersonID"]);
+                    PersonID = (int)reader["PersonID"];
                 }
 
                 reader.Close();

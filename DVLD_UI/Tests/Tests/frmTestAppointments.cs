@@ -55,7 +55,7 @@ namespace DVLD_UI.Tests.Vision_Test
 
         private void _RefreshPeopleList()
         {
-            dgvTestAppointments.DataSource = clsTestAppointments.GetAllTestsAppointmentsForThisLDLApplicationANDTestType(_LDLAppID, _TestTypeID);
+            dgvTestAppointments.DataSource = clsTestAppointment.GetAllTestsAppointmentsForThisLDLApplicationANDTestType(_LDLAppID, _TestTypeID);
         }
 
         private void _DecideHeader(int TestTypeID)
@@ -78,13 +78,13 @@ namespace DVLD_UI.Tests.Vision_Test
 
         private void btnAddTest_Click(object sender, EventArgs e)
         {
-            clsTestAppointments IsThereApreviousTest = clsTestAppointments.GetTheLastestTestAppointmentForThisLDLApplicationANDTestTypeID(_LDLAppID, _TestTypeID);
+            clsTestAppointment IsThereApreviousTest = clsTestAppointment.GetTheLastestTestAppointmentForThisLDLApplicationANDTestTypeID(_LDLAppID, _TestTypeID);
 
             if(IsThereApreviousTest != null)
             {
                 if(IsThereApreviousTest.IsLocked)
                 {
-                    clsTests PreviousTest = clsTests.GetTestByTestAppointmentID(IsThereApreviousTest.TestAppointmentID);
+                    clsTest PreviousTest = clsTest.GetTestByTestAppointmentID(IsThereApreviousTest.TestAppointmentID);
 
                     if(PreviousTest.TestResult == 0)
                     {

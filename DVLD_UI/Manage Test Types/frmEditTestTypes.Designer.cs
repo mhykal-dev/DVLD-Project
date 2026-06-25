@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmEditTestTypes));
             this.btnSave = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -43,9 +44,11 @@
             this.label5 = new System.Windows.Forms.Label();
             this.txtboxDescription = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnSave
@@ -98,6 +101,7 @@
             this.txtboxFees.Name = "txtboxFees";
             this.txtboxFees.Size = new System.Drawing.Size(271, 20);
             this.txtboxFees.TabIndex = 17;
+            this.txtboxFees.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxFees_Validating);
             // 
             // txtboxTitle
             // 
@@ -106,6 +110,7 @@
             this.txtboxTitle.Name = "txtboxTitle";
             this.txtboxTitle.Size = new System.Drawing.Size(271, 20);
             this.txtboxTitle.TabIndex = 16;
+            this.txtboxTitle.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxTitle_Validating);
             // 
             // lblID
             // 
@@ -175,6 +180,7 @@
             this.txtboxDescription.Name = "txtboxDescription";
             this.txtboxDescription.Size = new System.Drawing.Size(271, 85);
             this.txtboxDescription.TabIndex = 23;
+            this.txtboxDescription.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxDescription_Validating);
             // 
             // pictureBox3
             // 
@@ -185,6 +191,10 @@
             this.pictureBox3.Size = new System.Drawing.Size(27, 26);
             this.pictureBox3.TabIndex = 24;
             this.pictureBox3.TabStop = false;
+            // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
             // 
             // frmEditTestTypes
             // 
@@ -207,9 +217,11 @@
             this.Controls.Add(this.label1);
             this.Name = "frmEditTestTypes";
             this.Text = "frmEditTestTypes";
+            this.Load += new System.EventHandler(this.frmEditTestTypes_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,5 +243,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txtboxDescription;
         private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
     }
 }

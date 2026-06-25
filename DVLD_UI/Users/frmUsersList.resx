@@ -2206,7 +2206,7 @@
   <data name="addNewUserToolStripMenuItem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAO
-        wAAADsABataJCQAACxdJREFUWEetlAlQk2cax9/t2Omua4+tra1a5FBA8NjWcV2rth7rqou3tp4IiHhE
+        vwAADr8BOAVTJAAACxdJREFUWEetlAlQk2cax9/t2Omua4+tra1a5FBA8NjWcV2rth7rqou3tp4IiHhE
         QRS5tGC57wAiEK5AgoQQQsghhJtAIAQCyCUECCKnXAKipWIR/ztJt9ua2m6ns7+ZZ753vm/m+/3f532+
         j5Bf4Q1CiDKVQs5tN1nA8Td3lbEcJXKWY62QapXnZGtdl5+fixcvXqC6rRpBcf64HnMNtim2sMqwhhXX
         GhQmBZ6xX8Mz3A1FikJMTk4iJycbTg72XMcr9rO1fS9h9PofNFeLdQab6G4HZPJUp5nmLE+osj2RHnoe
@@ -2370,4 +2370,7 @@
         edW5gr4LgvgN3jaC3i/Ey+oAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="$this.TrayHeight" type="System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>25</value>
+  </metadata>
 </root>

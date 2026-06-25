@@ -12,7 +12,7 @@ namespace DVLD_UI.Global_Classes
 {
     internal static class clsGlobal
     {
-        public static clsUsers currentUser;
+        public static clsUser currentUser;
 
         public static bool RememberUsernameAndPassword(string Username, string Password)
         {

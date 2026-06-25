@@ -19,9 +19,11 @@ namespace DVLD_UI.Users
 
             _UserID = UserID;
 
-            ctrUserCard1.UserID = _UserID;
+        }
 
-            ctrUserCard1.ShowDetails();
+        private void frmShowUserDetails_Load(object sender, EventArgs e)
+        {
+            ctrUserCard1.ShowDetails(_UserID);
         }
     }
 }

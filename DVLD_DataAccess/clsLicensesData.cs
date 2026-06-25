@@ -14,7 +14,7 @@ namespace Licenses_DataAccess
     {
         public static bool GetLicenseInFoByID(int LicenseID, ref int ApplicationID, ref int DriverID,
             ref int LicenseClass, ref DateTime IssueDate, ref DateTime ExpirationDate, ref string Notes,
-            ref int PaidFees, ref int IsActive, ref int IssueReason, ref int CreatedByUserID)
+            ref float PaidFees, ref int IsActive, ref int IssueReason, ref int CreatedByUserID)
         {
             bool IsFound = false;
 
@@ -36,16 +36,16 @@ namespace Licenses_DataAccess
                 {
 
                     IsFound = true;
-                    ApplicationID = Convert.ToInt32(reader["ApplicationID"]);
-                    DriverID = Convert.ToInt32(reader["DriverID"]);
-                    LicenseClass = Convert.ToInt32(reader["LicenseClass"]);
+                    ApplicationID = (int)reader["ApplicationID"];
+                    DriverID = (int)reader["DriverID"];
+                    LicenseClass = (int)reader["LicenseClass"];
                     IssueDate = (DateTime)reader["IssueDate"];
                     ExpirationDate = (DateTime)reader["ExpirationDate"];
                     Notes = reader["Notes"] as string;
-                    PaidFees = Convert.ToInt32(reader["PaidFees"]);
-                    IsActive = Convert.ToInt32(reader["IsActive"]);
-                    IssueReason = Convert.ToInt32(reader["IssueReason"]);
-                    CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                    PaidFees = (int)reader["PaidFees"];
+                    IsActive = (int)reader["IsActive"];
+                    IssueReason = (int)reader["IssueReason"];
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
 
                 }
 
@@ -73,7 +73,7 @@ namespace Licenses_DataAccess
 
         public static bool GetLicenseInFoByApplicationID(ref int LicenseID, int ApplicationID, ref int DriverID,
             ref int LicenseClass, ref DateTime IssueDate, ref DateTime ExpirationDate, ref string Notes,
-            ref int PaidFees, ref int IsActive, ref int IssueReason, ref int CreatedByUserID)
+            ref float PaidFees, ref int IsActive, ref int IssueReason, ref int CreatedByUserID)
         {
             bool IsFound = false;
 
@@ -95,16 +95,16 @@ namespace Licenses_DataAccess
                 {
 
                     IsFound = true;
-                    LicenseID = Convert.ToInt32(reader["LicenseID"]);
-                    DriverID = Convert.ToInt32(reader["DriverID"]);
-                    LicenseClass = Convert.ToInt32(reader["LicenseClass"]);
+                    LicenseID = (int)reader["LicenseID"];
+                    DriverID = (int)reader["DriverID"];
+                    LicenseClass = (int)reader["LicenseClass"];
                     IssueDate = (DateTime)reader["IssueDate"];
                     ExpirationDate = (DateTime)reader["ExpirationDate"];
                     Notes = reader["Notes"] as string;
-                    PaidFees = Convert.ToInt32(reader["PaidFees"]);
-                    IsActive = Convert.ToInt32(reader["IsActive"]);
-                    IssueReason = Convert.ToInt32(reader["IssueReason"]);
-                    CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                    PaidFees = (int)reader["PaidFees"];
+                    IsActive = (int)reader["IsActive"];
+                    IssueReason = (int)reader["IssueReason"];
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
 
                 }
 
@@ -132,7 +132,7 @@ namespace Licenses_DataAccess
 
         public static bool GetLicenseInFoByDriverID(ref int LicenseID, ref int ApplicationID, int DriverID,
             ref int LicenseClass, ref DateTime IssueDate, ref DateTime ExpirationDate, ref string Notes,
-            ref int PaidFees, ref int IsActive, ref int IssueReason, ref int CreatedByUserID)
+            ref float PaidFees, ref int IsActive, ref int IssueReason, ref int CreatedByUserID)
         {
             bool IsFound = false;
 
@@ -154,16 +154,16 @@ namespace Licenses_DataAccess
                 {
 
                     IsFound = true;
-                    LicenseID = Convert.ToInt32(reader["LicenseID"]);
-                    ApplicationID = Convert.ToInt32(reader["ApplicationID"]);
-                    LicenseClass = Convert.ToInt32(reader["LicenseClass"]);
+                    LicenseID = (int)reader["LicenseID"];
+                    ApplicationID = (int)reader["ApplicationID"];
+                    LicenseClass = (int)reader["LicenseClass"];
                     IssueDate = (DateTime)reader["IssueDate"];
                     ExpirationDate = (DateTime)reader["ExpirationDate"];
                     Notes = reader["Notes"] as string;
-                    PaidFees = Convert.ToInt32(reader["PaidFees"]);
-                    IsActive = Convert.ToInt32(reader["IsActive"]);
-                    IssueReason = Convert.ToInt32(reader["IssueReason"]);
-                    CreatedByUserID = Convert.ToInt32(reader["CreatedByUserID"]);
+                    PaidFees = (int)reader["PaidFees"];
+                    IsActive = (int)reader["IsActive"];
+                    IssueReason = (int)reader["IssueReason"];
+                    CreatedByUserID = (int)reader["CreatedByUserID"];
 
                 }
 
@@ -191,7 +191,7 @@ namespace Licenses_DataAccess
 
         public static int AddNewLicense(int ApplicationID, int DriverID,
             int LicenseClass, DateTime IssueDate, DateTime ExpirationDate, string Notes,
-            int PaidFees, int IsActive, int IssueReason, int CreatedByUserID)
+            float PaidFees, int IsActive, int IssueReason, int CreatedByUserID)
         {
             //this function will return the new contact id if succeeded and -1 if not.
             int LicenseID = -1;
@@ -244,7 +244,7 @@ namespace Licenses_DataAccess
 
         public static bool UpdateLicense(int LicenseID, int ApplicationID, int DriverID,
             int LicenseClass, DateTime IssueDate, DateTime ExpirationDate, string Notes,
-            int PaidFees, int IsActive, int IssueReason, int CreatedByUserID)
+            float PaidFees, int IsActive, int IssueReason, int CreatedByUserID)
         {
             int rowsAffected = 0;
             SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString);

@@ -35,14 +35,14 @@
             // 
             this.ctrChangeUserPassword1.Location = new System.Drawing.Point(12, 23);
             this.ctrChangeUserPassword1.Name = "ctrChangeUserPassword1";
-            this.ctrChangeUserPassword1.Size = new System.Drawing.Size(863, 405);
+            this.ctrChangeUserPassword1.Size = new System.Drawing.Size(863, 339);
             this.ctrChangeUserPassword1.TabIndex = 0;
             // 
             // frmChangePassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(893, 450);
+            this.ClientSize = new System.Drawing.Size(893, 394);
             this.Controls.Add(this.ctrChangeUserPassword1);
             this.Name = "frmChangePassword";
             this.Text = "frmChangePassword";
