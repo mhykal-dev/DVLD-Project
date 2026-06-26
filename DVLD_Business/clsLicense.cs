@@ -153,6 +153,13 @@ namespace Licenses_Business
             return false;
         }
 
+        public static int GetActiveLicenseIDByPersonID(int PersonID, int LicenseClassID)
+        {
+
+            return clsLicensesData.GetActiveLicenseIDByPersonID(PersonID, LicenseClassID);
+
+        }
+
         public static DataTable GetAllLicenses()
         {
             return clsLicensesData.GetAllLicense();
@@ -163,6 +170,11 @@ namespace Licenses_Business
         {
             return clsLicensesData.GetAllLicensesForThisDriver(DriverID);
 
+        }
+
+        public static bool IsLicenseExistByPersonID(int PersonID, int LicenseClassID)
+        {
+            return (GetActiveLicenseIDByPersonID(PersonID, LicenseClassID) != -1);
         }
     }
 }

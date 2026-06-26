@@ -1,7 +1,10 @@
-﻿using COUNTRIES_Business;
-using Applications_Business;
+﻿using Applications_Business;
+using ApplicationTypes_Business;
+using COUNTRIES_Business;
+using DVLD_UI.Global_Classes;
 using LDLApplications_Business;
 using LicenseClasses_Business;
+using Licenses_Business;
 using PEOPLE_Business;
 using System;
 using System.Collections.Generic;
@@ -18,13 +21,26 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
 {
     public partial class frmNewDrivingLicenseApplication : Form
     {
-        bool AllowChange = false;
+        public enum enMode { AddNew = 1, Update = 2 };
+
+        private enMode _Mode;
+        private int _LocalDrivingLicenseApplicationID = -1;
+        private int _SelectedPersonID = -1;
+        clsLocalDrivingLicenseApplication _LocalDrivingLicenseApplication;
 
         public frmNewDrivingLicenseApplication()
         {
             InitializeComponent();
 
-            _LoadClasses();
+            _Mode = enMode.AddNew;
+        }
+
+        public frmNewDrivingLicenseApplication(int LocalDrivingLicenseApplicationID)
+        {
+            InitializeComponent();
+
+            _Mode = enMode.Update;
+            _LocalDrivingLicenseApplicationID = LocalDrivingLicenseApplicationID;
         }
 
         private void _LoadClasses()
@@ -35,100 +51,162 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             cmbClasses.DataSource = clsLicenseClass.GelAllLicenseClasses();
         }
 
-        private void btnNext_Click(object sender, EventArgs e)
+        private void _ResetDefualtValues()
         {
-            if (!(clsPerson.isPersonExist(ctrPersonCard1.PersonID)))
+            //This Will Reset To The Default Parameters.
+            _LoadClasses();
+
+            if(_Mode == enMode.AddNew)
             {
-                MessageBox.Show("This Person Dosen't Exist!");
-                AllowChange = false;
+                lblTitle.Text = "New Local Driving License Application";
+                this.Text = "New Local Driving License Application";
+                _LocalDrivingLicenseApplication = new clsLocalDrivingLicenseApplication();
+                ctrNewPersonCardWithFilter1.FilterFocus();
+                tpApplicationInFo.Enabled = false;
+
+                cmbClasses.SelectedIndex = 2;
+                lblFees.Text = clsApplicationType.GetApplicatinTypePrice((int)clsApplication.enApplicationType.NewDrivingLicense).ToString();
+                lblApplicationDate.Text = DateTime.Now.ToShortDateString();
+                lblCreatedBy.Text = clsGlobal.currentUser.UserName;
             }
 
             else
             {
-                AllowChange = true;
-                tabControl1.SelectedTab = tabPage2;
-                AllowChange = false;
-                lblApplicationDate.Text = DateTime.Now.ToString();
-                lblCreatedBy.Text = "Msaqer77";
+                lblTitle.Text = "Update Local Driving License Application";
+                this.Text = "Update Local Driving License Application";
+
+                tpApplicationInFo.Enabled = true;
+                btnSave.Enabled = true;
             }
         }
 
-        private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
+        private void _LoadData()
         {
-            if (!AllowChange)
+            ctrNewPersonCardWithFilter1.FilterEnabled = false;
+            _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
+
+            if(_LocalDrivingLicenseApplication == null)
             {
-                e.Cancel = true;
+                MessageBox.Show("No Application with ID = " + _LocalDrivingLicenseApplicationID, "Application Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                this.Close();
+
+                return;
+            }
+
+            ctrNewPersonCardWithFilter1.LoadPersonInFo(_LocalDrivingLicenseApplication.ApplicantPersonID);
+            lblID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
+            lblApplicationDate.Text = clsFormat.DateToShort(_LocalDrivingLicenseApplication.ApplicationDate);
+            cmbClasses.SelectedValue = _LocalDrivingLicenseApplication.LicenseClassID;
+            lblFees.Text = _LocalDrivingLicenseApplication.PaidFees.ToString();
+            lblCreatedBy.Text = clsUser.Find(_LocalDrivingLicenseApplication.CreatedByUserID).UserName;
+        }
+
+        private void DataBackEvent(object sender, int PersonID)
+        {
+            // Handle the data received
+            _SelectedPersonID = PersonID;
+            ctrNewPersonCardWithFilter1.LoadPersonInFo(PersonID);
+
+
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if(_Mode == enMode.Update)
+            {
+                btnSave.Enabled = true;
+                tpApplicationInFo.Enabled = true;
+                tabControl1.SelectedTab = tabControl1.TabPages["tpApplicationInFo"];
+                return;
+            }
+
+            //incase of add new mode.
+            if(ctrNewPersonCardWithFilter1.PersonID != -1)
+            {
+                btnSave.Enabled = true;
+                tpApplicationInFo.Enabled = true;
+                tabControl1.SelectedTab = tabControl1.TabPages["tpApplicationInFo"];
+            }
+
+            else
+            {
+                MessageBox.Show("Please Select a Person", "Select a Person", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                ctrNewPersonCardWithFilter1.FilterFocus();
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+            
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //if (cmbClasses.SelectedItem is DataRowView row)
-            //{
-            //    string className = row["ClassName"].ToString();
+            int LicenseClassID = clsLicenseClass.Find(cmbClasses.Text).LicenseClassID;
 
-            //    //int AppID = clsLocalDrivingLicenseApplication.IsPersonHaveThisLicenseApplication(ctrPersonCard1.NationalNo, className);
 
-            //    //if (AppID != -1)
-            //    //{
-            //    //    clsLocalDrivingLicenseApplication ThisApplication = clsLocalDrivingLicenseApplication.FindByID(AppID);
+            int ActiveApplicationID = clsApplication.GetActiveApplicationIDForLicenseClass(_SelectedPersonID, clsApplication.enApplicationType.NewDrivingLicense, LicenseClassID);
 
-            //    //    if(ThisApplication != null)
-            //    //    {
-            //    //        string Status = clsLocalDrivingLicenseApplication.GetApplicationLastStatus(AppID);
+            if (ActiveApplicationID != -1)
+            {
+                MessageBox.Show("Choose another License Class, the selected Person Already have an active application for the selected class with id=" + ActiveApplicationID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                cmbClasses.Focus();
+                return;
+            }
 
-            //    //        switch(Status)
-            //    //        {
-            //    //            case "New":
-            //    //                MessageBox.Show($"You Already Have an Applications For This License With ID = {AppID}");
-            //    //                return;
 
-            //    //            case "Completed":
-            //    //                MessageBox.Show($"You Already Have an Applications For This License With ID = {AppID}");
-            //    //                return;
+            //check if user already have issued license of the same driving  class.
+            if (clsLicense.IsLicenseExistByPersonID(ctrNewPersonCardWithFilter1.PersonID, LicenseClassID))
+            {
 
-            //    //            case "Cancelled":
-            //    //                break;
-            //    //        }
-            //    //    }
-            //    //}
+                MessageBox.Show("Person already have a license with the same applied driving class, Choose diffrent driving class", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                //else
-                //{
+            _LocalDrivingLicenseApplication.ApplicantPersonID = ctrNewPersonCardWithFilter1.PersonID; ;
+            _LocalDrivingLicenseApplication.ApplicationDate = DateTime.Now;
+            _LocalDrivingLicenseApplication.ApplicationTypeID = 1;
+            _LocalDrivingLicenseApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
+            _LocalDrivingLicenseApplication.LastStatusDate = DateTime.Now;
+            _LocalDrivingLicenseApplication.PaidFees = Convert.ToSingle(lblFees.Text);
+            _LocalDrivingLicenseApplication.CreatedByUserID = clsGlobal.currentUser.UserID;
+            _LocalDrivingLicenseApplication.LicenseClassID = LicenseClassID;
 
-                //    clsApplication NewApplication = new clsApplication();
 
-                //    NewApplication.ApplicantPersonID = ctrPersonCard1.PersonID;
-                //    NewApplication.ApplicationDate   = Convert.ToDateTime(lblApplicationDate.Text);
-                //    NewApplication.ApplicationTypeID = 1;
-                //    NewApplication.ApplicationStatus = 1;
-                //    NewApplication.LastStatusDate    = Convert.ToDateTime(lblApplicationDate.Text);
-                //    //NewApplication.PaidFees          = (int)lblFees.Text);
-                //    NewApplication.CreatedByUserID   = 1;//This Will Remain HardCoded Until I Add The Global User.
+            if (_LocalDrivingLicenseApplication.Save())
+            {
+                lblID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
+                //change form mode to update.
+                _Mode = enMode.Update;
+                lblTitle.Text = "Update Local Driving License Application";
 
-                //    if(NewApplication.Save())
-                //    {
-                //        clsLocalDrivingLicenseApplication NewLocalDrivingApplication = new clsLocalDrivingLicenseApplication();
-                //        NewLocalDrivingApplication.ApplicationID = NewApplication.ApplicationID;
-                //        NewLocalDrivingApplication.LicenseClassID = (int)cmbClasses.SelectedValue);
+                MessageBox.Show("Data Saved Successfully.", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                //        if(NewLocalDrivingApplication.Save())
-                //        {
-                //            MessageBox.Show("Added!");
-                //            lblID.Text = NewApplication.ApplicationID.ToString();
-                //        }
-                //    }
+            }
+            else
+                MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
 
-                //    else
-                //    {
-                //        MessageBox.Show("Another Error😭😭😭😭😭😭😭😭😭😭😭😭");
-                //    }
-                //}
+        private void frmNewDrivingLicenseApplication_Load(object sender, EventArgs e)
+        {
+            _ResetDefualtValues();
+
+            if (_Mode == enMode.Update)
+            {
+                _LoadData();
+            }
+        }
+
+        private void ctrlPersonCardWithFilter1_OnPersonSelected(int obj)
+        {
+            _SelectedPersonID = obj;
+
+        }
+
+        private void frmNewDrivingLicenseApplication_Activated(object sender, EventArgs e)
+        {
+            ctrNewPersonCardWithFilter1.FilterFocus();
         }
     }
 }

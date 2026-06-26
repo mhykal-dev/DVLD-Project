@@ -29,11 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmNewDrivingLicenseApplication));
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tpPersonalInFo = new System.Windows.Forms.TabPage();
+            this.ctrNewPersonCardWithFilter1 = new DVLD_UI.People.User_Controls.CTRNewPersonCardWithFilter();
             this.btnNext = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tpApplicationInFo = new System.Windows.Forms.TabPage();
             this.cmbClasses = new System.Windows.Forms.ComboBox();
             this.lblCreatedBy = new System.Windows.Forms.Label();
             this.lblFees = new System.Windows.Forms.Label();
@@ -51,10 +52,9 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.ctrPersonCard1 = new DVLD_UI.People.User_Controls.ctrPersonCard();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
+            this.tpPersonalInFo.SuspendLayout();
+            this.tpApplicationInFo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -62,43 +62,51 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // lblTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Uighur", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Firebrick;
-            this.label1.Location = new System.Drawing.Point(310, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(455, 45);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "New Local Driving License Application";
+            this.lblTitle.AutoSize = true;
+            this.lblTitle.Font = new System.Drawing.Font("Microsoft Uighur", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.ForeColor = System.Drawing.Color.Firebrick;
+            this.lblTitle.Location = new System.Drawing.Point(191, 9);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(455, 45);
+            this.lblTitle.TabIndex = 9;
+            this.lblTitle.Text = "New Local Driving License Application";
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.Controls.Add(this.tpPersonalInFo);
+            this.tabControl1.Controls.Add(this.tpApplicationInFo);
             this.tabControl1.Location = new System.Drawing.Point(12, 58);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1039, 491);
+            this.tabControl1.Size = new System.Drawing.Size(865, 491);
             this.tabControl1.TabIndex = 8;
-            this.tabControl1.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl1_Selecting);
             // 
-            // tabPage1
+            // tpPersonalInFo
             // 
-            this.tabPage1.Controls.Add(this.btnNext);
-            this.tabPage1.Controls.Add(this.ctrPersonCard1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1031, 465);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Personal InFo";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.tpPersonalInFo.Controls.Add(this.ctrNewPersonCardWithFilter1);
+            this.tpPersonalInFo.Controls.Add(this.btnNext);
+            this.tpPersonalInFo.Location = new System.Drawing.Point(4, 22);
+            this.tpPersonalInFo.Name = "tpPersonalInFo";
+            this.tpPersonalInFo.Padding = new System.Windows.Forms.Padding(3);
+            this.tpPersonalInFo.Size = new System.Drawing.Size(857, 465);
+            this.tpPersonalInFo.TabIndex = 0;
+            this.tpPersonalInFo.Text = "Personal InFo";
+            this.tpPersonalInFo.UseVisualStyleBackColor = true;
+            // 
+            // ctrNewPersonCardWithFilter1
+            // 
+            this.ctrNewPersonCardWithFilter1.FilterEnabled = true;
+            this.ctrNewPersonCardWithFilter1.Location = new System.Drawing.Point(19, 19);
+            this.ctrNewPersonCardWithFilter1.Name = "ctrNewPersonCardWithFilter1";
+            this.ctrNewPersonCardWithFilter1.ShowAddPerson = true;
+            this.ctrNewPersonCardWithFilter1.Size = new System.Drawing.Size(843, 386);
+            this.ctrNewPersonCardWithFilter1.TabIndex = 6;
             // 
             // btnNext
             // 
-            this.btnNext.Location = new System.Drawing.Point(799, 405);
+            this.btnNext.Location = new System.Drawing.Point(655, 411);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(192, 47);
             this.btnNext.TabIndex = 5;
@@ -106,30 +114,30 @@
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
-            // tabPage2
+            // tpApplicationInFo
             // 
-            this.tabPage2.Controls.Add(this.cmbClasses);
-            this.tabPage2.Controls.Add(this.lblCreatedBy);
-            this.tabPage2.Controls.Add(this.lblFees);
-            this.tabPage2.Controls.Add(this.lblApplicationDate);
-            this.tabPage2.Controls.Add(this.pictureBox5);
-            this.tabPage2.Controls.Add(this.label2);
-            this.tabPage2.Controls.Add(this.lblID);
-            this.tabPage2.Controls.Add(this.pictureBox4);
-            this.tabPage2.Controls.Add(this.pictureBox3);
-            this.tabPage2.Controls.Add(this.pictureBox2);
-            this.tabPage2.Controls.Add(this.pictureBox1);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.label4);
-            this.tabPage2.Controls.Add(this.label3);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1031, 465);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "ApplicationInFo";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tpApplicationInFo.Controls.Add(this.cmbClasses);
+            this.tpApplicationInFo.Controls.Add(this.lblCreatedBy);
+            this.tpApplicationInFo.Controls.Add(this.lblFees);
+            this.tpApplicationInFo.Controls.Add(this.lblApplicationDate);
+            this.tpApplicationInFo.Controls.Add(this.pictureBox5);
+            this.tpApplicationInFo.Controls.Add(this.label2);
+            this.tpApplicationInFo.Controls.Add(this.lblID);
+            this.tpApplicationInFo.Controls.Add(this.pictureBox4);
+            this.tpApplicationInFo.Controls.Add(this.pictureBox3);
+            this.tpApplicationInFo.Controls.Add(this.pictureBox2);
+            this.tpApplicationInFo.Controls.Add(this.pictureBox1);
+            this.tpApplicationInFo.Controls.Add(this.label6);
+            this.tpApplicationInFo.Controls.Add(this.label5);
+            this.tpApplicationInFo.Controls.Add(this.label4);
+            this.tpApplicationInFo.Controls.Add(this.label3);
+            this.tpApplicationInFo.Location = new System.Drawing.Point(4, 22);
+            this.tpApplicationInFo.Name = "tpApplicationInFo";
+            this.tpApplicationInFo.Padding = new System.Windows.Forms.Padding(3);
+            this.tpApplicationInFo.Size = new System.Drawing.Size(857, 465);
+            this.tpApplicationInFo.TabIndex = 1;
+            this.tpApplicationInFo.Text = "ApplicationInFo";
+            this.tpApplicationInFo.UseVisualStyleBackColor = true;
             // 
             // cmbClasses
             // 
@@ -284,7 +292,7 @@
             // 
             this.btnClose.Image = ((System.Drawing.Image)(resources.GetObject("btnClose.Image")));
             this.btnClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnClose.Location = new System.Drawing.Point(617, 551);
+            this.btnClose.Location = new System.Drawing.Point(473, 551);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(192, 47);
             this.btnClose.TabIndex = 7;
@@ -294,9 +302,10 @@
             // 
             // btnSave
             // 
+            this.btnSave.Enabled = false;
             this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
             this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSave.Location = new System.Drawing.Point(815, 551);
+            this.btnSave.Location = new System.Drawing.Point(671, 551);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(192, 47);
             this.btnSave.TabIndex = 6;
@@ -304,30 +313,23 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // ctrPersonCard1
-            // 
-            this.ctrPersonCard1.Location = new System.Drawing.Point(39, 6);
-            this.ctrPersonCard1.Name = "ctrPersonCard1";
-            this.ctrPersonCard1.NationalNo = null;
-            this.ctrPersonCard1.PersonID = 0;
-            this.ctrPersonCard1.Size = new System.Drawing.Size(952, 393);
-            this.ctrPersonCard1.TabIndex = 4;
-            // 
             // frmNewDrivingLicenseApplication
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1065, 606);
-            this.Controls.Add(this.label1);
+            this.ClientSize = new System.Drawing.Size(883, 606);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnSave);
             this.Name = "frmNewDrivingLicenseApplication";
             this.Text = "frmNewDrivingLicenseApplication";
+            this.Activated += new System.EventHandler(this.frmNewDrivingLicenseApplication_Activated);
+            this.Load += new System.EventHandler(this.frmNewDrivingLicenseApplication_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPage2.PerformLayout();
+            this.tpPersonalInFo.ResumeLayout(false);
+            this.tpApplicationInFo.ResumeLayout(false);
+            this.tpApplicationInFo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
@@ -340,12 +342,11 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tpPersonalInFo;
         private System.Windows.Forms.Button btnNext;
-        private People.User_Controls.ctrPersonCard ctrPersonCard1;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tpApplicationInFo;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -363,5 +364,6 @@
         private System.Windows.Forms.Label lblApplicationDate;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label2;
+        private People.User_Controls.CTRNewPersonCardWithFilter ctrNewPersonCardWithFilter1;
     }
 }
