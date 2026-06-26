@@ -9,6 +9,9 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Net.NetworkInformation;
+using Licenses_Business;
+using TestTypes_Business;
 
 namespace LDLApplications_Business
 {
@@ -183,6 +186,21 @@ namespace LDLApplications_Business
             //Then we delete the base application.
             IsBaseApplicationDeleted = base.Delete();
             return IsBaseApplicationDeleted;
+        }
+
+        public bool DoesPassTestType(clsTestType.enTestType TestTypeID)
+        {
+            return clsLocalDrivingLicenseApplicationData.DoesPassTestType(this.LocalDrivingLicenseApplicationID, (int)TestTypeID);
+        }
+
+        public bool IsLicenseIssued()
+        {
+            return (GetActiveLicenseID() != -1);
+        }
+
+        public int GetActiveLicenseID()
+        {
+            return clsLicense.GetActiveLicenseIDByPersonID(this.ApplicantPersonID, this.LicenseClassID);
         }
 
     }

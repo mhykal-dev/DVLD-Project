@@ -28,7 +28,7 @@ namespace DVLD_UI.Tests.Vision_Test
 
         private string _FullName { get; set; }
 
-        public frmTestAppointments(int LDLApplicationID, int TestTypeID, string NationalNo, string ClassTypeName, string FullName)
+        public frmTestAppointments(int LDLApplicationID, clsTestType.enTestType TestTypeID)
         {
             InitializeComponent();
 
