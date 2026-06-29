@@ -10,7 +10,7 @@ using TestTypes_Business;
 
 namespace DVLD_UI.Tests.User_Controls
 {
-    public partial class crlScheduleTest : UserControl
+    public partial class ctrScheduleTest : UserControl
     {
         public enum enMode { AddNew = 0, Update = 1 };
         private enMode _Mode = enMode.AddNew;
@@ -304,7 +304,7 @@ namespace DVLD_UI.Tests.User_Controls
             return true;
         }
 
-        public crlScheduleTest()
+        public ctrScheduleTest()
         {
             InitializeComponent();
         }

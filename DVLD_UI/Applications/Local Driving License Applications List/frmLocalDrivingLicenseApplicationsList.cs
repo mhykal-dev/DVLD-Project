@@ -1,6 +1,7 @@
 ﻿using Applications_Business;
 using DVLD_UI.Applications.Local_Driving_License_Applications_List;
 using DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_Licenses_Applications.Driving_Licenses_Applications;
+using DVLD_UI.Licenses.Local_License;
 using DVLD_UI.Tests.Tests;
 using LDLApplications_Business;
 using System;
@@ -297,7 +298,39 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLDLApplicationsList.CurrentRow.Cells[0].Value;
+            using (Form frm = new frmIssueDriverLicenseFirstTime(LocalDrivingLicenseApplicationID))
+            {
+                frm.ShowDialog();
+            }
+            //refresh
+            frmLocalDrivingLicenseApplicationsList_Load(null, null);
+        }
 
+        private void ScheduleTestsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showLicenseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int LocalDrivingLicenseApplicationID = (int)dgvLDLApplicationsList.CurrentRow.Cells[0].Value;
+
+            int LicenseID = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(
+               LocalDrivingLicenseApplicationID).GetActiveLicenseID();
+
+            if (LicenseID != -1)
+            {
+                using (Form frm = new frmShowLocalLicenseDetails(LicenseID))
+                {
+                    frm.ShowDialog();
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No License Found!", "No License", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
         }
     }
 }

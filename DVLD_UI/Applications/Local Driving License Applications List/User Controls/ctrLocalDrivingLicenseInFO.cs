@@ -1,80 +1,80 @@
 ﻿using Drivers_Business;
+using DVLD_UI.Global_Classes;
+using DVLD_UI.Properties;
 using LicenseClasses_Business;
 using Licenses_Business;
 using PEOPLE_Business;
 using System;
+using System.IO;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
 {
     public partial class ctrLocalDrivingLicenseInFO : UserControl
     {
-        public int LicenseID { get; set; }
-
-        clsLicense License = new clsLicense();
-
-        clsDriver Driver = new clsDriver();
+        private int _LicenseID;
+        private clsLicense _License;
 
         public ctrLocalDrivingLicenseInFO()
         {
             InitializeComponent();
         }
 
-        public void GetDriverPersonalDetails(ref string FullName, ref string NationalNo, ref string Gendor, ref string IsActive, ref string ISDetained, ref DateTime DateOfBirth)
+        public int LicenseID
         {
-            Driver = clsDriver.FindByDriverID(License.DriverID);
+            get { return _LicenseID; }
+        }
 
-            //FullName = clsDriver.PersonInfo(Driver.PersonID);
+        public clsLicense SelectedLicenseInfo
+        { get { return _License; } }
 
-            NationalNo = clsPerson.GetPersonNationalNoByID(Driver.PersonID);
-
-
-            if (clsPerson.GetPersonGendorByID(Driver.PersonID) == 0)
-                Gendor = "Male";
-
+        private void _LoadPersonImage()
+        {
+            if (_License.DriverInfo.PersonInfo.Gendor == 0)
+                pbPersonImage.Image = Resources.Male_512;
             else
-                Gendor = "Female";
+                pbPersonImage.Image = Resources.Female_512;
 
+            string ImagePath = _License.DriverInfo.PersonInfo.ImagePath;
 
-
-            if (License.IsActive == true)
-                IsActive = "Yes";
-
-            else
-                IsActive = "No";
-
-
-
-            ISDetained = "No";//Only For Now!!!, I didn't made The Detained Classess Yet!, So Only For No, Teasting I mean, The Anwer Well Be No.
-            DateOfBirth = clsPerson.GetPersonDateOfBirthByID(Driver.PersonID);
+            if (ImagePath != "")
+                if (File.Exists(ImagePath))
+                    pbPersonImage.Load(ImagePath);
+                else
+                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
-        public void ShowDetail()
+        public void LoadInfo(int LicenseID)
         {
-            License = clsLicense.Find(LicenseID);
-
-            if (License != null)
+            _LicenseID = LicenseID;
+            _License = clsLicense.Find(_LicenseID);
+            if (_License == null)
             {
-                string FullName = "", NationalNo = "", Gendor = "", IsActive = "", ISDetained = "";
-                DateTime DateOfBirth = DateTime.Now;
-
-                GetDriverPersonalDetails(ref FullName, ref NationalNo, ref Gendor, ref IsActive, ref ISDetained, ref DateOfBirth);
-
-                lblClassTypeName.Text = clsLicenseClass.GetClassName(LicenseID);
-                lblFullName.Text = FullName;
-                lblLicenseID.Text = License.LicenseID.ToString();
-                lblNationalNo.Text = NationalNo;
-                lblGendor.Text = Gendor;
-                lblDate.Text = License.IssueDate.ToString();
-                lblReason.Text = License.IssueReason.ToString();
-                lblNotes.Text = License.Notes;
-                lblIsActive.Text = IsActive;
-                lblDateOfBirth.Text = DateOfBirth.ToString();
-                lblDriverID.Text = License.DriverID.ToString();
-                lblExpireDate.Text = License.ExpirationDate.ToString();
-                lblISDetained.Text = ISDetained;
+                MessageBox.Show("Could not find License ID = " + _LicenseID.ToString(),
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _LicenseID = -1;
+                return;
             }
+
+            lblLicenseID.Text = _License.LicenseID.ToString();
+            lblIsActive.Text = _License.IsActive ? "Yes" : "No";
+            lblIsDetained.Text = _License.IsDetained ? "Yes" : "No";
+            lblClass.Text = _License.LicenseClassIfo.ClassName;
+            lblFullName.Text = _License.DriverInfo.PersonInfo.FullName;
+            lblNationalNo.Text = _License.DriverInfo.PersonInfo.NationalNo;
+            lblGendor.Text = _License.DriverInfo.PersonInfo.Gendor == 0 ? "Male" : "Female";
+            lblDateOfBirth.Text = clsFormat.DateToShort(_License.DriverInfo.PersonInfo.DateOfBirth);
+
+            lblDriverID.Text = _License.DriverID.ToString();
+            lblIssueDate.Text = clsFormat.DateToShort(_License.IssueDate);
+            lblExpirationDate.Text = clsFormat.DateToShort(_License.ExpirationDate);
+            lblIssueReason.Text = _License.IssueReasonText;
+            lblNotes.Text = _License.Notes == "" ? "No Notes" : _License.Notes;
+            _LoadPersonImage();
+
+
+
         }
     }
 }

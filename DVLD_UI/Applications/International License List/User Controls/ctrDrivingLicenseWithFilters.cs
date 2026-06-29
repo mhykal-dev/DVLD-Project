@@ -23,9 +23,9 @@ namespace DVLD_UI.International_License_Applications.User_Controls
 
             if (License != null)
             {
-                ctrLocalDrivingLicenseInFO1.LicenseID = License.LicenseID;
+                //ctrLocalDrivingLicenseInFO1.LicenseID = License.LicenseID;
 
-                ctrLocalDrivingLicenseInFO1.ShowDetail();
+                //ctrLocalDrivingLicenseInFO1.ShowDetail();
 
                 DataBack?.Invoke(this, License.LicenseID, License.ExpirationDate, License.DriverID, Convert.ToInt32(License.IsActive));
 

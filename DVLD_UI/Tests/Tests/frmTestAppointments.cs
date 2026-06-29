@@ -100,13 +100,16 @@ namespace DVLD_UI.Tests.Tests
             //---
             clsTest LastTest = localDrivingLicenseApplication.GetLastTestPerTestType(_TestType);
 
-            //if (LastTest == null)
-            //{
-            //    frmScheduleTest frm1 = new frmScheduleTest(_LocalDrivingLicenseApplicationID, _TestType);
-            //    frm1.ShowDialog();
-            //    frmListTestAppointments_Load(null, null);
-            //    return;
-            //}
+            if (LastTest == null)
+            {
+                using (Form frm1 = new frmScheduleTests(_LocalDrivingLicenseApplicationID, _TestType))
+                {
+                    frm1.ShowDialog();
+                }
+
+                frmTestAppointments_Load(null, null);
+                return;
+            }
 
             //if person already passed the test s/he cannot retak it.
             if (LastTest.TestResult == true)
@@ -115,11 +118,14 @@ namespace DVLD_UI.Tests.Tests
                 return;
             }
 
-            //frmScheduleTest frm2 = new frmScheduleTest
-            //    (LastTest.TestAppointmentInfo.LocalDrivingLicenseApplicationID, _TestType);
-            //frm2.ShowDialog();
-            //frmListTestAppointments_Load(null, null);
-            ////---
+            using (Form frm2 = new frmScheduleTests
+                (LastTest.TestAppointmentInfo.LocalDrivingLicenseApplicationID, _TestType))
+            {
+                frm2.ShowDialog();
+            }
+
+            frmTestAppointments_Load(null, null);
+            //---
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
@@ -127,9 +133,12 @@ namespace DVLD_UI.Tests.Tests
             int TestAppointmentID = (int)dgvLicenseTestAppointments.CurrentRow.Cells[0].Value;
 
 
-            //frmScheduleTest frm = new frmScheduleTest(_LocalDrivingLicenseApplicationID, _TestType, TestAppointmentID);
-            //frm.ShowDialog();
-            //frmListTestAppointments_Load(null, null);
+            using (Form frm = new frmScheduleTests(_LocalDrivingLicenseApplicationID, _TestType, TestAppointmentID))
+            {
+                frm.ShowDialog();
+            }
+
+            frmTestAppointments_Load(null, null);
         }
 
         private void takeTestToolStripMenuItem_Click(object sender, EventArgs e)

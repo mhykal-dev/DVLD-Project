@@ -37,14 +37,6 @@
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // ctrLocalDrivingLicenseInFO1
-            // 
-            this.ctrLocalDrivingLicenseInFO1.LicenseID = 0;
-            this.ctrLocalDrivingLicenseInFO1.Location = new System.Drawing.Point(3, 67);
-            this.ctrLocalDrivingLicenseInFO1.Name = "ctrLocalDrivingLicenseInFO1";
-            this.ctrLocalDrivingLicenseInFO1.Size = new System.Drawing.Size(997, 445);
-            this.ctrLocalDrivingLicenseInFO1.TabIndex = 0;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnFindLicense);

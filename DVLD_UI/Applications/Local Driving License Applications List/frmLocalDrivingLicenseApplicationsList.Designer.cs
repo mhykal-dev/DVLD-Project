@@ -188,6 +188,7 @@
             this.ScheduleTestsToolStripMenuItem.Name = "ScheduleTestsToolStripMenuItem";
             this.ScheduleTestsToolStripMenuItem.Size = new System.Drawing.Size(262, 38);
             this.ScheduleTestsToolStripMenuItem.Text = "ScheduleTests";
+            this.ScheduleTestsToolStripMenuItem.Click += new System.EventHandler(this.ScheduleTestsToolStripMenuItem_Click);
             // 
             // visionTestToolStripMenuItem
             // 
@@ -237,6 +238,7 @@
             this.showLicenseToolStripMenuItem.Name = "showLicenseToolStripMenuItem";
             this.showLicenseToolStripMenuItem.Size = new System.Drawing.Size(262, 38);
             this.showLicenseToolStripMenuItem.Text = "Show License";
+            this.showLicenseToolStripMenuItem.Click += new System.EventHandler(this.showLicenseToolStripMenuItem_Click);
             // 
             // showPersonLicenseHistoryToolStripMenuItem
             // 
