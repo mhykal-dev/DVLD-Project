@@ -61,7 +61,7 @@ namespace Detained_Business
             this.DetainDate = DetainDate;
             this.FineFees = FineFees;
             this.CreatedByUserID = CreatedByUserID;
-            this.CreatedByUserInfo = clsUser.FindByUserID(this.CreatedByUserID);
+            this.CreatedByUserInfo = clsUser.Find(this.CreatedByUserID);
             this.IsReleased = IsReleased;
             this.ReleaseDate = ReleaseDate;
             this.ReleasedByUserID = ReleasedByUserID;

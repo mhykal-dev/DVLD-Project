@@ -3,13 +3,6 @@ using InternationalLicenses_Business;
 using Licenses_Business;
 using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.International_License_Applications.User_Controls
@@ -37,13 +30,13 @@ namespace DVLD_UI.International_License_Applications.User_Controls
 
         public void ShowDetails()
         {
-            License = clsLicense.FindByLicenseID(LicenseID);
+            License = clsLicense.Find(LicenseID);
 
             Driver = clsDriver.FindByDriverID(DriverID);
 
             Person = clsPerson.Find(Driver.PersonID);
 
-            InternationalLicense = clsInternationalLicense.FindByInternationalLicenseID(IntLicenseID);
+            //InternationalLicense = clsInternationalLicense.FindByInternationalLicenseID(IntLicenseID);
 
             lblFullName.Text = clsPerson.GetPersonNameByID(Person.PersonID);
             lblIntLicenseID.Text = Convert.ToString(IntLicenseID);
@@ -58,7 +51,7 @@ namespace DVLD_UI.International_License_Applications.User_Controls
             lblDate.Text = InternationalLicense.IssueDate.ToString();
             lblAppID.Text = InternationalLicense.ApplicationID.ToString();
 
-            if (InternationalLicense.IsActive == 1)
+            if (InternationalLicense.IsActive == true)
                 lblIsActive.Text = "YES";
 
             else

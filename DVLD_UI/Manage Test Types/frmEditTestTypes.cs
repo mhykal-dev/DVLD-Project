@@ -1,16 +1,8 @@
 ﻿using DVLD_UI.Global_Classes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestTypes_Business;
-using TestTypes_Business;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace DVLD_UI.Manage_Test_Types
 {
@@ -28,15 +20,15 @@ namespace DVLD_UI.Manage_Test_Types
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(!this.ValidateChildren())
+            if (!this.ValidateChildren())
             {
                 MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            _TestType.TestTypeTitle = txtboxTitle.Text;
-            _TestType.TestTypeDescription = txtboxDescription.Text;
-            _TestType.TestTypeFees = Convert.ToInt32(txtboxFees.Text);
+            _TestType.Title = txtboxTitle.Text;
+            _TestType.Description = txtboxDescription.Text;
+            _TestType.Fees = Convert.ToInt32(txtboxFees.Text);
 
             if (_TestType.Save())
             {
@@ -58,9 +50,9 @@ namespace DVLD_UI.Manage_Test_Types
             if (_TestType != null)
             {
                 lblID.Text = _TestType.TestTypeID.ToString();
-                txtboxTitle.Text = _TestType.TestTypeTitle;
-                txtboxDescription.Text = _TestType.TestTypeDescription;
-                txtboxFees.Text = _TestType.TestTypeFees.ToString();
+                txtboxTitle.Text = _TestType.Title;
+                txtboxDescription.Text = _TestType.Description;
+                txtboxFees.Text = _TestType.Fees.ToString();
             }
 
             else
@@ -72,7 +64,7 @@ namespace DVLD_UI.Manage_Test_Types
 
         private void txtboxTitle_Validating(object sender, CancelEventArgs e)
         {
-            if(string.IsNullOrEmpty(txtboxTitle.Text.Trim()))
+            if (string.IsNullOrEmpty(txtboxTitle.Text.Trim()))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtboxTitle, "Title is required");
@@ -81,7 +73,8 @@ namespace DVLD_UI.Manage_Test_Types
             else
             {
                 errorProvider1.SetError(txtboxTitle, null);
-            };
+            }
+            ;
         }
 
         private void txtboxDescription_Validating(object sender, CancelEventArgs e)
@@ -94,7 +87,8 @@ namespace DVLD_UI.Manage_Test_Types
             else
             {
                 errorProvider1.SetError(txtboxDescription, null);
-            };
+            }
+            ;
         }
 
         private void txtboxFees_Validating(object sender, CancelEventArgs e)

@@ -1,15 +1,7 @@
 ﻿using COUNTRIES_Business;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using PEOPLE_Business;
+using System;
+using System.Windows.Forms;
 
 namespace DVLD_UI.People.User_Controls
 {
@@ -28,7 +20,7 @@ namespace DVLD_UI.People.User_Controls
         {
             Form ParentForm = this.FindForm();
 
-            if(ParentForm != null)
+            if (ParentForm != null)
             {
                 ParentForm.Close();
             }
@@ -50,7 +42,7 @@ namespace DVLD_UI.People.User_Controls
 
             clsPerson LocalPerson = clsPerson.Find(ID);
 
-            if(LocalPerson != null)
+            if (LocalPerson != null)
             {
                 Person = LocalPerson;
                 txtboxNationalNo.Text = Person.NationalNo;
@@ -59,7 +51,7 @@ namespace DVLD_UI.People.User_Controls
                 txtboxThirdName.Text = Person.ThirdName;
                 txtboxLastName.Text = Person.LastName;
 
-                if(Person.Gendor == 0)
+                if (Person.Gendor == 0)
                 {
                     rdbtnMale.Checked = true;
                 }
@@ -84,8 +76,8 @@ namespace DVLD_UI.People.User_Controls
             Person.SecondName = txtboxSecondName.Text;
             Person.ThirdName = txtboxThirdName.Text;
             Person.LastName = txtboxLastName.Text;
-            
-            if(rdbtnMale.Checked == true)
+
+            if (rdbtnMale.Checked == true)
             {
                 Person.Gendor = 0;
             }
@@ -107,10 +99,10 @@ namespace DVLD_UI.People.User_Controls
         {
             _UpdatePersonInFo();
 
-            if(Person.Save())
+            if (Person.Save())
             {
                 MessageBox.Show("Person Updated/Added");
-                
+
             }
 
             else

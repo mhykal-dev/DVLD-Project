@@ -6,15 +6,7 @@ using LicenseClasses_Business;
 using Licenses_Business;
 using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using USERS_Business;
 
 namespace DVLD_UI.Renew_Driving_License
 {
@@ -39,7 +31,7 @@ namespace DVLD_UI.Renew_Driving_License
 
         private void _ShowApplicationDetails(object sender, int LicenseID, DateTime ExpirationDate, int DriverID, int IsActive)
         {
-            oldlicense = clsLicense.FindByLicenseID(LicenseID);
+            oldlicense = clsLicense.Find(LicenseID);
 
             Driver = clsDriver.FindByDriverID(DriverID);
 
@@ -50,7 +42,7 @@ namespace DVLD_UI.Renew_Driving_License
 
             int APPFees = clsApplicationType.GetApplicatinTypePrice(2);
             int LicFees = clsLicenseClass.GetClassFees(oldlicense.LicenseClass);
-            int Total   = APPFees + LicFees;
+            int Total = APPFees + LicFees;
 
             lblApplicationFees.Text = APPFees.ToString();
             lblLicenseFees.Text = LicFees.ToString();
@@ -79,13 +71,13 @@ namespace DVLD_UI.Renew_Driving_License
 
         private void btnRenew_Click(object sender, EventArgs e)
         {
-            if(DateTime.Now < oldlicense.ExpirationDate)
+            if (DateTime.Now < oldlicense.ExpirationDate)
             {
                 MessageBox.Show("This License Isn't Expired Yet!, didn't Save!");
                 return;
             }
 
-            if(oldlicense.IsActive == 0)
+            if (oldlicense.IsActive == false)
             {
                 MessageBox.Show("This License Is No Longer Activer And Can't be Used!");
                 return;
@@ -103,7 +95,7 @@ namespace DVLD_UI.Renew_Driving_License
 
                 lblApplicationID.Text = application.ApplicationID.ToString();
 
-                oldlicense.IsActive = 0;
+                oldlicense.IsActive = false;
 
                 if (!oldlicense.Save())
                 {
@@ -118,11 +110,11 @@ namespace DVLD_UI.Renew_Driving_License
                 NewLicense.ExpirationDate = DateTime.Now.AddYears(10);
                 NewLicense.Notes = txtboxNotes.Text;
                 NewLicense.PaidFees = Convert.ToInt32(lblTotalFees.Text);
-                NewLicense.IssueReason = 2;
-                NewLicense.IsActive = 1;
+                //NewLicense.IssueReason = 2;
+                //NewLicense.IsActive = 1;
                 NewLicense.CreatedByUserID = 1;
 
-                if(!NewLicense.Save())
+                if (!NewLicense.Save())
                 {
                     MessageBox.Show("NewLicense didn't Save!");
                     return;
@@ -132,7 +124,7 @@ namespace DVLD_UI.Renew_Driving_License
 
                 MessageBox.Show("License Renewed!");
                 linklblShowNewLicenseInFo.Enabled = true;
-            }             
+            }
         }
 
         private void linklblShowNewLicenseInFo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

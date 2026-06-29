@@ -1,19 +1,11 @@
 ﻿using COUNTRIES_Business;
 using DVLD_UI.Global_Classes;
-using DVLD_UI.People.User_Controls;
 using DVLD_UI.Properties;
 using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using USERS_Business;
 
 namespace DVLD_UI.People
 {
@@ -25,9 +17,9 @@ namespace DVLD_UI.People
         //Declare an event using the delegate.
         public event DateBackEventHandler DataBack;
 
-        public enum enMode { AddNew  = 0, Update = 1 };
+        public enum enMode { AddNew = 0, Update = 1 };
 
-        public enum enGendor { Male = 0, Female = 1};
+        public enum enGendor { Male = 0, Female = 1 };
 
         private enMode _Mode;
         private int _PersonID = -1;
@@ -52,7 +44,7 @@ namespace DVLD_UI.People
             //This Will Initialize The Reset of the default values.
             _FillCountriesInComoboBox();
 
-            if( _Mode == enMode.AddNew )
+            if (_Mode == enMode.AddNew)
             {
                 lblTitle.Text = "Add New Person";
                 _Person = new clsPerson();
@@ -156,9 +148,9 @@ namespace DVLD_UI.People
             // place it in the images folder.
 
             //_Person.ImagePath contains the old Image, we check if it changed then we copy the new image
-            if(_Person.ImagePath != pbPersonImage.ImageLocation)
+            if (_Person.ImagePath != pbPersonImage.ImageLocation)
             {
-                if(_Person.ImagePath != "")
+                if (_Person.ImagePath != "")
                 {
                     //first we delete the old image from the folder in case there is any.
                     try
@@ -172,12 +164,12 @@ namespace DVLD_UI.People
                     }
                 }
 
-                if(pbPersonImage.ImageLocation != null)
+                if (pbPersonImage.ImageLocation != null)
                 {
                     //then we copy the new image to the image folder after we rename it
                     string SourceImageFile = pbPersonImage.ImageLocation.ToString();
 
-                    if(util.CopyImageToProjectImagesFolder(ref SourceImageFile))
+                    if (util.CopyImageToProjectImagesFolder(ref SourceImageFile))
                     {
                         pbPersonImage.ImageLocation = SourceImageFile;
                         return true;
@@ -194,7 +186,7 @@ namespace DVLD_UI.People
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if(this.ValidateChildren())
+            if (this.ValidateChildren())
             {
                 //Here we dont continue becuase the form is not valid
                 MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -252,7 +244,7 @@ namespace DVLD_UI.People
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
 
-            if(openFileDialog1.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 //Process the selected file.
                 string selectedFilePath = openFileDialog1.FileName;

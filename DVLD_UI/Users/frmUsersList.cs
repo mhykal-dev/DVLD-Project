@@ -1,13 +1,5 @@
-﻿using DVLD_UI.People;
-using PEOPLE_Business;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using USERS_Business;
 
@@ -130,7 +122,7 @@ namespace DVLD_UI.Users
 
             _RefreshUsersList();
         }
-        
+
         private void addNewUserToolStripMenuItem_Click(object sender, EventArgs e)
         {
             using (Form frm = new frmAddNewUser())

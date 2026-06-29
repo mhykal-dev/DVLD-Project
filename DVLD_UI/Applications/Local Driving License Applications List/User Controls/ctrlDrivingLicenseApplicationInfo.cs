@@ -1,14 +1,6 @@
 ﻿using DVLD_UI.Local_Driving_License_Applications_List;
 using LDLApplications_Business;
 using LicenseClasses_Business;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Controls
@@ -88,7 +80,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
 
         private void llShowLicenceInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using(Form frm = new frmShowLocalLicenseDetails(_LicenseID))
+            using (Form frm = new frmShowLocalLicenseDetails(_LicenseID))
             {
                 frm.ShowDialog();
             }

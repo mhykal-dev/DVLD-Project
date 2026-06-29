@@ -1,12 +1,5 @@
 ﻿using Licenses_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.International_License_Applications.User_Controls
@@ -26,15 +19,15 @@ namespace DVLD_UI.International_License_Applications.User_Controls
 
         private void btnFindLicense_Click(object sender, EventArgs e)
         {
-            clsLicense License = clsLicense.FindByLicenseID(Convert.ToInt32(txtboxLicenseField.Text));
+            clsLicense License = clsLicense.Find(Convert.ToInt32(txtboxLicenseField.Text));
 
-            if(License != null )
+            if (License != null)
             {
                 ctrLocalDrivingLicenseInFO1.LicenseID = License.LicenseID;
 
                 ctrLocalDrivingLicenseInFO1.ShowDetail();
 
-                DataBack?.Invoke(this, License.LicenseID, License.ExpirationDate, License.DriverID, License.IsActive);
+                DataBack?.Invoke(this, License.LicenseID, License.ExpirationDate, License.DriverID, Convert.ToInt32(License.IsActive));
 
                 return;
             }

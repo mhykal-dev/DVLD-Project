@@ -41,7 +41,7 @@ namespace Tests_Business
         {
             this.TestID = TestID;
             this.TestAppointmentID = TestAppointmentID;
-            this.TestAppointmentInfo = clsTestAppointment.FindByTestAppointmentID(TestAppointmentID);
+            this.TestAppointmentInfo = clsTestAppointment.Find(TestAppointmentID);
             this.TestResult = TestResult;
             this.Notes = Notes;
             this.CreatedByUserID = CreatedByUserID;

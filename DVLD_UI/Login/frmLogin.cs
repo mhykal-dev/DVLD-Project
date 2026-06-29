@@ -1,12 +1,5 @@
 ﻿using DVLD_UI.Global_Classes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using USERS_Business;
 
@@ -28,9 +21,9 @@ namespace DVLD_UI.Login
         {
             clsUser User = clsUser.FindByUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
 
-            if(User != null )
+            if (User != null)
             {
-                if(chkRememberMe.Checked )
+                if (chkRememberMe.Checked)
                 {
                     //store username and password.
                     clsGlobal.RememberUsernameAndPassword(txtUserName.Text.Trim(), txtPassword.Text.Trim());
@@ -43,7 +36,7 @@ namespace DVLD_UI.Login
                 }
 
                 //incase the user is not active.
-                if(!User.IsActive)
+                if (!User.IsActive)
                 {
                     txtUserName.Focus();
                     MessageBox.Show("Your accound is not Active, Contact Admin.", "In Active Account", MessageBoxButtons.OK, MessageBoxIcon.Error);

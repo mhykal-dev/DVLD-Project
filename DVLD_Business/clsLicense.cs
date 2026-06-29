@@ -96,7 +96,7 @@ namespace Licenses_Business
         {
             //call DataAccess Layer 
 
-            this.LicenseID = clsLicenseData.AddNewLicense(this.ApplicationID, this.DriverID, this.LicenseClass,
+            this.LicenseID = clsLicensesData.AddNewLicense(this.ApplicationID, this.DriverID, this.LicenseClass,
                this.IssueDate, this.ExpirationDate, this.Notes, this.PaidFees,
                this.IsActive, (byte)this.IssueReason, this.CreatedByUserID);
 
@@ -108,7 +108,7 @@ namespace Licenses_Business
         {
             //call DataAccess Layer 
 
-            return clsLicenseData.UpdateLicense(this.ApplicationID, this.LicenseID, this.DriverID, this.LicenseClass,
+            return clsLicensesData.UpdateLicense(this.ApplicationID, this.LicenseID, this.DriverID, this.LicenseClass,
                this.IssueDate, this.ExpirationDate, this.Notes, this.PaidFees,
                this.IsActive, (byte)this.IssueReason, this.CreatedByUserID);
         }
@@ -120,7 +120,7 @@ namespace Licenses_Business
             string Notes = "";
             float PaidFees = 0; bool IsActive = true; int CreatedByUserID = 1;
             byte IssueReason = 1;
-            if (clsLicenseData.GetLicenseInfoByID(LicenseID, ref ApplicationID, ref DriverID, ref LicenseClass,
+            if (clsLicensesData.GetLicenseInfoByID(LicenseID, ref ApplicationID, ref DriverID, ref LicenseClass,
             ref IssueDate, ref ExpirationDate, ref Notes,
             ref PaidFees, ref IsActive, ref IssueReason, ref CreatedByUserID))
 
@@ -134,7 +134,7 @@ namespace Licenses_Business
 
         public static DataTable GetAllLicenses()
         {
-            return clsLicenseData.GetAllLicenses();
+            return clsLicensesData.GetAllLicenses();
 
         }
 
@@ -171,13 +171,13 @@ namespace Licenses_Business
         public static int GetActiveLicenseIDByPersonID(int PersonID, int LicenseClassID)
         {
 
-            return clsLicenseData.GetActiveLicenseIDByPersonID(PersonID, LicenseClassID);
+            return clsLicensesData.GetActiveLicenseIDByPersonID(PersonID, LicenseClassID);
 
         }
 
         public static DataTable GetDriverLicenses(int DriverID)
         {
-            return clsLicenseData.GetDriverLicenses(DriverID);
+            return clsLicensesData.GetDriverLicenses(DriverID);
         }
 
         public Boolean IsLicenseExpired()
@@ -189,7 +189,7 @@ namespace Licenses_Business
 
         public bool DeactivateCurrentLicense()
         {
-            return (clsLicenseData.DeactivateLicense(this.LicenseID));
+            return (clsLicensesData.DeactivateLicense(this.LicenseID));
         }
 
         public static string GetIssueReasonText(enIssueReason IssueReason)

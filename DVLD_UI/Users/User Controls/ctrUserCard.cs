@@ -1,13 +1,4 @@
-﻿using DVLD_UI.People.User_Controls;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using USERS_Business;
 
 namespace DVLD_UI.Users.User_Controls
@@ -26,8 +17,8 @@ namespace DVLD_UI.Users.User_Controls
 
             _User = clsUser.Find(UserID);
 
-            if(_User == null)
-    {
+            if (_User == null)
+            {
                 MessageBox.Show("User not found with ID: " + UserID, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -38,7 +29,7 @@ namespace DVLD_UI.Users.User_Controls
         }
 
         public void ShowLogInFo()
-        {         
+        {
             if (_User != null)
             {
                 lblUserID.Text = _User.UserID.ToString();

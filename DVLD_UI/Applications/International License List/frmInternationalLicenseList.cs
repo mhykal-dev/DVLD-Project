@@ -1,15 +1,6 @@
 ﻿using DVLD_UI.International_License_Applications;
-using DVLD_UI.Tests.Vision_Test;
 using InternationalLicenses_Business;
-using LDLApplications_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.International_License_Lists
@@ -34,7 +25,7 @@ namespace DVLD_UI.International_License_Lists
             {
                 int InternationalLicenseID = (int)dgvInternationalLicensesList.SelectedRows[0].Cells[0].Value;
 
-                clsInternationalLicense InternationalLicense = clsInternationalLicense.FindByInternationalLicenseID(InternationalLicenseID);
+                clsInternationalLicense InternationalLicense = clsInternationalLicense.Find(InternationalLicenseID);
 
                 int LicenseID = InternationalLicense.IssuedUsingLocalLicenseID;
 

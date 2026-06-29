@@ -1,13 +1,5 @@
 ﻿using Applications_Business;
 using DVLD_UI.Global_Classes;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Applications.User_Control
@@ -45,7 +37,7 @@ namespace DVLD_UI.Applications.User_Control
             _ApplicationID = _Application.ApplicationID;
             lblApplicationID.Text = _Application.ApplicationID.ToString();
             lblStatus.Text = _Application.StatusText;
-            lblType.Text = _Application.ApplicationTypeInFo.ApplicationTypeTitle;
+            lblType.Text = _Application.ApplicationTypeInFo.Title;
             lblFees.Text = _Application.PaidFees.ToString();
             lblApplicant.Text = _Application.ApplicantFullName;
             lblDate.Text = clsFormat.DateToShort(_Application.ApplicationDate);
@@ -70,7 +62,7 @@ namespace DVLD_UI.Applications.User_Control
 
         private void llViewPersonInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using(Form frm = new People.frmShowPersonInFo(_Application.ApplicantPersonID))
+            using (Form frm = new People.frmShowPersonInFo(_Application.ApplicantPersonID))
             {
                 frm.ShowDialog();
             }

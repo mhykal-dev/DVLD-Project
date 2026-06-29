@@ -6,15 +6,7 @@ using LicenseClasses_Business;
 using Licenses_Business;
 using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using USERS_Business;
 
 namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 {
@@ -39,7 +31,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
         private void _ShowApplicationDetails(object sender, int LicenseID, DateTime ExpirationDate, int DriverID, int IsActive)
         {
-            oldlicense = clsLicense.FindByLicenseID(LicenseID);
+            oldlicense = clsLicense.Find(LicenseID);
 
             Driver = clsDriver.FindByDriverID(DriverID);
 
@@ -57,10 +49,10 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
             {
                 lblApplicationFees.Text = clsApplicationType.GetApplicatinTypePrice(3).ToString();
             }
-            
+
             int LicFees = clsLicenseClass.GetClassFees(oldlicense.LicenseClass);
             int APPFees = Convert.ToInt32(lblApplicationFees.Text);
-            int Total   = APPFees + LicFees;
+            int Total = APPFees + LicFees;
 
             lblLicenseFees.Text = LicFees.ToString();
             lblTotalFees.Text = Total.ToString();
@@ -84,7 +76,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
             {
                 application.ApplicationTypeID = 3;
             }
-           
+
             application.ApplicationStatus = (clsApplication.enApplicationStatus)1;
             application.LastStatusDate = DateTime.Now;
             application.PaidFees = clsApplicationType.GetApplicatinTypePrice(2);
@@ -99,7 +91,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
         private void btnRenew_Click(object sender, EventArgs e)
         {
 
-            if(oldlicense.IsActive == 0)
+            if (oldlicense.IsActive == false)
             {
                 MessageBox.Show("This License Is No Longer Active And Can't be Used!");
                 return;
@@ -117,7 +109,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
                 lblApplicationID.Text = application.ApplicationID.ToString();
 
-                oldlicense.IsActive = 0;
+                oldlicense.IsActive = false;
 
                 if (!oldlicense.Save())
                 {
@@ -135,18 +127,18 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
                 if (rdbtnDamaged.Checked)
                 {
-                    NewLicense.IssueReason = 3;
+                    //NewLicense.IssueReason = 3;
                 }
 
                 else
                 {
-                    NewLicense.IssueReason = 4;
+                    //NewLicense.IssueReason = 4;
                 }
 
-                NewLicense.IsActive = 1;
+                //NewLicense.IsActive = 1;
                 NewLicense.CreatedByUserID = 1;
 
-                if(!NewLicense.Save())
+                if (!NewLicense.Save())
                 {
                     MessageBox.Show("NewLicense didn't Save!");
                     return;
@@ -156,7 +148,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
                 MessageBox.Show("License Replaced!");
                 linklblShowNewLicenseInFo.Enabled = true;
-            }             
+            }
         }
 
         private void linklblShowNewLicenseInFo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -199,12 +191,12 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
             if (rdbtnDamaged.Checked)
             {
-                NewLicense.IssueReason = 3;
+                //NewLicense.IssueReason = 3;
             }
 
             else
             {
-                NewLicense.IssueReason = 4;
+                //NewLicense.IssueReason = 4;
             }
         }
 
@@ -232,12 +224,12 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
             if (rdbtnDamaged.Checked)
             {
-                NewLicense.IssueReason = 3;
+                //NewLicense.IssueReason = 3;
             }
 
             else
             {
-                NewLicense.IssueReason = 4;
+                //NewLicense.IssueReason = 4;
             }
         }
     }

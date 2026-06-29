@@ -1,19 +1,10 @@
 ﻿using Applications_Business;
 using ApplicationTypes_Business;
-using COUNTRIES_Business;
 using DVLD_UI.Global_Classes;
 using LDLApplications_Business;
 using LicenseClasses_Business;
 using Licenses_Business;
-using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using USERS_Business;
 
@@ -56,7 +47,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             //This Will Reset To The Default Parameters.
             _LoadClasses();
 
-            if(_Mode == enMode.AddNew)
+            if (_Mode == enMode.AddNew)
             {
                 lblTitle.Text = "New Local Driving License Application";
                 this.Text = "New Local Driving License Application";
@@ -85,7 +76,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             ctrNewPersonCardWithFilter1.FilterEnabled = false;
             _LocalDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(_LocalDrivingLicenseApplicationID);
 
-            if(_LocalDrivingLicenseApplication == null)
+            if (_LocalDrivingLicenseApplication == null)
             {
                 MessageBox.Show("No Application with ID = " + _LocalDrivingLicenseApplicationID, "Application Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 this.Close();
@@ -112,7 +103,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if(_Mode == enMode.Update)
+            if (_Mode == enMode.Update)
             {
                 btnSave.Enabled = true;
                 tpApplicationInFo.Enabled = true;
@@ -121,7 +112,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             }
 
             //incase of add new mode.
-            if(ctrNewPersonCardWithFilter1.PersonID != -1)
+            if (ctrNewPersonCardWithFilter1.PersonID != -1)
             {
                 btnSave.Enabled = true;
                 tpApplicationInFo.Enabled = true;
@@ -138,7 +129,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-            
+
         }
 
         private void btnSave_Click(object sender, EventArgs e)

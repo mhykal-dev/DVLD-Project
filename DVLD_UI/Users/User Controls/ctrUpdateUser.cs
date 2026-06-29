@@ -1,12 +1,4 @@
-﻿using DVLD_UI.People;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows.Forms;
 using USERS_Business;
 
@@ -24,7 +16,7 @@ namespace DVLD_UI.Users.User_Controls
         {
             _User = clsUser.Find(_UserID);
 
-            ShowLoginInFo(_User);           
+            ShowLoginInFo(_User);
         }
 
         public void ShowLoginInFo(clsUser User)
@@ -83,7 +75,7 @@ namespace DVLD_UI.Users.User_Controls
 
         private void lklblChangePassword_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using(Form frm = new frmChangePassword(_User.UserID))
+            using (Form frm = new frmChangePassword(_User.UserID))
             {
                 frm.ShowDialog();
             }

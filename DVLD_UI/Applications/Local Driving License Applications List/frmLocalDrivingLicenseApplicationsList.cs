@@ -1,22 +1,12 @@
 ﻿using Applications_Business;
 using DVLD_UI.Applications.Local_Driving_License_Applications_List;
 using DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_Licenses_Applications.Driving_Licenses_Applications;
-using DVLD_UI.People;
-using DVLD_UI.Tests.User_Controls;
-using DVLD_UI.Tests.Vision_Test;
+using DVLD_UI.Tests.Tests;
 using LDLApplications_Business;
-using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using TestAppointments_Business;
-using Tests_Business;
 using TestTypes_Business;
 
 namespace DVLD_UI.Local_Driving_License_Applications_List
@@ -28,7 +18,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         {
             InitializeComponent();
 
-            
+
         }
 
         private void btnAddNewLicense_Click(object sender, EventArgs e)
@@ -73,14 +63,14 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
             }
 
             //Reset the filters in case nothing selected or filter value contains nothing.
-            if(txtboxFilterField.Text.Trim() == "" || FilterColumn == "None")
+            if (txtboxFilterField.Text.Trim() == "" || FilterColumn == "None")
             {
                 _dtAllLocalDrivingLicenseApplications.DefaultView.RowFilter = "";
                 _UpdateRecords();
                 return;
             }
 
-            if(FilterColumn == "LocalDrivingLicenseApplicationID")
+            if (FilterColumn == "LocalDrivingLicenseApplicationID")
                 //in this case we deal with integer not string.
                 _dtAllLocalDrivingLicenseApplications.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtboxFilterField.Text.Trim());
             else
@@ -138,7 +128,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         {
             txtboxFilterField.Visible = (cmbFilterBy.Text != "None");
 
-            if(txtboxFilterField.Visible )
+            if (txtboxFilterField.Visible)
             {
                 txtboxFilterField.Text = "";
                 txtboxFilterField.Focus();
@@ -152,7 +142,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLDLApplicationsList.CurrentRow.Cells[0].Value;
 
-            using(Form frm = new frmNewDrivingLicenseApplication(LocalDrivingLicenseApplicationID))
+            using (Form frm = new frmNewDrivingLicenseApplication(LocalDrivingLicenseApplicationID))
             {
                 frm.ShowDialog();
             }
@@ -281,7 +271,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLDLApplicationsList.CurrentRow.Cells[0].Value;
 
-           using(Form frm = new frmTestAppointments(LocalDrivingLicenseApplicationID, TestTypeID))
+            using (Form frm = new frmTestAppointments(LocalDrivingLicenseApplicationID, TestTypeID))
             {
                 frm.ShowDialog();
             }
@@ -307,7 +297,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         private void issueDrivingLicenseFirstTimeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int LocalDrivingLicenseApplicationID = (int)dgvLDLApplicationsList.CurrentRow.Cells[0].Value;
-            
+
         }
     }
 }

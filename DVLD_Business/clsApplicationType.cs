@@ -12,34 +12,34 @@ namespace ApplicationTypes_Business
 {
     public class clsApplicationType
     {
-        public int ApplicationTypeID { get; set; }
+        public int TypeID { get; set; }
 
-        public string ApplicationTypeTitle { get; set; }
+        public string Title { get; set; }
 
-        public int ApplicationFees { get; set; }
+        public int Fees { get; set; }
 
         public clsApplicationType()
         {
-            ApplicationTypeID = -1;
-            ApplicationTypeTitle = "";
-            ApplicationFees = 0;
+            TypeID = -1;
+            Title = "";
+            Fees = 0;
         }
 
-        private clsApplicationType(int ApplicationTypeID, string ApplicationTypeTitle, int ApplicationFees)
+        private clsApplicationType(int TypeID, string Title, int Fees)
         {
-            this.ApplicationTypeID = ApplicationTypeID;
-            this.ApplicationTypeTitle = ApplicationTypeTitle;
-            this.ApplicationFees = ApplicationFees;
+            this.TypeID = TypeID;
+            this.Title = Title;
+            this.Fees = Fees;
         }
 
-        public static clsApplicationType Find(int ApplicationTypeID)
+        public static clsApplicationType Find(int TypeID)
         {
-            string ApplicationTypeTitle = "";
-            int ApplicationFees = 0;
+            string Title = "";
+            int Fees = 0;
 
-            if(clsApplicationsTypeData.GetApplicatinTypeByID(ApplicationTypeID, ref ApplicationTypeTitle, ref ApplicationFees))
+            if(clsApplicationsTypeData.GetApplicatinTypeByID(TypeID, ref Title, ref Fees))
             {
-                return new clsApplicationType(ApplicationTypeID, ApplicationTypeTitle, ApplicationFees);
+                return new clsApplicationType(TypeID, Title, Fees);
             }
 
             else
@@ -52,7 +52,7 @@ namespace ApplicationTypes_Business
         {
             //call DataAccess Layer 
 
-            return clsApplicationsTypeData.UpdateApplicationType(this.ApplicationTypeID, this.ApplicationTypeTitle, this.ApplicationFees);
+            return clsApplicationsTypeData.UpdateApplicationType(this.TypeID, this.Title, this.Fees);
 
         }
 
@@ -61,9 +61,9 @@ namespace ApplicationTypes_Business
             return clsApplicationsTypeData.GetAllApplicatinsType();
         }
 
-        public static int GetApplicatinTypePrice(int ApplicationTypeID)
+        public static int GetApplicatinTypePrice(int TypeID)
         {
-            return clsApplicationsTypeData.GetApplicatinTypePrice(ApplicationTypeID);
+            return clsApplicationsTypeData.GetApplicatinTypePrice(TypeID);
         }
 
         public bool Save()

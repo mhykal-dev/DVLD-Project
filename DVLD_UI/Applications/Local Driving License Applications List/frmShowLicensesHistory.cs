@@ -1,15 +1,6 @@
 ﻿using Drivers_Business;
 using InternationalLicenses_Business;
 using Licenses_Business;
-using PEOPLE_Business;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Local_Driving_License_Applications_List
@@ -30,7 +21,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
 
             Driver = clsDriver.FindByPersonID(PersonID);
 
-            if(Driver == null )
+            if (Driver == null)
             {
                 MessageBox.Show("This Person Is Not A Registered Driver");
                 return;
@@ -46,12 +37,12 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
 
         private void _RefreshLocalLicensesList()
         {
-            dgvLocalLicensesHistory.DataSource = clsLicense.GetAllLicensesForThisDriver(Driver.DriverID);
+            //dgvLocalLicensesHistory.DataSource = clsLicense.GetActiveLicenseIDByPersonID(Driver.DriverID);
         }
 
         private void _RefreshInternationalLicensesList()
         {
-            dgvInternationalLicensesHistory.DataSource = clsInternationalLicense.GetAllLicensesForThisDriver(Driver.DriverID);
+            //dgvInternationalLicensesHistory.DataSource = clsInternationalLicense.GetAllLicensesForThisDriver(Driver.DriverID);
         }
 
 

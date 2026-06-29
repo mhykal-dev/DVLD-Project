@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using PEOPLE_Business;
+using System;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using PEOPLE_Business;
 
 namespace DVLD_UI.People
 {
@@ -42,9 +36,9 @@ namespace DVLD_UI.People
             string[] headers = { "Person ID", "National No.", "First Name", "Second Name", "Third Name", "Last Name", "Gender", "Date Of Birth", "Nationality", "Phone", "Email" };
             int[] widths = { 110, 120, 120, 140, 120, 120, 120, 140, 120, 120, 170 };
 
-            for(int i = 0; i < dgvPeopleList.Columns.Count; i++)
+            for (int i = 0; i < dgvPeopleList.Columns.Count; i++)
             {
-                if(i < headers.Length)
+                if (i < headers.Length)
                 {
                     dgvPeopleList.Columns[i].HeaderText = headers[i];
                     dgvPeopleList.Columns[i].Width = widths[i];
@@ -228,7 +222,7 @@ namespace DVLD_UI.People
 
         private void txtboxFilterField_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if(cmbFilterBy.Text == "Person ID")
+            if (cmbFilterBy.Text == "Person ID")
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }

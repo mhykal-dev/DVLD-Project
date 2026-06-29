@@ -1,13 +1,6 @@
 ﻿using Detained_Business;
 using Licenses_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Detained_Licenses
@@ -28,9 +21,9 @@ namespace DVLD_UI.Detained_Licenses
 
         private void _ShowDetails(object sender, int LicenseID, DateTime ExpirationDate, int DriverID, int IsActive)
         {
-            License = clsLicense.FindByLicenseID(LicenseID);
+            License = clsLicense.Find(LicenseID);
 
-            if (License.IsActive == 0)
+            if (License.IsActive == false)
             {
 
                 MessageBox.Show("Can't Detain a non-Active License!");
@@ -62,7 +55,7 @@ namespace DVLD_UI.Detained_Licenses
             DetainedLicense.DetainDate = DateTime.Now;
             DetainedLicense.FineFees = Convert.ToInt32(tctboxFineFees.Text);
             DetainedLicense.CreatedByUserID = 1;
-            DetainedLicense.IsReleased = 0;
+            DetainedLicense.IsReleased = false;
             DetainedLicense.ReleasedByUserID = -1;
             DetainedLicense.ReleaseApplicationID = -1;
         }

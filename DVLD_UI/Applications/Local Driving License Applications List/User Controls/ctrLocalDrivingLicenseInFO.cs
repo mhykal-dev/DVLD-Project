@@ -3,13 +3,6 @@ using LicenseClasses_Business;
 using Licenses_Business;
 using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
@@ -31,7 +24,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
         {
             Driver = clsDriver.FindByDriverID(License.DriverID);
 
-            FullName = clsDriver.GetDriverNameByPersonID(Driver.PersonID);
+            //FullName = clsDriver.PersonInfo(Driver.PersonID);
 
             NationalNo = clsPerson.GetPersonNationalNoByID(Driver.PersonID);
 
@@ -44,7 +37,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
 
 
 
-            if (License.IsActive == 1)
+            if (License.IsActive == true)
                 IsActive = "Yes";
 
             else
@@ -59,9 +52,9 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
 
         public void ShowDetail()
         {
-            License = clsLicense.FindByLicenseID(LicenseID);
+            License = clsLicense.Find(LicenseID);
 
-            if( License != null )
+            if (License != null)
             {
                 string FullName = "", NationalNo = "", Gendor = "", IsActive = "", ISDetained = "";
                 DateTime DateOfBirth = DateTime.Now;

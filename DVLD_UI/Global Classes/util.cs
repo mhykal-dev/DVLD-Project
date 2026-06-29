@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Global_Classes
@@ -22,7 +18,7 @@ namespace DVLD_UI.Global_Classes
         public static bool CreateFolderIfDoesNotExist(string FolderPath)
         {
             //Check if the folder exists.
-            if(!Directory.Exists(FolderPath))
+            if (!Directory.Exists(FolderPath))
             {
                 try
                 {

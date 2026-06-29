@@ -3,15 +3,7 @@ using ApplicationTypes_Business;
 using Drivers_Business;
 using InternationalLicenses_Business;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using USERS_Business;
 
 namespace DVLD_UI.International_License_Applications
 {
@@ -58,7 +50,7 @@ namespace DVLD_UI.International_License_Applications
             //(int ApplicationID, ref int ApplicantPersonID, ref DateTime ApplicationDate,
             //ref int ApplicationTypeID, ref byte ApplicationStatus, ref DateTime LastStatusDate, ref float PaidFees, ref int CreatedByUserID)
 
-            application.ApplicantPersonID = clsDriver.GetDriverPersonIDoByDriverID(_DriverID);
+            //application.ApplicantPersonID = clsDriver;
             application.ApplicationDate = Convert.ToDateTime(lblIssueDate.Text);
             application.ApplicationTypeID = 6;
             application.ApplicationStatus = (clsApplication.enApplicationStatus)1;
@@ -74,7 +66,7 @@ namespace DVLD_UI.International_License_Applications
             InternationalLicenses.IssuedUsingLocalLicenseID = _LicenseID;
             InternationalLicenses.IssueDate = Convert.ToDateTime(lblIssueDate.Text);
             InternationalLicenses.ExpirationDate = Convert.ToDateTime(lblExpirationDate.Text);
-            InternationalLicenses.IsActive = _IsActive;
+            InternationalLicenses.IsActive = Convert.ToBoolean(_IsActive);
             InternationalLicenses.CreatedByUserID = 1;
         }
 
@@ -92,11 +84,11 @@ namespace DVLD_UI.International_License_Applications
 
             _SaveInternationalLicenseInFo();
 
-            if (_LicenseID == clsInternationalLicense.IsThereInternationalLicenseForThisLocalLicense(_LicenseID))
-            {
-                MessageBox.Show($"This Driver Have Already An InternationalLicense With ID {clsInternationalLicense.FindByDriverID(_DriverID)}");
-                return;
-            }
+            //if (_LicenseID == clsInternationalLicense.IsThereInternationalLicenseForThisLocalLicense(_LicenseID))
+            //{
+            //    MessageBox.Show($"This Driver Have Already An InternationalLicense With ID {clsInternationalLicense.FindByDriverID(_DriverID)}");
+            //    return;
+            //}
 
             if (!InternationalLicenses.Save())
             {

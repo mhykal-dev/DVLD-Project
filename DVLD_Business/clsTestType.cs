@@ -14,36 +14,36 @@ namespace TestTypes_Business
 
         public clsTestType.enTestType TestTypeID { set; get; }
 
-        public string TestTypeTitle { get; set; }
+        public string Title { get; set; }
 
-        public string TestTypeDescription { get; set; }
+        public string Description { get; set; }
 
-        public int TestTypeFees { get; set; }
+        public int Fees { get; set; }
 
         public clsTestType()
         {
             this.TestTypeID = clsTestType.enTestType.VisionTest;
-            TestTypeTitle = "";
-            TestTypeDescription = "";
-            TestTypeFees = 0;
+            Title = "";
+            Description = "";
+            Fees = 0;
         }
 
-        private clsTestType(clsTestType.enTestType ID, string TestTypeTitle, string TestTypeDescription, int TestTypeFees)
+        private clsTestType(clsTestType.enTestType ID, string Title, string Description, int Fees)
         {
             this.TestTypeID = ID;
-            this.TestTypeTitle = TestTypeTitle;
-            this.TestTypeDescription = TestTypeDescription;
-            this.TestTypeFees = TestTypeFees;
+            this.Title = Title;
+            this.Description = Description;
+            this.Fees = Fees;
         }
 
         public static clsTestType Find(clsTestType.enTestType TestTypeID)
         {
-            string TestTypeTitle = "", TestTypeDescription = "";
-            int TestTypeFees = 0;
+            string Title = "", Description = "";
+            int Fees = 0;
 
-            if (clsTestTypeData.GetTestTypeByID((int)TestTypeID, ref TestTypeTitle, ref TestTypeDescription, ref TestTypeFees))
+            if (clsTestTypeData.GetTestTypeByID((int)TestTypeID, ref Title, ref Description, ref Fees))
             {
-                return new clsTestType(TestTypeID, TestTypeTitle, TestTypeDescription, TestTypeFees);
+                return new clsTestType(TestTypeID, Title, Description, Fees);
             }
 
             else
@@ -56,7 +56,7 @@ namespace TestTypes_Business
         {
             //call DataAccess Layer 
 
-            return clsTestTypeData.UpdateTestType((int)this.TestTypeID, this.TestTypeTitle, this.TestTypeDescription, this.TestTypeFees);
+            return clsTestTypeData.UpdateTestType((int)this.TestTypeID, this.Title, this.Description, this.Fees);
 
         }
 
@@ -80,5 +80,4 @@ namespace TestTypes_Business
             return false;
         }
     }
-
 }

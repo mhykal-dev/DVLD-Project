@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using USERS_Business;
 
@@ -42,7 +35,7 @@ namespace DVLD_UI.Users
 
         private void btnUpdatePersonalInFo_Click(object sender, EventArgs e)
         {
-            using(Form frm = new People.frmAddUpdatePerson(_User.PersonID))
+            using (Form frm = new People.frmAddUpdatePerson(_User.PersonID))
             {
                 frm.ShowDialog();
             }

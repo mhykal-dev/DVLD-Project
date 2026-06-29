@@ -1,12 +1,6 @@
 ﻿using PEOPLE_Business;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.People.User_Controls
@@ -19,7 +13,7 @@ namespace DVLD_UI.People.User_Controls
         protected virtual void PersonSelected(int PersonID)
         {
             Action<int> handler = OnPersonSelected;
-            if(handler != null)
+            if (handler != null)
             {
                 handler(PersonID);//Raise the event with the parameter
             }
@@ -110,7 +104,7 @@ namespace DVLD_UI.People.User_Controls
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            if(!ValidateChildren())
+            if (!ValidateChildren())
             {
                 //Here we dont continue becuase the form is not valid
                 MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -128,7 +122,7 @@ namespace DVLD_UI.People.User_Controls
 
         private void txtFilterValue_Validating(object sender, CancelEventArgs e)
         {
-            if(string.IsNullOrEmpty(txtFilterValue.Text.Trim()))
+            if (string.IsNullOrEmpty(txtFilterValue.Text.Trim()))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtFilterValue, "This Field Is required!");

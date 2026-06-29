@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using USERS_Business;
 
@@ -53,13 +46,13 @@ namespace DVLD_UI.Users.User_Controls
                 HasError = true;
             }
 
-            if(!string.IsNullOrWhiteSpace(txtboxNewPassword.Text) && txtboxNewPassword.Text.Trim() == txtboxOldPassword.Text.Trim())
+            if (!string.IsNullOrWhiteSpace(txtboxNewPassword.Text) && txtboxNewPassword.Text.Trim() == txtboxOldPassword.Text.Trim())
             {
                 errorProvider1.SetError(txtboxNewPassword, "New Password Cann't be OldPassword Matched!");
                 HasError = true;
             }
 
-            if(txtboxNewPassword.Text != txtboxConfirmNewPassword.Text)
+            if (txtboxNewPassword.Text != txtboxConfirmNewPassword.Text)
             {
                 errorProvider1.SetError(txtboxConfirmNewPassword, "Password Confirmation does not match!");
                 HasError = true;
@@ -91,15 +84,15 @@ namespace DVLD_UI.Users.User_Controls
 
         private void chkAllowPassword_CheckedChanged(object sender, EventArgs e)
         {
-                char passwordCahr = chkAllowPassword.Checked ? '\0' : '*';
-                txtboxOldPassword.PasswordChar = passwordCahr;
-                txtboxNewPassword.PasswordChar = passwordCahr;
-                txtboxConfirmNewPassword.PasswordChar = passwordCahr;
+            char passwordCahr = chkAllowPassword.Checked ? '\0' : '*';
+            txtboxOldPassword.PasswordChar = passwordCahr;
+            txtboxNewPassword.PasswordChar = passwordCahr;
+            txtboxConfirmNewPassword.PasswordChar = passwordCahr;
         }
 
         private void ctrChangeUserPassword_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void txtboxOldPassword_TextChanged(object sender, EventArgs e)

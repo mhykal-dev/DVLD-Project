@@ -29,16 +29,8 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmScheduleTests));
-            this.ctrScheduleTests1 = new DVLD_UI.Tests.User_Controls.ctrScheduleTests();
             this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // ctrScheduleTests1
-            // 
-            this.ctrScheduleTests1.Location = new System.Drawing.Point(8, 7);
-            this.ctrScheduleTests1.Name = "ctrScheduleTests1";
-            this.ctrScheduleTests1.Size = new System.Drawing.Size(542, 725);
-            this.ctrScheduleTests1.TabIndex = 0;
             // 
             // btnClose
             // 
@@ -57,7 +49,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(557, 803);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.ctrScheduleTests1);
             this.Name = "frmScheduleTests";
             this.Text = "frmScheduleTests";
             this.ResumeLayout(false);
@@ -65,8 +56,6 @@
         }
 
         #endregion
-
-        private User_Controls.ctrScheduleTests ctrScheduleTests1;
         private System.Windows.Forms.Button btnClose;
     }
 }
