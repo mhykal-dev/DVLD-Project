@@ -34,21 +34,9 @@ namespace DVLD_UI.Tests.Vision_Test
 
             _LDLAppID = LDLApplicationID;
 
-            _TestTypeID = TestTypeID;
-
-            _NationalNo = NationalNo;
-
-            _ClassTypeName = ClassTypeName;
-
-            _FullName = FullName;
-
-            _DecideHeader(TestTypeID);
-
             _RefreshPeopleList();
 
             ctrApplicationsBasicInFo1.LDLApplicationID = LDLApplicationID;
-
-            ctrApplicationsBasicInFo1.NationalNo = NationalNo;
 
             ctrApplicationsBasicInFo1.ShowDetails();
         }
@@ -84,7 +72,7 @@ namespace DVLD_UI.Tests.Vision_Test
             {
                 if(IsThereApreviousTest.IsLocked)
                 {
-                    clsTest PreviousTest = clsTest.GetTestByTestAppointmentID(IsThereApreviousTest.TestAppointmentID);
+                    clsTest PreviousTest = clsTest.Ge(IsThereApreviousTest.TestAppointmentID);
 
                     if(PreviousTest.TestResult == 0)
                     {

@@ -127,7 +127,7 @@ namespace DVLD_UI.Tests.User_Controls
             testAppointment.RetakeTestApplications = applications.ApplicationID;
 
             Test.TestAppointmentID = testAppointment.TestAppointmentID;
-            Test.TestResult = 0;
+            //Test.TestResult = 0;
             Test.CreatedByUserID = 1;
             Test.Notes = "";
         }
