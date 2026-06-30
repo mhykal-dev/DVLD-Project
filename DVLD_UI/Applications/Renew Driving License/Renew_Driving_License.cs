@@ -68,10 +68,10 @@ namespace DVLD_UI.Renew_Driving_License
 
         private void linklblShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
-            {
-                frm.ShowDialog();
-            }
+            //using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
+            //{
+            //    frm.ShowDialog();
+            //}
         }
 
         private void frmRenewLicense_Load(object sender, EventArgs e)

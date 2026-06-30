@@ -122,6 +122,12 @@ namespace DVLD_UI.Drivers.Controls
             }
         }
 
+        public void Clear()
+        {
+            _dtDriverLocalLicensesHistory.Clear();
+            _dtDriverInternationalLicensesHistory.Clear();
+        }
+
         private void showInternationalLicenseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int LicenseID = (int)dgvLocalLicensesHistory.CurrentRow.Cells[0].Value;

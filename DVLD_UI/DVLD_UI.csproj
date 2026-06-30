@@ -134,12 +134,6 @@
     <Compile Include="Applications\Local Driving License Applications List\frmLocalDrivingLicenseApplicationsList.Designer.cs">
       <DependentUpon>frmLocalDrivingLicenseApplicationsList.cs</DependentUpon>
     </Compile>
-    <Compile Include="Applications\Local Driving License Applications List\frmShowLicensesHistory.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Applications\Local Driving License Applications List\frmShowLicensesHistory.Designer.cs">
-      <DependentUpon>frmShowLicensesHistory.cs</DependentUpon>
-    </Compile>
     <Compile Include="Applications\Local Driving License Applications List\frmShowLocalLicenseDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -151,6 +145,12 @@
     </Compile>
     <Compile Include="Applications\Local Driving License Applications List\User Controls\ctrLocalDrivingLicenseInFO.Designer.cs">
       <DependentUpon>ctrLocalDrivingLicenseInFO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Licenses\frmShowLicensesHistory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Licenses\frmShowLicensesHistory.Designer.cs">
+      <DependentUpon>frmShowLicensesHistory.cs</DependentUpon>
     </Compile>
     <Compile Include="Licenses\Local License\frmIssueDriverLicenseFirstTime.cs">
       <SubType>Form</SubType>
@@ -370,14 +370,14 @@
     <EmbeddedResource Include="Applications\Local Driving License Applications List\frmLocalDrivingLicenseApplicationsList.resx">
       <DependentUpon>frmLocalDrivingLicenseApplicationsList.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Applications\Local Driving License Applications List\frmShowLicensesHistory.resx">
-      <DependentUpon>frmShowLicensesHistory.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local Driving License Applications List\frmShowLocalLicenseDetails.resx">
       <DependentUpon>frmShowLocalLicenseDetails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Applications\Local Driving License Applications List\User Controls\ctrLocalDrivingLicenseInFO.resx">
       <DependentUpon>ctrLocalDrivingLicenseInFO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Licenses\frmShowLicensesHistory.resx">
+      <DependentUpon>frmShowLicensesHistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Licenses\Local License\frmIssueDriverLicenseFirstTime.resx">
       <DependentUpon>frmIssueDriverLicenseFirstTime.cs</DependentUpon>

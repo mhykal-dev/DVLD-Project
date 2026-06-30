@@ -59,10 +59,10 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
         private void linklblShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
-            {
-                frm.ShowDialog();
-            }
+            //using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
+            //{
+            //    frm.ShowDialog();
+            //}
         }
 
         private void rdbtnDamaged_CheckedChanged(object sender, EventArgs e)

@@ -143,10 +143,10 @@ namespace DVLD_UI.Drivers
         {
             int PersonID = (int)dgvDrivers.CurrentRow.Cells[1].Value;
 
-            using (Form frm = new frmShowLicensesHistory(PersonID))
-            {
-                frm.ShowDialog();
-            }
+            //using (Form frm = new frmShowLicensesHistory(PersonID))
+            //{
+            //    frm.ShowDialog();
+            //}
         }
     }
 }

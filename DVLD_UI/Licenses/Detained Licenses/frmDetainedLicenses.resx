@@ -262,7 +262,7 @@
   <data name="btnDetain.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAACEAAAAgCAYAAACcuBHKAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
-        EAAACxABrSO9dQAAA2NJREFUWEe9l01IG0EUgKdq8KfUKpX0oKIUfw4ejAet5lCGHCw0UmiJBVusgYIV
+        DAAACwwBP0AiyAAAA2NJREFUWEe9l01IG0EUgKdq8KfUKpX0oKIUfw4ejAet5lCGHCw0UmiJBVusgYIV
         aUXpQSqlpCCtHiwKIkV6CJUehBRpJbQlWLzoUXPSiKn/KC7iHxFRLK/MZEcnb5O4avDwwcvbt+99mZ0s
         EwIA5LwQQkyEEAchhOJrEVGICRRCJXK1RafABqp0E0JYQtCs5k34nhAUYgeFgIRDWxQFQogTDWYidkLI
         tpy/kU5eq/k03COMiH4JdelZIB4BSNfYZ29P+5V7xUUnMslJ5OBOBenFvTgnImeSYEs9Kg3FEqP/FlPo
@@ -292,4 +292,7 @@
         PNd3R62NJGP6/OZ2jAjhqX5w0MkvLkjlQBhPaBAAAAAASUVORK5CYII=
 </value>
   </data>
+  <metadata name="errorProvider1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

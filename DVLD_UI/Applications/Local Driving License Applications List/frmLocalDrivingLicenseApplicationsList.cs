@@ -1,6 +1,7 @@
 ﻿using Applications_Business;
 using DVLD_UI.Applications.Local_Driving_License_Applications_List;
 using DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_Licenses_Applications.Driving_Licenses_Applications;
+using DVLD_UI.Licenses;
 using DVLD_UI.Licenses.Local_License;
 using DVLD_UI.Tests.Tests;
 using LDLApplications_Business;
@@ -181,10 +182,10 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
             int LocalDrivingLicenseApplicationID = (int)dgvLDLApplicationsList.CurrentRow.Cells[0].Value;
             clsLocalDrivingLicenseApplication localDrivingLicenseApplication = clsLocalDrivingLicenseApplication.FindByLocalDrivingAppLicenseID(LocalDrivingLicenseApplicationID);
 
-            using (Form frm = new frmShowLicensesHistory(localDrivingLicenseApplication.ApplicantPersonID))
-            {
-                frm.ShowDialog();
-            }
+            //using (Form frm = new frmShowLicensesHistory(localDrivingLicenseApplication.ApplicantPersonID))
+            //{
+            //    frm.ShowDialog();
+            //}
         }
 
         private void cancleApplicationToolStripMenuItem_Click(object sender, EventArgs e)
