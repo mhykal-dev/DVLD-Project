@@ -1,14 +1,7 @@
 ﻿using Drivers_Business;
-using DVLD_UI.Local_Driving_License_Applications_List;
 using DVLD_UI.People;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Drivers
@@ -105,14 +98,14 @@ namespace DVLD_UI.Drivers
             }
 
             //Reset the filters in case nothing selected or filter value conains nothing.
-            if(txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
+            if (txtFilterValue.Text.Trim() == "" || FilterColumn == "None")
             {
                 _dtAllDrivers.DefaultView.RowFilter = "";
                 _UpdateRecordsCount();
                 return;
             }
 
-            if(FilterColumn != "FullName" && FilterColumn != "NationalNo")
+            if (FilterColumn != "FullName" && FilterColumn != "NationalNo")
                 //in this case we deal with numbers not string.
                 _dtAllDrivers.DefaultView.RowFilter = string.Format("[{0}] = {1}", FilterColumn, txtFilterValue.Text.Trim());
             else

@@ -1,12 +1,6 @@
 ﻿using Licenses_Business;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Controls
@@ -31,7 +25,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
         }
 
         private bool _FilterEnabled = true;
-        
+
         public bool FilterEnabled
         {
             get
@@ -79,7 +73,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
 
         private void btnFind_Click(object sender, EventArgs e)
         {
-            if(!this.ValidateChildren())
+            if (!this.ValidateChildren())
             {
                 //Here we dont continue becuase the form is not valid
                 MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -98,7 +92,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
 
         private void txtLicenseID_Validating(object sender, CancelEventArgs e)
         {
-            if(string.IsNullOrEmpty(txtLicenseID.Text.Trim()))
+            if (string.IsNullOrEmpty(txtLicenseID.Text.Trim()))
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtLicenseID, "This field is required!");

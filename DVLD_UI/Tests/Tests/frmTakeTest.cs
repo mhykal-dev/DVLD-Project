@@ -1,16 +1,8 @@
 ﻿using DVLD_UI.Global_Classes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Tests_Business;
 using TestTypes_Business;
-using static TestTypes_Business.clsTestType;
 
 namespace DVLD_UI.Tests.Tests
 {

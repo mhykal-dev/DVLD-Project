@@ -1,14 +1,6 @@
 ﻿using DVLD_UI.Global_Classes;
 using DVLD_UI.Properties;
 using LDLApplications_Business;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestAppointments_Business;
 using TestTypes_Business;

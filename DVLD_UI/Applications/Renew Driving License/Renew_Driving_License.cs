@@ -1,11 +1,8 @@
 ﻿using Applications_Business;
 using ApplicationTypes_Business;
-using Drivers_Business;
 using DVLD_UI.Global_Classes;
 using DVLD_UI.Local_Driving_License_Applications_List;
-using LicenseClasses_Business;
 using Licenses_Business;
-using PEOPLE_Business;
 using System;
 using System.Windows.Forms;
 
@@ -20,7 +17,7 @@ namespace DVLD_UI.Renew_Driving_License
             InitializeComponent();
         }
 
-        
+
 
         private void btnClose_Click(object sender, EventArgs e)
         {
@@ -99,7 +96,7 @@ namespace DVLD_UI.Renew_Driving_License
             {
                 return;
             }
-            
+
             int DefaultValidityLength = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.LicenseClassIfo.DefaultValidityLength;
             lblExpirationDate.Text = clsFormat.DateToShort(DateTime.Now.AddYears(DefaultValidityLength));
             lblLicenseFees.Text = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.LicenseClassIfo.ClassFees.ToString();

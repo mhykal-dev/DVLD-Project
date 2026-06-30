@@ -8,7 +8,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         public frmShowLocalLicenseDetails(int LicenseID)
         {
             InitializeComponent();
-            _LicenseID = LicenseID;           
+            _LicenseID = LicenseID;
         }
 
         private void btnClose_Click(object sender, System.EventArgs e)

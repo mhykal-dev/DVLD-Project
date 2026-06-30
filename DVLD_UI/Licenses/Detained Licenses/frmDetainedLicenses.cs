@@ -1,6 +1,5 @@
 ﻿using Detained_Business;
 using DVLD_UI.Global_Classes;
-using Licenses_Business;
 using System;
 using System.Windows.Forms;
 
@@ -32,7 +31,7 @@ namespace DVLD_UI.Detained_Licenses
             }
 
 
-            _DetainID = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.Detain(Convert.ToSingle(txtFineFees.Text), clsGlobal.CurrentUser.UserID);
+            _DetainID = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.Detain(Convert.ToSingle(tctboxFineFees.Text), clsGlobal.currentUser.UserID);
             if (_DetainID == -1)
             {
                 MessageBox.Show("Faild to Detain License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -87,7 +86,7 @@ namespace DVLD_UI.Detained_Licenses
 
         private void tctboxFineFees_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if(string.IsNullOrEmpty(tctboxFineFees.Text.Trim()))
+            if (string.IsNullOrEmpty(tctboxFineFees.Text.Trim()))
             {
                 errorProvider1.SetError(tctboxFineFees, "Fees cannot be empty");
             }

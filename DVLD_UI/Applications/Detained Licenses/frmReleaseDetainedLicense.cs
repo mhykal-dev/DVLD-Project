@@ -4,13 +4,6 @@ using DVLD_UI.Global_Classes;
 using DVLD_UI.Licenses;
 using DVLD_UI.Local_Driving_License_Applications_List;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DVLD_UI.Applications.Detained_Licenses
@@ -106,7 +99,7 @@ namespace DVLD_UI.Applications.Detained_Licenses
 
         private void llShowLicenseInfo_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            using(Form frm = new frmShowLocalLicenseDetails(_SelectedLicenseID))
+            using (Form frm = new frmShowLocalLicenseDetails(_SelectedLicenseID))
             {
                 frm.ShowDialog();
             }

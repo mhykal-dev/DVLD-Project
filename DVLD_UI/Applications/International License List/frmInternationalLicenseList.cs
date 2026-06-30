@@ -31,7 +31,7 @@ namespace DVLD_UI.International_License_Lists
 
                 int DriverID = InternationalLicense.DriverID;
 
-                frmInternationalLicenseDetails frm = new frmInternationalLicenseDetails(InternationalLicenseID, LicenseID, DriverID);
+                frmInternationalLicenseDetails frm = new frmInternationalLicenseDetails(InternationalLicenseID);
                 frm.ShowDialog();
 
                 frm.Dispose();
