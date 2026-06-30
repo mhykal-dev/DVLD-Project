@@ -151,6 +151,8 @@
             // 
             // pictureBox12
             // 
+            this.pictureBox12.BackgroundImage = global::DVLD_UI.Properties.Resources.Question_32;
+            this.pictureBox12.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox12.Location = new System.Drawing.Point(484, 252);
             this.pictureBox12.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox12.Name = "pictureBox12";
@@ -183,6 +185,8 @@
             // 
             // pictureBox11
             // 
+            this.pictureBox11.BackgroundImage = global::DVLD_UI.Properties.Resources.Notes_32;
+            this.pictureBox11.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox11.Location = new System.Drawing.Point(140, 250);
             this.pictureBox11.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox11.Name = "pictureBox11";
@@ -215,6 +219,8 @@
             // 
             // pictureBox8
             // 
+            this.pictureBox8.BackgroundImage = global::DVLD_UI.Properties.Resources.Person_32;
+            this.pictureBox8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox8.Location = new System.Drawing.Point(140, 74);
             this.pictureBox8.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox8.Name = "pictureBox8";
@@ -225,6 +231,8 @@
             // 
             // pictureBox10
             // 
+            this.pictureBox10.BackgroundImage = global::DVLD_UI.Properties.Resources.Question_32;
+            this.pictureBox10.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox10.Location = new System.Drawing.Point(484, 109);
             this.pictureBox10.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox10.Name = "pictureBox10";
@@ -246,6 +254,8 @@
             // 
             // pictureBox9
             // 
+            this.pictureBox9.BackgroundImage = global::DVLD_UI.Properties.Resources.Number_32;
+            this.pictureBox9.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox9.Location = new System.Drawing.Point(140, 38);
             this.pictureBox9.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox9.Name = "pictureBox9";
@@ -279,6 +289,8 @@
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackgroundImage = global::DVLD_UI.Properties.Resources.Number_32;
+            this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox2.Location = new System.Drawing.Point(484, 180);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox2.Name = "pictureBox2";
@@ -300,6 +312,8 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackgroundImage = global::DVLD_UI.Properties.Resources.Number_32;
+            this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox1.Location = new System.Drawing.Point(140, 106);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox1.Name = "pictureBox1";
@@ -398,6 +412,8 @@
             // 
             // pictureBox4
             // 
+            this.pictureBox4.BackgroundImage = global::DVLD_UI.Properties.Resources.Calendar_32;
+            this.pictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox4.Location = new System.Drawing.Point(484, 144);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox4.Name = "pictureBox4";
@@ -441,6 +457,8 @@
             // 
             // pbGendor
             // 
+            this.pbGendor.BackgroundImage = global::DVLD_UI.Properties.Resources.Man_32;
+            this.pbGendor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pbGendor.Location = new System.Drawing.Point(140, 180);
             this.pbGendor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pbGendor.Name = "pbGendor";
@@ -451,6 +469,8 @@
             // 
             // pictureBox7
             // 
+            this.pictureBox7.BackgroundImage = global::DVLD_UI.Properties.Resources.Notes_32;
+            this.pictureBox7.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox7.Location = new System.Drawing.Point(140, 286);
             this.pictureBox7.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox7.Name = "pictureBox7";
@@ -461,6 +481,8 @@
             // 
             // pictureBox6
             // 
+            this.pictureBox6.BackgroundImage = global::DVLD_UI.Properties.Resources.Calendar_32;
+            this.pictureBox6.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox6.Location = new System.Drawing.Point(484, 216);
             this.pictureBox6.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox6.Name = "pictureBox6";
@@ -471,6 +493,8 @@
             // 
             // pictureBox5
             // 
+            this.pictureBox5.BackgroundImage = global::DVLD_UI.Properties.Resources.Calendar_32;
+            this.pictureBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox5.Location = new System.Drawing.Point(140, 216);
             this.pictureBox5.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox5.Name = "pictureBox5";
@@ -481,6 +505,8 @@
             // 
             // pictureBox3
             // 
+            this.pictureBox3.BackgroundImage = global::DVLD_UI.Properties.Resources.Number_32;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pictureBox3.Location = new System.Drawing.Point(140, 144);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pictureBox3.Name = "pictureBox3";
