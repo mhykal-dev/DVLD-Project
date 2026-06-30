@@ -1,5 +1,6 @@
 ﻿
 using DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_Licenses_Applications.Driving_Licenses_Applications;
+using DVLD_UI.Drivers;
 using DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication;
 using DVLD_UI.International_License_Applications;
 using DVLD_UI.International_License_Lists;
@@ -25,7 +26,7 @@ namespace DVLD_UI
 
         private void peopleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (frmPeopleList frm = new frmPeopleList())
+            using (Form frm = new frmPeopleList())
             {
                 frm.ShowDialog();
             }
@@ -33,7 +34,7 @@ namespace DVLD_UI
 
         private void usersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (frmUsersList frm = new frmUsersList())
+            using (Form frm = new frmUsersList())
             {
                 frm.ShowDialog();
             }
@@ -41,7 +42,7 @@ namespace DVLD_UI
 
         private void manageApplicationTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (ManageApplicationTypes.frmManageApplicationTypesList frm = new frmManageApplicationTypesList())
+            using (Form frm = new frmManageApplicationTypesList())
             {
                 frm.ShowDialog();
             }
@@ -49,7 +50,7 @@ namespace DVLD_UI
 
         private void manageTestTypesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (Manage_Test_Types.frmManageTestTypes frm = new Manage_Test_Types.frmManageTestTypes())
+            using (Form frm = new Manage_Test_Types.frmManageTestTypes())
             {
                 frm.ShowDialog();
             }
@@ -65,7 +66,7 @@ namespace DVLD_UI
 
         private void localDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (frmLocalDrivingLicenseApplicationsList frm = new frmLocalDrivingLicenseApplicationsList())
+            using (Form frm = new frmLocalDrivingLicenseApplicationsList())
             {
                 frm.ShowDialog();
             }
@@ -73,7 +74,7 @@ namespace DVLD_UI
 
         private void internationalLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (frmInternational_Licenses_Applications frm = new frmInternational_Licenses_Applications())
+            using (Form frm = new frmInternational_Licenses_Applications())
             {
                 frm.ShowDialog();
             }
@@ -81,7 +82,7 @@ namespace DVLD_UI
 
         private void internationalDrivingLicenseApplicationsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (frmInternationalLicenseList frm = new frmInternationalLicenseList())
+            using (Form frm = new frmInternationalLicenseList())
             {
                 frm.ShowDialog();
             }
@@ -89,7 +90,7 @@ namespace DVLD_UI
 
         private void rENewDrivingLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (Renew_Driving_License.frmRenewLicense frm = new Renew_Driving_License.frmRenewLicense())
+            using (Form frm = new Renew_Driving_License.frmRenewLicense())
             {
                 frm.ShowDialog();
             }
@@ -97,7 +98,15 @@ namespace DVLD_UI
 
         private void replaceDamagedLicenseToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (frmReplaceLicense frm = new frmReplaceLicense())
+            using (Form frm = new frmReplaceLicense())
+            {
+                frm.ShowDialog();
+            }
+        }
+
+        private void driversToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (Form frm = new frmListDrivers())
             {
                 frm.ShowDialog();
             }
