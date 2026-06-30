@@ -66,7 +66,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.btnRenew = new System.Windows.Forms.Button();
             this.btnClose = new System.Windows.Forms.Button();
-            this.ctrDrivingLicenseWithFilters1 = new DVLD_UI.International_License_Applications.User_Controls.ctrDrivingLicenseWithFilters();
             this.linklblShowNewLicenseInFo = new System.Windows.Forms.LinkLabel();
             this.linklblShowLicenseHistory = new System.Windows.Forms.LinkLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -492,13 +491,6 @@
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // ctrDrivingLicenseWithFilters1
-            // 
-            this.ctrDrivingLicenseWithFilters1.Location = new System.Drawing.Point(12, 49);
-            this.ctrDrivingLicenseWithFilters1.Name = "ctrDrivingLicenseWithFilters1";
-            this.ctrDrivingLicenseWithFilters1.Size = new System.Drawing.Size(1004, 452);
-            this.ctrDrivingLicenseWithFilters1.TabIndex = 0;
-            // 
             // linklblShowNewLicenseInFo
             // 
             this.linklblShowNewLicenseInFo.AutoSize = true;
@@ -571,7 +563,6 @@
             this.Controls.Add(this.btnRenew);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ctrDrivingLicenseWithFilters1);
             this.Name = "frmReplaceLicense";
             this.Text = "frmRenewDrivingLicenseApplication";
             this.groupBox1.ResumeLayout(false);
@@ -596,7 +587,6 @@
 
         #endregion
 
-        private International_License_Applications.User_Controls.ctrDrivingLicenseWithFilters ctrDrivingLicenseWithFilters1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.PictureBox pictureBox5;

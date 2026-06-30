@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmDetainedLicenses));
-            this.ctrDrivingLicenseWithFilters1 = new DVLD_UI.International_License_Applications.User_Controls.ctrDrivingLicenseWithFilters();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -58,13 +57,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // ctrDrivingLicenseWithFilters1
-            // 
-            this.ctrDrivingLicenseWithFilters1.Location = new System.Drawing.Point(3, 49);
-            this.ctrDrivingLicenseWithFilters1.Name = "ctrDrivingLicenseWithFilters1";
-            this.ctrDrivingLicenseWithFilters1.Size = new System.Drawing.Size(1003, 445);
-            this.ctrDrivingLicenseWithFilters1.TabIndex = 0;
             // 
             // label1
             // 
@@ -306,7 +298,6 @@
             this.Controls.Add(this.btnDetain);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ctrDrivingLicenseWithFilters1);
             this.Name = "frmDetainedLicenses";
             this.Text = "frmDetainedLicenses";
             this.groupBox1.ResumeLayout(false);
@@ -323,7 +314,6 @@
 
         #endregion
 
-        private International_License_Applications.User_Controls.ctrDrivingLicenseWithFilters ctrDrivingLicenseWithFilters1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblDetainedID;

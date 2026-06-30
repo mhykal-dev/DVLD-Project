@@ -24,7 +24,7 @@ namespace DVLD_UI.International_License_Applications
         {
             InitializeComponent();
 
-            ctrDrivingLicenseWithFilters1.DataBack += _LoadApplication;
+            //ctrDrivingLicenseWithFilters1.DataBack += _LoadApplication;
         }
 
         private void _LoadApplication(object sender, int LicenseID, DateTime ExpirationDate, int DriverID, int IsActive)

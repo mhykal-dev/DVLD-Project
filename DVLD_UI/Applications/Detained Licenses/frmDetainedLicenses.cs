@@ -16,7 +16,7 @@ namespace DVLD_UI.Detained_Licenses
         {
             InitializeComponent();
 
-            ctrDrivingLicenseWithFilters1.DataBack += _ShowDetails;
+            //ctrDrivingLicenseWithFilters1.DataBack += _ShowDetails;
         }
 
         private void _ShowDetails(object sender, int LicenseID, DateTime ExpirationDate, int DriverID, int IsActive)

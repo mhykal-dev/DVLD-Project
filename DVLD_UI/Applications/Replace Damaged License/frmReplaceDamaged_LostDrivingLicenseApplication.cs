@@ -26,7 +26,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
         {
             InitializeComponent();
 
-            ctrDrivingLicenseWithFilters1.DataBack += _ShowApplicationDetails;
+            //ctrDrivingLicenseWithFilters1.DataBack += _ShowApplicationDetails;
         }
 
         private void _ShowApplicationDetails(object sender, int LicenseID, DateTime ExpirationDate, int DriverID, int IsActive)

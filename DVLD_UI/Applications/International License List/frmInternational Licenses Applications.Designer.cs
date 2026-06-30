@@ -57,7 +57,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
-            this.ctrDrivingLicenseWithFilters1 = new DVLD_UI.International_License_Applications.User_Controls.ctrDrivingLicenseWithFilters();
             this.linklblShowLicenseHistory = new System.Windows.Forms.LinkLabel();
             this.linklblShowLicenseInFo = new System.Windows.Forms.LinkLabel();
             this.groupBox1.SuspendLayout();
@@ -379,13 +378,6 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // ctrDrivingLicenseWithFilters1
-            // 
-            this.ctrDrivingLicenseWithFilters1.Location = new System.Drawing.Point(6, 49);
-            this.ctrDrivingLicenseWithFilters1.Name = "ctrDrivingLicenseWithFilters1";
-            this.ctrDrivingLicenseWithFilters1.Size = new System.Drawing.Size(958, 544);
-            this.ctrDrivingLicenseWithFilters1.TabIndex = 0;
-            // 
             // linklblShowLicenseHistory
             // 
             this.linklblShowLicenseHistory.AutoSize = true;
@@ -422,7 +414,6 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.ctrDrivingLicenseWithFilters1);
             this.Name = "frmInternational_Licenses_Applications";
             this.Text = "frmInternational_Licenses_Applications";
             this.groupBox1.ResumeLayout(false);
@@ -442,7 +433,6 @@
 
         #endregion
 
-        private User_Controls.ctrDrivingLicenseWithFilters ctrDrivingLicenseWithFilters1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label5;
