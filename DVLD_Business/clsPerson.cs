@@ -175,21 +175,9 @@ namespace PEOPLE_Business
 
         }
 
-        //did't use it.
-        public static DataTable GetPeopleByFilter(string KeyWord, string Value)
-        {
-            return clsPersonData.GetPeopleByFilter(KeyWord, Value);
-
-        }
-
         public static bool DeletePerson(int ID)
         {
             return clsPersonData.DeletePerson(ID);
-        }
-
-        public static bool isPersonExist(int ID)
-        {
-            return clsPersonData.IsPersonExist(ID);
         }
 
         public static bool isPersonExist(string NationalNo)
@@ -206,26 +194,5 @@ namespace PEOPLE_Business
         {
             return clsPersonData.GetPersonNameByID(PersonID);
         }
-
-        public static int GetPersonIDByNationalNo(string NationalNo)
-        {
-            return clsPersonData.GetPersonIDByNationalNo(NationalNo);
-        }
-
-        public static string GetPersonNationalNoByID(int PersonID)
-        {
-            return clsPersonData.GetPersonNationalNoByID(PersonID);
-        }
-
-        public static int GetPersonGendorByID(int PersonID)
-        {
-            return clsPersonData.GetPersonGendorByID(PersonID);
-        }
-
-        public static DateTime GetPersonDateOfBirthByID(int PersonID)
-        {
-            return clsPersonData.GetPersonDateOfBirthByID(PersonID);
-        }
-        //did't use it.
     }
 }
