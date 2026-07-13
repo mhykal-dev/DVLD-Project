@@ -236,18 +236,6 @@
     <Compile Include="People\User Controls\CTRNewPersonCardWithFilter.Designer.cs">
       <DependentUpon>CTRNewPersonCardWithFilter.cs</DependentUpon>
     </Compile>
-    <Compile Include="People\User Controls\ctrPersonCard.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="People\User Controls\ctrPersonCard.Designer.cs">
-      <DependentUpon>ctrPersonCard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="People\User Controls\PersonCardWithFilters.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="People\User Controls\PersonCardWithFilters.Designer.cs">
-      <DependentUpon>PersonCardWithFilters.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Applications\Renew Driving License\Renew_Driving_License.cs">
@@ -432,12 +420,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="People\User Controls\CTRNewPersonCardWithFilter.resx">
       <DependentUpon>CTRNewPersonCardWithFilter.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="People\User Controls\ctrPersonCard.resx">
-      <DependentUpon>ctrPersonCard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="People\User Controls\PersonCardWithFilters.resx">
-      <DependentUpon>PersonCardWithFilters.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

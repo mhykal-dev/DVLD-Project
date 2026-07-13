@@ -2,7 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.Remoting.Messaging;
+using System.Linq;
 
 namespace PEOPLE_DataAccess
 {
@@ -10,7 +10,7 @@ namespace PEOPLE_DataAccess
     {
         public static bool GetPersonInFoByID(int PersonID, ref string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
-            ref short Gendor, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
+            ref short Gender, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool IsFound = false;
             string query = "SELECT * FROM People WHERE PersonID = @PersonID";
@@ -38,7 +38,7 @@ namespace PEOPLE_DataAccess
 
                             LastName = reader["LastName"] as string;
                             DateOfBirth = (DateTime)reader["DateOfBirth"];
-                            Gendor = Convert.ToInt16(reader["Gendor"]);
+                            Gender = Convert.ToInt16(reader["Gender"]);
                             Address = reader["Address"] as string;
                             Phone = reader["Phone"] as string;
 
@@ -58,7 +58,7 @@ namespace PEOPLE_DataAccess
 
         public static bool GetPersonInFoByNationalNo(ref int PersonID, string NationalNo, ref string FirstName,
             ref string SecondName, ref string ThirdName, ref string LastName, ref DateTime DateOfBirth,
-            ref short Gendor, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
+            ref short Gender, ref string Address, ref string Phone, ref string Email, ref int NationalityCountryID, ref string ImagePath)
         {
             bool IsFound = false;
             string query = "SELECT * FROM People WHERE NationalNo = @NationalNo";
@@ -86,7 +86,7 @@ namespace PEOPLE_DataAccess
 
                             LastName = reader["LastName"] as string;
                             DateOfBirth = (DateTime)reader["DateOfBirth"];
-                            Gendor = Convert.ToInt16(reader["Gendor"]);
+                            Gender = Convert.ToInt16(reader["Gender"]);
                             Address = reader["Address"] as string;
                             Phone = reader["Phone"] as string;
 
@@ -106,13 +106,13 @@ namespace PEOPLE_DataAccess
 
         public static int AddNewPerson(string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
-            short Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+            short Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int PersonID = -1;
             string query = @"INSERT INTO People (NationalNo, FirstName, SecondName, ThirdName, LastName, DateOfBirth, 
-                                Gendor, Address, Phone, Email, NationalityCountryID, ImagePath)
+                                Gender, Address, Phone, Email, NationalityCountryID, ImagePath)
                              VALUES (@NationalNo, @FirstName, @SecondName, @ThirdName, @LastName, 
-                                     @DateOfBirth, @Gendor, @Address, @Phone ,@Email, @NationalityCountryID, @ImagePath);
+                                     @DateOfBirth, @Gender, @Address, @Phone ,@Email, @NationalityCountryID, @ImagePath);
                              SELECT SCOPE_IDENTITY();";
 
             using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
@@ -125,7 +125,7 @@ namespace PEOPLE_DataAccess
                     command.Parameters.AddWithValue("@ThirdName", string.IsNullOrEmpty(ThirdName) ? (object)DBNull.Value : ThirdName);
                     command.Parameters.AddWithValue("@LastName", LastName);
                     command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
-                    command.Parameters.AddWithValue("@Gendor", Gendor);
+                    command.Parameters.AddWithValue("@Gender", Gender);
                     command.Parameters.AddWithValue("@Address", Address);
                     command.Parameters.AddWithValue("@Phone", Phone);
                     command.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(Email) ? (object)DBNull.Value : Email);
@@ -145,34 +145,9 @@ namespace PEOPLE_DataAccess
             return PersonID;
         }
 
-        //didn't use it.
-        public static int GetPersonIDByFilter(string KeyWord, string Value)
-        {
-            int PersonID = -1;
-            string query = $"SELECT * FROM People WHERE [{KeyWord}] = @Value";
-
-            using (SqlConnection connection = new SqlConnection(clsDataAccessSettings.ConnectionString))
-            {
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    command.Parameters.AddWithValue("@Value", Value);
-
-                    connection.Open();
-                    object Result = command.ExecuteScalar();
-
-                    if (Result != null)
-                    {
-                        PersonID = Convert.ToInt32(Result);
-                        return PersonID;
-                    }
-                }
-            }
-            return PersonID;
-        }
-
-        public static bool updatePerson(int ID, string NationalNo, string FirstName,
+        public static bool UpdatePerson(int ID, string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
-            short Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+            short Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int rowsAffected = 0;
             string query = @"Update  People  
@@ -182,7 +157,7 @@ namespace PEOPLE_DataAccess
                                 ThirdName = @ThirdName,
                                 LastName = @LastName,
                                 DateOfBirth = @DateOfBirth,
-                                Gendor = @Gendor,
+                                Gender = @Gender,
                                 Address = @Address,
                                 Phone = @Phone, 
                                 Email = @Email, 
@@ -200,7 +175,7 @@ namespace PEOPLE_DataAccess
                     command.Parameters.AddWithValue("@ThirdName", string.IsNullOrEmpty(ThirdName) ? (object)DBNull.Value : ThirdName);
                     command.Parameters.AddWithValue("@LastName", LastName);
                     command.Parameters.AddWithValue("@DateOfBirth", DateOfBirth);
-                    command.Parameters.AddWithValue("@Gendor", Gendor);
+                    command.Parameters.AddWithValue("@Gender", Gender);
                     command.Parameters.AddWithValue("@Address", Address);
                     command.Parameters.AddWithValue("@Phone", Phone);
                     command.Parameters.AddWithValue("@Email", string.IsNullOrEmpty(Email) ? (object)DBNull.Value : Email);
@@ -221,13 +196,13 @@ namespace PEOPLE_DataAccess
             string query =
               @"SELECT People.PersonID, People.NationalNo,
               People.FirstName, People.SecondName, People.ThirdName, People.LastName,
-			  People.DateOfBirth, People.Gendor,  
+			  People.DateOfBirth, People.Gender,  
 				  CASE
-                  WHEN People.Gendor = 0 THEN 'Male'
+                  WHEN People.Gender = 0 THEN 'Male'
 
                   ELSE 'Female'
 
-                  END as GendorCaption ,
+                  END as GenderCaption,
 			  People.Address, People.Phone, People.Email, 
               People.NationalityCountryID, Countries.CountryName, People.ImagePath
               FROM            People INNER JOIN
@@ -311,7 +286,7 @@ namespace PEOPLE_DataAccess
                             string ThirdName = reader["ThirdName"] as string;
                             string LastName = reader["LastName"] as string;
 
-                            FullName = FirstName + " " + SecondName + " " + ThirdName + " " + LastName;
+                            FullName = string.Join(" ", new[] { FirstName, SecondName, ThirdName, LastName }.Where(S => !string.IsNullOrWhiteSpace(S)));
                         }
                     }
                 }

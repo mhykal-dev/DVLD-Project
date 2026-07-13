@@ -7,17 +7,6 @@ namespace DVLD_UI.People.User_Controls
 {
     public partial class CTRNewPersonCardWithFilter : UserControl
     {
-        //Define a custom event handler delegate with parameters
-        public event Action<int> OnPersonSelected;
-        //Create a protected method to raise the event with a parameter
-        protected virtual void PersonSelected(int PersonID)
-        {
-            Action<int> handler = OnPersonSelected;
-            if (handler != null)
-            {
-                handler(PersonID);//Raise the event with the parameter
-            }
-        }
 
         private bool _ShowAddPerson = true;
         public bool ShowAddPerson
@@ -52,8 +41,6 @@ namespace DVLD_UI.People.User_Controls
             InitializeComponent();
         }
 
-        private int _PersonID = -1;
-
         public int PersonID
         {
             get { return ctrNewPersonCard1.PersonID; }
@@ -76,7 +63,10 @@ namespace DVLD_UI.People.User_Controls
             switch (cbFilterBy.Text)
             {
                 case "Person ID":
-                    ctrNewPersonCard1.LoadPersonInfo(int.Parse(txtFilterValue.Text));
+                    if(int.TryParse(txtFilterValue.Text.Trim(), out int PersonID))
+                    {
+                        ctrNewPersonCard1.LoadPersonInfo(PersonID);
+                    }
 
                     break;
 
@@ -87,12 +77,6 @@ namespace DVLD_UI.People.User_Controls
 
                 default:
                     break;
-            }
-
-            if (OnPersonSelected != null && FilterEnabled)
-            {
-                //Raise the event with a parameter.
-                OnPersonSelected(ctrNewPersonCard1.PersonID);
             }
         }
 
@@ -126,20 +110,26 @@ namespace DVLD_UI.People.User_Controls
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtFilterValue, "This Field Is required!");
+                return;
             }
 
-            else
+            if(cbFilterBy.Text == "Person ID" && !int.TryParse(txtFilterValue.Text.Trim(), out int PersonID))
             {
-                //e.Cancel = false;
-                errorProvider1.SetError(txtFilterValue, null);
+                e.Cancel= true;
+                errorProvider1.SetError(txtFilterValue, "Person ID Must be a Number");
+                return;
             }
+
+            errorProvider1.SetError(txtFilterValue, null);
         }
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            frmAddUpdatePerson frm1 = new frmAddUpdatePerson(0);
-            frm1.DataBack += DataBackEvent; // Subscribe to the event
-            frm1.ShowDialog();
+            using (frmAddUpdatePerson frm1 = new frmAddUpdatePerson())
+            {
+                frm1.DataBack += DataBackEvent; // Subscribe to the event
+                frm1.ShowDialog();
+            }
         }
 
         private void DataBackEvent(object sender, int PersonID)
@@ -156,12 +146,11 @@ namespace DVLD_UI.People.User_Controls
             txtFilterValue.Focus();
         }
 
-        private void txtFilterValue_KeyPress(object sender, KeyPressEventArgs e)
+        private void txtFilterValue_KeyPress_1(object sender, KeyPressEventArgs e)
         {
             // Check if the pressed key is Enter (character code 13)
             if (e.KeyChar == (char)13)
             {
-
                 btnFind.PerformClick();
             }
 

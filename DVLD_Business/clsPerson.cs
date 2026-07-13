@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Linq;
 using COUNTRIES_Business;
 using PEOPLE_DataAccess;
 
@@ -7,6 +8,7 @@ namespace PEOPLE_Business
 {
     public class clsPerson
     {
+        public enum enGender { Male = 0, Female = 1 };
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
@@ -18,16 +20,30 @@ namespace PEOPLE_Business
         public string LastName { set; get; }
         public string FullName
         {
-            get { return FirstName + " " + SecondName + " " + ThirdName + " " + LastName; }
+            get { return string.Join(" ", new[] { FirstName, SecondName, ThirdName, LastName }.Where(S => !string.IsNullOrWhiteSpace(S)) ); }
 
         }
         public DateTime DateOfBirth { set; get; }
-        public short Gendor {  set; get; }
+        public enGender Gender {  set; get; }
         public string Address { set; get; }
         public string Phone { set; get; }
         public string Email { set; get; }
         public int NationalityCountryID { set; get; }
-        public clsCountry CountryInfo;//
+
+        private clsCountry _CountryInfo = null;
+
+        public clsCountry CountryInfo
+        {
+            get
+            {
+                if(_CountryInfo == null && NationalityCountryID != -1)
+                {
+                    _CountryInfo = clsCountry.Find(NationalityCountryID);
+                }
+
+                return _CountryInfo;
+            }
+        }
         private string _ImagePath { set; get; }
         public string ImagePath
         {
@@ -44,7 +60,7 @@ namespace PEOPLE_Business
             ThirdName = "";
             LastName = "";
             DateOfBirth = DateTime.Now;
-            Gendor = 0;
+            Gender = 0;
             Address = "";
             Phone = "";
             Email = "";
@@ -56,7 +72,7 @@ namespace PEOPLE_Business
 
         private clsPerson(int PersonID, string NationalNo, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
-            short Gendor, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
+            enGender Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             this.PersonID = PersonID;
             this.NationalNo = NationalNo;
@@ -65,13 +81,12 @@ namespace PEOPLE_Business
             this.ThirdName = ThirdName;
             this.LastName = LastName;
             this.DateOfBirth = DateOfBirth;
-            this.Gendor = Gendor;
+            this.Gender = Gender;
             this.Address = Address;
             this.Phone = Phone;
             this.Email = Email;
             this.NationalityCountryID = NationalityCountryID;
             this.ImagePath = ImagePath;
-            this.CountryInfo = clsCountry.Find(NationalityCountryID);
 
             Mode = enMode.Update;
         }
@@ -81,7 +96,7 @@ namespace PEOPLE_Business
             //call DataAccess Layer 
 
             this.PersonID = clsPersonData.AddNewPerson(this.NationalNo, this.FirstName, this.SecondName, this.ThirdName, 
-                this.LastName, this.DateOfBirth, this.Gendor, this.Address,
+                this.LastName, this.DateOfBirth, (short)this.Gender, this.Address,
                 this.Phone, this.Email, this.NationalityCountryID, this.ImagePath);
 
             return (this.PersonID != -1);
@@ -91,8 +106,8 @@ namespace PEOPLE_Business
         {
             //call DataAccess Layer 
 
-            return clsPersonData.updatePerson(this.PersonID, this.NationalNo, this.FirstName, this.SecondName, this.ThirdName,
-                this.LastName, this.DateOfBirth, this.Gendor, this.Address,
+            return clsPersonData.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.SecondName, this.ThirdName,
+                this.LastName, this.DateOfBirth, (short)this.Gender, this.Address,
                 this.Phone, this.Email, this.NationalityCountryID, this.ImagePath);
 
         }
@@ -102,15 +117,15 @@ namespace PEOPLE_Business
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", NationalNo = "", Email = "", Phone = "", Address = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
             int NationalityCountryID = -1;
-            short Gendor = 0;
+            short Gender = 0;
 
             bool IsFound = clsPersonData.GetPersonInFoByID(ID, ref NationalNo, ref FirstName, ref SecondName, ref ThirdName, ref LastName,
-                          ref DateOfBirth, ref Gendor, ref Address, ref Phone, ref Email, ref NationalityCountryID, ref ImagePath);
+                          ref DateOfBirth, ref Gender, ref Address, ref Phone, ref Email, ref NationalityCountryID, ref ImagePath);
 
             if (IsFound)
             {
                 return new clsPerson(ID, NationalNo, FirstName, SecondName, ThirdName, LastName,
-                          DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+                          DateOfBirth, (enGender)Gender, Address, Phone, Email, NationalityCountryID, ImagePath);
             }
             else
                 return null;
@@ -121,20 +136,20 @@ namespace PEOPLE_Business
             string FirstName = "", SecondName = "", ThirdName = "", LastName = "", Email = "", Phone = "", Address = "", ImagePath = "";
             DateTime DateOfBirth = DateTime.Now;
             int PersonID = -1, NationalityCountryID = -1;
-            short Gendor = 0;
+            short Gender = 0;
 
             bool IsFound = clsPersonData.GetPersonInFoByNationalNo
                                 (
                                     ref PersonID, NationalNo, ref FirstName, ref SecondName,
                                     ref ThirdName, ref LastName, ref DateOfBirth,
-                                    ref Gendor, ref Address, ref Phone, ref Email,
+                                    ref Gender, ref Address, ref Phone, ref Email,
                                     ref NationalityCountryID, ref ImagePath
                                 );
 
             if (IsFound)
 
-                return new clsPerson(PersonID, FirstName, SecondName, ThirdName, LastName,
-                          NationalNo, DateOfBirth, Gendor, Address, Phone, Email, NationalityCountryID, ImagePath);
+                return new clsPerson(PersonID, NationalNo, FirstName, SecondName, ThirdName, LastName,
+                          DateOfBirth, (enGender)Gender, Address, Phone, Email, NationalityCountryID, ImagePath);
             else
                 return null;
         }
@@ -183,11 +198,6 @@ namespace PEOPLE_Business
         public static bool isPersonExist(string NationalNo)
         {
             return clsPersonData.IsPersonExist(NationalNo);
-        }
-
-        public static int GetPersonIDByFilter(string KeyWord, string Value)
-        {
-            return clsPersonData.GetPersonIDByFilter(KeyWord, Value);
         }
 
         public static string GetPersonNameByID(int PersonID)
