@@ -145,14 +145,13 @@ namespace PEOPLE_DataAccess
             return PersonID;
         }
 
-        public static bool UpdatePerson(int ID, string NationalNo, string FirstName,
+        public static bool UpdatePerson(int ID, string FirstName,
             string SecondName, string ThirdName, string LastName, DateTime DateOfBirth,
             short Gender, string Address, string Phone, string Email, int NationalityCountryID, string ImagePath)
         {
             int rowsAffected = 0;
             string query = @"Update  People  
-                            set NationalNo = @NationalNo,
-                                FirstName = @FirstName,
+                            set FirstName = @FirstName,                               
                                 SecondName = @SecondName,
                                 ThirdName = @ThirdName,
                                 LastName = @LastName,
@@ -169,7 +168,6 @@ namespace PEOPLE_DataAccess
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@NationalNo", NationalNo);
                     command.Parameters.AddWithValue("@FirstName", FirstName);
                     command.Parameters.AddWithValue("@SecondName", SecondName);
                     command.Parameters.AddWithValue("@ThirdName", string.IsNullOrEmpty(ThirdName) ? (object)DBNull.Value : ThirdName);

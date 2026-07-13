@@ -12,8 +12,36 @@ namespace PEOPLE_Business
         public enum enMode { AddNew = 0, Update = 1 };
         public enMode Mode = enMode.AddNew;
 
-        public int PersonID { set; get; }
-        public string NationalNo { set; get; }
+        private int _PersonID;
+        public int PersonID
+        {
+            get
+            {
+                return _PersonID;
+            }
+
+            set
+            {
+                if (Mode == enMode.Update && _PersonID != value)
+                    throw new InvalidOperationException("PersonID cannot be changed once a person is created.");
+                _PersonID = value;
+            }
+        }
+        private string _NationalNo;
+        public string NationalNo
+        {
+            get
+            {
+                return _NationalNo;
+            }
+
+            set
+            {
+                if (Mode == enMode.Update && _NationalNo != value)
+                    throw new InvalidOperationException("NationalNo cannot be changed once a person is created.");
+                _NationalNo = value;
+            }
+        }
         public string FirstName { set; get; }
         public string SecondName { set; get; }
         public string ThirdName { set; get; }
@@ -31,14 +59,15 @@ namespace PEOPLE_Business
         public int NationalityCountryID { set; get; }
 
         private clsCountry _CountryInfo = null;
-
+        private bool _CountryInfoLoaded = false;
         public clsCountry CountryInfo
         {
             get
             {
-                if(_CountryInfo == null && NationalityCountryID != -1)
+                if(!_CountryInfoLoaded && NationalityCountryID != -1)
                 {
                     _CountryInfo = clsCountry.Find(NationalityCountryID);
+                    _CountryInfoLoaded = true;
                 }
 
                 return _CountryInfo;
@@ -64,7 +93,7 @@ namespace PEOPLE_Business
             Address = "";
             Phone = "";
             Email = "";
-            NationalityCountryID = 0;
+            NationalityCountryID = -1;
             ImagePath = "";
 
             Mode = enMode.AddNew;
@@ -106,7 +135,7 @@ namespace PEOPLE_Business
         {
             //call DataAccess Layer 
 
-            return clsPersonData.UpdatePerson(this.PersonID, this.NationalNo, this.FirstName, this.SecondName, this.ThirdName,
+            return clsPersonData.UpdatePerson(this.PersonID, this.FirstName, this.SecondName, this.ThirdName,
                 this.LastName, this.DateOfBirth, (short)this.Gender, this.Address,
                 this.Phone, this.Email, this.NationalityCountryID, this.ImagePath);
 
