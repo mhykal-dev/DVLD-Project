@@ -72,6 +72,9 @@ namespace DVLD_UI.People
                     "LastName", "GenderCaption", "DateOfBirth", "CountryName", "Phone", "Email");
 
                 dgvPeopleList.DataSource = _dtPeople;
+                //cmbFilterBy.SelectedIndex = 0;
+                _ApplyFilter();
+
             }
 
             catch (Exception ex)
@@ -145,7 +148,7 @@ namespace DVLD_UI.People
             {
 
                 //Perform Delele and refresh
-                if (clsPerson.DeletePerson((int)dgvPeopleList.CurrentRow.Cells[0].Value))
+                if (clsPerson.DeletePerson(PersonID))
                 {
                     MessageBox.Show("Person Deleted Successfully.", "Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     _RefreshPeopleList();
@@ -176,64 +179,36 @@ namespace DVLD_UI.People
 
         private void sToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("I Don't Have The Email!");
+            MessageBox.Show("This feature is not available yet.", "Coming Soon", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void phoneCallToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("I Don't Have The Number!");
+            MessageBox.Show("This feature is not available yet.", "Coming Soon", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void txtboxFilterField_TextChanged(object sender, EventArgs e)
         {
-            string filterColumn = "";
-            //Map Selected Filter to real Column name 
+            _ApplyFilter();
+        }
+
+        private void _ApplyFilter()
+        {
+            string filterColumn;
+
             switch (cmbFilterBy.Text)
             {
-                case "Person ID":
-                    filterColumn = "PersonID";
-                    break;
-
-                case "National No.":
-                    filterColumn = "NationalNo";
-                    break;
-
-                case "First Name":
-                    filterColumn = "FirstName";
-                    break;
-
-                case "Second Name":
-                    filterColumn = "SecondName";
-                    break;
-
-                case "Third Name":
-                    filterColumn = "ThirdName";
-                    break;
-
-                case "Last Name":
-                    filterColumn = "LastName";
-                    break;
-
-                case "Nationality":
-                    filterColumn = "CountryName";
-                    break;
-
-                case "Gender":
-                    filterColumn = "GenderCaption";
-                    break;
-
-                case "Phone":
-                    filterColumn = "Phone";
-                    break;
-
-                case "Email":
-                    filterColumn = "Email";
-                    break;
-
-                default:
-                    filterColumn = "None";
-                    break;
-
+                case "Person ID": filterColumn = "PersonID"; break;
+                case "National No.": filterColumn = "NationalNo"; break;
+                case "First Name": filterColumn = "FirstName"; break;
+                case "Second Name": filterColumn = "SecondName"; break;
+                case "Third Name": filterColumn = "ThirdName"; break;
+                case "Last Name": filterColumn = "LastName"; break;
+                case "Nationality": filterColumn = "CountryName"; break;
+                case "Gender": filterColumn = "GenderCaption"; break;
+                case "Phone": filterColumn = "Phone"; break;
+                case "Email": filterColumn = "Email"; break;
+                default: filterColumn = "None"; break;
             }
 
             if (string.IsNullOrWhiteSpace(txtboxFilterField.Text) || filterColumn == "None")
@@ -243,22 +218,29 @@ namespace DVLD_UI.People
                 return;
             }
 
-
             string filterValue = txtboxFilterField.Text.Trim().Replace("'", "''");
 
-            if (filterColumn == "PersonID")
+            try
             {
-                if(!int.TryParse(filterValue, out int personId))
+                if (filterColumn == "PersonID")
                 {
-                    MessageBox.Show("Please enter a valid numeric value for Person ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    _UpdateRecordsCount();
-                    return;
+                    if (!int.TryParse(filterValue, out int personId))
+                    {
+                        MessageBox.Show("Please enter a valid numeric value for Person ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        _UpdateRecordsCount();
+                        return;
+                    }
+                    _dtPeople.DefaultView.RowFilter = $"{filterColumn} = {filterValue}";
                 }
-                _dtPeople.DefaultView.RowFilter = $"{filterColumn} = {filterValue}";
+                else
+                {
+                    _dtPeople.DefaultView.RowFilter = $"{filterColumn} LIKE '{filterValue}%'";
+                }
             }
-
-            else
-                _dtPeople.DefaultView.RowFilter = $"{filterColumn} LIKE '{filterValue}%'";
+            catch (Exception)
+            {
+                // invalid filter characters — ignore rather than crash
+            }
 
             _UpdateRecordsCount();
         }
