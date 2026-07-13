@@ -35,16 +35,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // ctrNewPersonCardWithFilter1
-            // 
-            this.ctrNewPersonCardWithFilter1.FilterEnabled = true;
-            this.ctrNewPersonCardWithFilter1.Location = new System.Drawing.Point(2, 0);
-            this.ctrNewPersonCardWithFilter1.Name = "ctrNewPersonCardWithFilter1";
-            this.ctrNewPersonCardWithFilter1.ShowAddPerson = true;
-            this.ctrNewPersonCardWithFilter1.Size = new System.Drawing.Size(830, 388);
-            this.ctrNewPersonCardWithFilter1.TabIndex = 0;
-            this.ctrNewPersonCardWithFilter1.OnPersonSelected += new System.Action<int>(this.ctrNewPersonCardWithFilter1_OnPersonSelected);
-            // 
             // pictureBox1
             // 
             this.pictureBox1.BackgroundImage = global::DVLD_UI.Properties.Resources.PersonLicenseHistory_512;

@@ -39,7 +39,7 @@ namespace DVLD_UI.International_License_Lists
         {
             _dtInternationalLicenseApplications = clsInternationalLicense.GetAllInternationalLicenses();
             cbFilterBy.SelectedIndex = 0;
-            
+
             dgvInternationalLicenses.DataSource = _dtInternationalLicenseApplications;
             lblInternationalLicensesRecords.Text = dgvInternationalLicenses.Rows.Count.ToString();
 
@@ -71,7 +71,7 @@ namespace DVLD_UI.International_License_Lists
 
         private void btnNewApplication_Click(object sender, EventArgs e)
         {
-            using(Form frm = new frmInternational_Licenses_Applications())
+            using (Form frm = new frmInternational_Licenses_Applications())
             {
                 frm.ShowDialog();
             }
@@ -83,7 +83,7 @@ namespace DVLD_UI.International_License_Lists
             int DriverID = (int)dgvInternationalLicenses.CurrentRow.Cells[2].Value;
             int PersonID = clsDriver.FindByDriverID(DriverID).PersonID;
 
-            using(Form frm = new frmShowLicensesHistory(PersonID))
+            using (Form frm = new frmShowLicensesHistory(PersonID))
             {
                 frm.ShowDialog();
             }

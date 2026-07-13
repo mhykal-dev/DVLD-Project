@@ -26,7 +26,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
 
         private void _LoadPersonImage()
         {
-            if (_License.DriverInfo.PersonInfo.Gendor == 0)
+            if (_License.DriverInfo.PersonInfo.Gender == 0)
                 pbPersonImage.Image = Resources.Male_512;
             else
                 pbPersonImage.Image = Resources.Female_512;
@@ -59,7 +59,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
             lblClass.Text = _License.LicenseClassIfo.ClassName;
             lblFullName.Text = _License.DriverInfo.PersonInfo.FullName;
             lblNationalNo.Text = _License.DriverInfo.PersonInfo.NationalNo;
-            lblGendor.Text = _License.DriverInfo.PersonInfo.Gendor == 0 ? "Male" : "Female";
+            lblGender.Text = _License.DriverInfo.PersonInfo.Gender == 0 ? "Male" : "Female";
             lblDateOfBirth.Text = clsFormat.DateToShort(_License.DriverInfo.PersonInfo.DateOfBirth);
 
             lblDriverID.Text = _License.DriverID.ToString();

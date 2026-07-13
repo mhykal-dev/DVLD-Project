@@ -49,7 +49,7 @@
             this.lblExpirationDate = new System.Windows.Forms.Label();
             this.lblDriverID = new System.Windows.Forms.Label();
             this.lblDateOfBirth = new System.Windows.Forms.Label();
-            this.lblGendor = new System.Windows.Forms.Label();
+            this.lblGender = new System.Windows.Forms.Label();
             this.lblNotes = new System.Windows.Forms.Label();
             this.lblIssueDate = new System.Windows.Forms.Label();
             this.lblNationalNo = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             this.label22 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.lblLicenseID = new System.Windows.Forms.Label();
-            this.pbGendor = new System.Windows.Forms.PictureBox();
+            this.pbGender = new System.Windows.Forms.PictureBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -78,7 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbGendor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGender)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -108,7 +108,7 @@
             this.groupBox1.Controls.Add(this.lblExpirationDate);
             this.groupBox1.Controls.Add(this.lblDriverID);
             this.groupBox1.Controls.Add(this.lblDateOfBirth);
-            this.groupBox1.Controls.Add(this.lblGendor);
+            this.groupBox1.Controls.Add(this.lblGender);
             this.groupBox1.Controls.Add(this.lblNotes);
             this.groupBox1.Controls.Add(this.lblIssueDate);
             this.groupBox1.Controls.Add(this.lblNationalNo);
@@ -116,7 +116,7 @@
             this.groupBox1.Controls.Add(this.label22);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.lblLicenseID);
-            this.groupBox1.Controls.Add(this.pbGendor);
+            this.groupBox1.Controls.Add(this.pbGender);
             this.groupBox1.Controls.Add(this.pictureBox7);
             this.groupBox1.Controls.Add(this.pictureBox6);
             this.groupBox1.Controls.Add(this.pictureBox5);
@@ -366,16 +366,16 @@
             this.lblDateOfBirth.TabIndex = 136;
             this.lblDateOfBirth.Text = "[????]";
             // 
-            // lblGendor
+            // lblGender
             // 
-            this.lblGendor.AutoSize = true;
-            this.lblGendor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblGendor.Location = new System.Drawing.Point(180, 180);
-            this.lblGendor.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lblGendor.Name = "lblGendor";
-            this.lblGendor.Size = new System.Drawing.Size(53, 20);
-            this.lblGendor.TabIndex = 135;
-            this.lblGendor.Text = "[????]";
+            this.lblGender.AutoSize = true;
+            this.lblGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblGender.Location = new System.Drawing.Point(180, 180);
+            this.lblGender.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lblGender.Name = "lblGender";
+            this.lblGender.Size = new System.Drawing.Size(53, 20);
+            this.lblGender.TabIndex = 135;
+            this.lblGender.Text = "[????]";
             // 
             // lblNotes
             // 
@@ -442,7 +442,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 20);
             this.label5.TabIndex = 129;
-            this.label5.Text = "Gendor:";
+            this.label5.Text = "Gender:";
             // 
             // lblLicenseID
             // 
@@ -455,17 +455,17 @@
             this.lblLicenseID.TabIndex = 127;
             this.lblLicenseID.Text = "[????]";
             // 
-            // pbGendor
+            // pbGender
             // 
-            this.pbGendor.BackgroundImage = global::DVLD_UI.Properties.Resources.Man_32;
-            this.pbGendor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pbGendor.Location = new System.Drawing.Point(140, 180);
-            this.pbGendor.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pbGendor.Name = "pbGendor";
-            this.pbGendor.Size = new System.Drawing.Size(31, 26);
-            this.pbGendor.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pbGendor.TabIndex = 130;
-            this.pbGendor.TabStop = false;
+            this.pbGender.BackgroundImage = global::DVLD_UI.Properties.Resources.Man_32;
+            this.pbGender.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.pbGender.Location = new System.Drawing.Point(140, 180);
+            this.pbGender.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pbGender.Name = "pbGender";
+            this.pbGender.Size = new System.Drawing.Size(31, 26);
+            this.pbGender.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pbGender.TabIndex = 130;
+            this.pbGender.TabStop = false;
             // 
             // pictureBox7
             // 
@@ -611,7 +611,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbGendor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbGender)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
@@ -644,7 +644,7 @@
         private System.Windows.Forms.Label lblExpirationDate;
         private System.Windows.Forms.Label lblDriverID;
         private System.Windows.Forms.Label lblDateOfBirth;
-        private System.Windows.Forms.Label lblGendor;
+        private System.Windows.Forms.Label lblGender;
         private System.Windows.Forms.Label lblNotes;
         private System.Windows.Forms.Label lblIssueDate;
         private System.Windows.Forms.Label lblNationalNo;
@@ -652,7 +652,7 @@
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label lblLicenseID;
-        private System.Windows.Forms.PictureBox pbGendor;
+        private System.Windows.Forms.PictureBox pbGender;
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.PictureBox pictureBox5;
