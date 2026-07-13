@@ -16,10 +16,12 @@ namespace DVLD_UI.People
             InitializeComponent();
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void frmFindPerson_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //triger the event to send data back to the caller from.
-            DataBack?.Invoke(this, ctrNewPersonCardWithFilter1.PersonID);
+            if(ctrNewPersonCardWithFilter1.PersonID != -1)
+            {
+                DataBack?.Invoke(this, ctrNewPersonCardWithFilter1.PersonID);
+            }
         }
     }
 }

@@ -176,7 +176,7 @@
             "Third Name",
             "Last Name",
             "Nationality",
-            "Gendor",
+            "Gender",
             "Phone",
             "Email"});
             this.cmbFilterBy.Location = new System.Drawing.Point(125, 237);

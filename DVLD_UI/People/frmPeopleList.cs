@@ -7,13 +7,10 @@ namespace DVLD_UI.People
 {
     public partial class frmPeopleList : Form
     {
-        private static DataTable _dtAllPeople = clsPerson.GetAllPeople();
+        private DataTable _dtAllPeople;
 
         //only select the columns that you want to show in the grid.
-        private DataTable _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
-                                                       "FirstName", "SecondName", "ThirdName", "LastName",
-                                                       "GendorCaption", "DateOfBirth", "CountryName",
-                                                       "Phone", "Email");
+        private DataTable _dtPeople;
 
         public frmPeopleList()
         {
@@ -22,8 +19,27 @@ namespace DVLD_UI.People
 
         private void frmPeopleList_Load(object sender, EventArgs e)
         {
-            dgvPeopleList.DataSource = _dtPeople;
-            cmbFilterBy.SelectedIndex = 0; //None!.
+
+            try
+            {
+                _dtAllPeople = clsPerson.GetAllPeople();
+
+                //only select the columns that you want to show in the grid.
+                _dtPeople = _dtAllPeople.DefaultView.ToTable(false, "PersonID", "NationalNo",
+                                                               "FirstName", "SecondName", "ThirdName", "LastName",
+                                                               "GenderCaption", "DateOfBirth", "CountryName",
+                                                               "Phone", "Email");
+
+                dgvPeopleList.DataSource = _dtPeople;
+                cmbFilterBy.SelectedIndex = 0; //None!.
+            }
+
+            catch(Exception ex)
+            {
+                MessageBox.Show("Error while loading People List: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                this.BeginInvoke(new Action(() => this.Close())); // Close the form on load error.
+                return;
+            }
 
             _SetupDataGridViewColumns();
             _UpdateRecordsCount();
@@ -31,7 +47,7 @@ namespace DVLD_UI.People
 
         private void _SetupDataGridViewColumns()
         {
-            if (dgvPeopleList.Rows.Count == 0) return;
+            if (dgvPeopleList.Columns.Count == 0) return;
 
             string[] headers = { "Person ID", "National No.", "First Name", "Second Name", "Third Name", "Last Name", "Gender", "Date Of Birth", "Nationality", "Phone", "Email" };
             int[] widths = { 110, 120, 120, 140, 120, 120, 120, 140, 120, 120, 170 };
@@ -48,13 +64,23 @@ namespace DVLD_UI.People
 
         private void _RefreshPeopleList()
         {
-            _dtAllPeople = clsPerson.GetAllPeople();
-            _dtPeople = _dtAllPeople.DefaultView.ToTable(false,
-                "PersonID", "NationalNo", "FirstName", "SecondName", "ThirdName",
-                "LastName", "GendorCaption", "DateOfBirth", "CountryName", "Phone", "Email");
+            try
+            {
+                _dtAllPeople = clsPerson.GetAllPeople();
+                _dtPeople = _dtAllPeople.DefaultView.ToTable(false,
+                    "PersonID", "NationalNo", "FirstName", "SecondName", "ThirdName",
+                    "LastName", "GenderCaption", "DateOfBirth", "CountryName", "Phone", "Email");
 
-            dgvPeopleList.DataSource = _dtPeople;
+                dgvPeopleList.DataSource = _dtPeople;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error while refreshing People List: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
             _UpdateRecordsCount();
+            _SetupDataGridViewColumns();
         }
 
         private void _UpdateRecordsCount()
@@ -81,16 +107,18 @@ namespace DVLD_UI.People
 
         private void btnAddNewPerson_Click(object sender, EventArgs e)
         {
-            using (Form frm = new frmAddUpdatePerson())
-            {
-                frm.ShowDialog();
-            }
-
-            _RefreshPeopleList();
+            AddNewPerson();
         }
 
         private void showDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+
+            if(dgvPeopleList.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a valid Person to show details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             int PersonID = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
             using (Form frmPerson = new frmShowPersonInFo(PersonID))
             {
@@ -100,18 +128,20 @@ namespace DVLD_UI.People
 
         private void addNewPersonToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (Form frm = new frmAddUpdatePerson())
-            {
-                frm.ShowDialog();
-            }
-
-            _RefreshPeopleList();
+            AddNewPerson();
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Are you sure you want to delete Person [" + dgvPeopleList.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
 
+            if (dgvPeopleList.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a valid Person to show details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int PersonID = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
+            if (MessageBox.Show("Are you sure you want to delete Person [" + dgvPeopleList.CurrentRow.Cells[0].Value + "]", "Confirm Delete", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
             {
 
                 //Perform Delele and refresh
@@ -123,14 +153,19 @@ namespace DVLD_UI.People
 
                 else
                     MessageBox.Show("Person was not deleted because it has data linked to it.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
             }
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int PersonID = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
 
+            if (dgvPeopleList.CurrentRow == null)
+            {
+                MessageBox.Show("Please select a valid Person to show details.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int PersonID = (int)dgvPeopleList.CurrentRow.Cells[0].Value;
             using (Form frm = new frmAddUpdatePerson(PersonID))
             {
                 frm.ShowDialog();
@@ -183,8 +218,8 @@ namespace DVLD_UI.People
                     filterColumn = "CountryName";
                     break;
 
-                case "Gendor":
-                    filterColumn = "GendorCaption";
+                case "Gender":
+                    filterColumn = "GenderCaption";
                     break;
 
                 case "Phone":
@@ -212,7 +247,15 @@ namespace DVLD_UI.People
             string filterValue = txtboxFilterField.Text.Trim().Replace("'", "''");
 
             if (filterColumn == "PersonID")
+            {
+                if(!int.TryParse(filterValue, out int personId))
+                {
+                    MessageBox.Show("Please enter a valid numeric value for Person ID.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    _UpdateRecordsCount();
+                    return;
+                }
                 _dtPeople.DefaultView.RowFilter = $"{filterColumn} = {filterValue}";
+            }
 
             else
                 _dtPeople.DefaultView.RowFilter = $"{filterColumn} LIKE '{filterValue}%'";
@@ -226,6 +269,15 @@ namespace DVLD_UI.People
             {
                 e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             }
+        }
+
+        private void AddNewPerson()
+        {
+            using(Form frm = new frmAddUpdatePerson())
+            {
+                frm.ShowDialog();
+            }
+            _RefreshPeopleList();
         }
     }
 }

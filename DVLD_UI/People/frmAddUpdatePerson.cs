@@ -19,7 +19,7 @@ namespace DVLD_UI.People
 
         public enum enMode { AddNew = 0, Update = 1 };
 
-        public enum enGendor { Male = 0, Female = 1 };
+        public enum enGender { Male = 0, Female = 1 };
 
         private enMode _Mode;
         private int _PersonID = -1;
@@ -54,21 +54,13 @@ namespace DVLD_UI.People
                 lblTitle.Text = "Update Person";
             }
 
-            //set default image for the person.
-            if (rbMale.Checked)
-                pbPersonImage.Image = Resources.Male_512;
-            else
-                pbPersonImage.Image = Resources.Female_512;
+            rbMale.Checked = true;
+
+
+            pbPersonImage.Image = Resources.Male_512;
 
             //hide/show the remove link incase there is no image for the Person.
             llRemoveImage.Visible = (pbPersonImage.ImageLocation != null);
-
-            //set the max date to 18 years from toay and set the default the same.
-            dtpDateOfBirth.MaxDate = DateTime.Now.AddYears(-18);
-            dtpDateOfBirth.Value = dtpDateOfBirth.MaxDate;
-
-            //should not allow adding age more than 100 years
-            dtpDateOfBirth.MinDate = DateTime.Now.AddYears(-100);
 
             //this will set default country to jordan.
             cbCountry.SelectedIndex = cbCountry.FindString("Jordan");
@@ -78,7 +70,6 @@ namespace DVLD_UI.People
             txtThirdName.Text = "";
             txtLastName.Text = "";
             txtNationalNo.Text = "";
-            rbMale.Checked = true;
             txtPhone.Text = "";
             txtEmail.Text = "";
             txtAddress.Text = "";
@@ -112,7 +103,7 @@ namespace DVLD_UI.People
             txtNationalNo.Text = _Person.NationalNo;
             dtpDateOfBirth.Value = _Person.DateOfBirth;
 
-            if (_Person.Gendor == 0)
+            if (_Person.Gender == 0)
                 rbMale.Checked = true;
             else
                 rbFemale.Checked = true;
@@ -186,12 +177,17 @@ namespace DVLD_UI.People
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            if (this.ValidateChildren())
+            if (!this.ValidateChildren())
             {
                 //Here we dont continue becuase the form is not valid
                 MessageBox.Show("Some fileds are not valide!, put the mouse over the red icon(s) to see the erro", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            if (rbMale.Checked)
+                _Person.Gender = clsPerson.enGender.Male;
+            else
+                _Person.Gender = clsPerson.enGender.Female;
 
             if (!_HandlePersonImage())
                 return;
@@ -207,11 +203,6 @@ namespace DVLD_UI.People
             _Person.Phone = txtPhone.Text.Trim();
             _Person.Address = txtAddress.Text.Trim();
             _Person.DateOfBirth = dtpDateOfBirth.Value;
-
-            if (rbMale.Checked)
-                _Person.Gendor = (short)enGendor.Male;
-            else
-                _Person.Gendor = (short)enGendor.Female;
 
             _Person.NationalityCountryID = NationalityCountryID;
 
@@ -340,6 +331,23 @@ namespace DVLD_UI.People
             else
             {
                 errorProvider1.SetError(txtNationalNo, null);
+            }
+        }
+
+        private void dtpDateOfBirth_Validating(object sender, CancelEventArgs e)
+        {
+            int age = DateTime.Now.Year - dtpDateOfBirth.Value.Year;
+            if (dtpDateOfBirth.Value > DateTime.Now.AddYears(-age)) age--;
+
+            if (age < 18 || age > 100)
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(dtpDateOfBirth, "Age must be between 18 and 100 years.");
+            }
+
+            else
+            {
+                errorProvider1.SetError(dtpDateOfBirth, null);
             }
         }
     }

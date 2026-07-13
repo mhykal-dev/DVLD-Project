@@ -207,7 +207,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(74, 20);
             this.label5.TabIndex = 106;
-            this.label5.Text = "Gendor:";
+            this.label5.Text = "Gender:";
             // 
             // cbCountry
             // 
@@ -346,6 +346,7 @@
             this.dtpDateOfBirth.Size = new System.Drawing.Size(167, 20);
             this.dtpDateOfBirth.TabIndex = 6;
             this.dtpDateOfBirth.Value = new System.DateTime(2000, 12, 31, 0, 0, 0, 0);
+            this.dtpDateOfBirth.Validating += new System.ComponentModel.CancelEventHandler(this.dtpDateOfBirth_Validating);
             // 
             // btnClose
             // 
