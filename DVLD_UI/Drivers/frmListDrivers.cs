@@ -1,4 +1,5 @@
 ﻿using Drivers_Business;
+using DVLD_UI.Licenses;
 using DVLD_UI.People;
 using System;
 using System.Data;
@@ -50,15 +51,9 @@ namespace DVLD_UI.Drivers
 
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            txtFilterValue.Visible = (cbFilterBy.Text != "None");
-
-
-            if (cbFilterBy.Text == "None")
-            {
-                txtFilterValue.Enabled = false;
-            }
-            else
-                txtFilterValue.Enabled = true;
+            bool isNotNone = (cbFilterBy.Text != "None");
+            txtFilterValue.Visible = isNotNone;
+            txtFilterValue.Enabled = isNotNone;
 
             txtFilterValue.Text = "";
             txtFilterValue.Focus();
@@ -66,7 +61,7 @@ namespace DVLD_UI.Drivers
 
         private void _UpdateRecordsCount()
         {
-            lblRecordsCount.Text = _dtAllDrivers.Rows.Count.ToString();
+            lblRecordsCount.Text = dgvDrivers.Rows.Count.ToString();
         }
 
         private void txtFilterValue_TextChanged(object sender, EventArgs e)
@@ -129,17 +124,23 @@ namespace DVLD_UI.Drivers
                 frm.ShowDialog();
             }
 
-            cbFilterBy_SelectedIndexChanged(null, null);
+            _dtAllDrivers = clsDriver.GetAllDrivers();
         }
 
         private void showPersonLicenseHistoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (dgvDrivers.CurrentRow == null)
+            {
+                MessageBox.Show("Please Select A Row First", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             int PersonID = (int)dgvDrivers.CurrentRow.Cells[1].Value;
 
-            //using (Form frm = new frmShowLicensesHistory(PersonID))
-            //{
-            //    frm.ShowDialog();
-            //}
+            using (Form frm = new frmShowLicensesHistory(PersonID))
+            {
+                frm.ShowDialog();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Drivers_Business;
+using DVLD_UI.International_License_Applications;
 using DVLD_UI.Local_Driving_License_Applications_List;
 using System;
 using System.Data;
@@ -98,6 +99,8 @@ namespace DVLD_UI.Drivers.Controls
             if (_Driver == null)
             {
                 MessageBox.Show($"There Is No Linked Driver to this PersonID {PersonID}");
+                Clear();
+                return;
             }
 
             _DriverID = _Driver.DriverID;
@@ -108,6 +111,12 @@ namespace DVLD_UI.Drivers.Controls
 
         private void showLocalLicenseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (dgvLocalLicensesHistory.CurrentRow == null)
+            {
+                MessageBox.Show("Please, Select A Row First", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             int LicenseID = (int)dgvLocalLicensesHistory.CurrentRow.Cells[0].Value;
             using (Form frm = new frmShowLocalLicenseDetails(LicenseID))
             {
@@ -117,17 +126,26 @@ namespace DVLD_UI.Drivers.Controls
 
         public void Clear()
         {
-            _dtDriverLocalLicensesHistory.Clear();
-            _dtDriverInternationalLicensesHistory.Clear();
+            if(_dtDriverLocalLicensesHistory != null)
+                _dtDriverLocalLicensesHistory.Clear();
+
+            if(_dtDriverInternationalLicensesHistory!= null)
+                _dtDriverInternationalLicensesHistory.Clear();
         }
 
         private void showInternationalLicenseDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int LicenseID = (int)dgvLocalLicensesHistory.CurrentRow.Cells[0].Value;
-            //using (Form frm = new frmInternationalLicenseDetails(LicenseID))
-            //{
-            //    frm.ShowDialog();
-            //}
+            if(dgvInternationalLicensesHistory.CurrentRow == null)
+            {
+                MessageBox.Show("Please, Select A Row First", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            int LicenseID = (int)dgvInternationalLicensesHistory.CurrentRow.Cells[0].Value;
+            using (Form frm = new frmInternationalLicenseDetails(LicenseID))
+            {
+                frm.ShowDialog();
+            }
         }
     }
 }
