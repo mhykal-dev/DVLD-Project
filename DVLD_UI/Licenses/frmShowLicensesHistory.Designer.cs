@@ -28,10 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.ctrNewPersonCardWithFilter1 = new DVLD_UI.People.User_Controls.CTRNewPersonCardWithFilter();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.ctrlDriverLicenses1 = new DVLD_UI.Drivers.Controls.ctrlDriverLicenses();
             this.btnClose = new System.Windows.Forms.Button();
+            this.ctrlDriverLicenses1 = new DVLD_UI.Drivers.Controls.ctrlDriverLicenses();
+            this.ctrNewPersonCardWithFilter1 = new DVLD_UI.People.User_Controls.CTRNewPersonCardWithFilter();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -45,13 +45,6 @@
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
-            // ctrlDriverLicenses1
-            // 
-            this.ctrlDriverLicenses1.Location = new System.Drawing.Point(2, 382);
-            this.ctrlDriverLicenses1.Name = "ctrlDriverLicenses1";
-            this.ctrlDriverLicenses1.Size = new System.Drawing.Size(1118, 343);
-            this.ctrlDriverLicenses1.TabIndex = 2;
-            // 
             // btnClose
             // 
             this.btnClose.Image = global::DVLD_UI.Properties.Resources.Close_32;
@@ -63,6 +56,23 @@
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
+            // 
+            // ctrlDriverLicenses1
+            // 
+            this.ctrlDriverLicenses1.Location = new System.Drawing.Point(2, 382);
+            this.ctrlDriverLicenses1.Name = "ctrlDriverLicenses1";
+            this.ctrlDriverLicenses1.Size = new System.Drawing.Size(1118, 343);
+            this.ctrlDriverLicenses1.TabIndex = 2;
+            // 
+            // ctrNewPersonCardWithFilter1
+            // 
+            this.ctrNewPersonCardWithFilter1.FilterEnabled = true;
+            this.ctrNewPersonCardWithFilter1.Location = new System.Drawing.Point(0, 0);
+            this.ctrNewPersonCardWithFilter1.Name = "ctrNewPersonCardWithFilter1";
+            this.ctrNewPersonCardWithFilter1.ShowAddPerson = true;
+            this.ctrNewPersonCardWithFilter1.Size = new System.Drawing.Size(836, 393);
+            this.ctrNewPersonCardWithFilter1.TabIndex = 4;
+            this.ctrNewPersonCardWithFilter1.OnPersonSelectedev += new System.Action<int>(this.ctrNewPersonCardWithFilter1_OnPersonSelectedev);
             // 
             // frmShowLicensesHistory
             // 

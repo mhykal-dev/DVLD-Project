@@ -14,14 +14,23 @@ namespace DVLD_UI.International_License_Applications
             _InternationalLicenseID = InternationalLicenseID;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         private void frmInternationalLicenseDetails_Load(object sender, EventArgs e)
         {
-            ctrInternationalLicenseDetails1.LoadInfo(_InternationalLicenseID);
+            try
+            {
+                ctrInternationalLicenseDetails1.LoadInfo(_InternationalLicenseID);
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error : " +  ex.Message);
+                this.BeginInvoke(new Action(() => this.Close()));
+            }
         }
     }
 }

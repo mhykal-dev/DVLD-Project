@@ -13,6 +13,13 @@ namespace DVLD_UI.Licenses
             _PersonID = PersonID;
         }
 
+        public frmShowLicensesHistory()
+        {
+            InitializeComponent();
+
+
+        }
+
         private void frmShowLicensesHistory_Load(object sender, EventArgs e)
         {
             if (_PersonID != -1)
@@ -28,7 +35,12 @@ namespace DVLD_UI.Licenses
             }
         }
 
-        private void ctrNewPersonCardWithFilter1_OnPersonSelected(int obj)
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void ctrNewPersonCardWithFilter1_OnPersonSelectedev(int obj)
         {
             _PersonID = obj;
             if (_PersonID == -1)
@@ -37,11 +49,6 @@ namespace DVLD_UI.Licenses
             }
             else
                 ctrlDriverLicenses1.LoadByPersonID(_PersonID);
-        }
-
-        private void btnClose_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
     }
 }

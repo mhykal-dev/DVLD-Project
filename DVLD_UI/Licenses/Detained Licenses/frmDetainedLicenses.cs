@@ -11,8 +11,6 @@ namespace DVLD_UI.Detained_Licenses
         private int _DetainID = -1;
         private int _SelectedLicenseID = -1;
 
-        clsDetainedLicense DetainedLicense = new clsDetainedLicense();
-
         public frmDetainedLicenses()
         {
             InitializeComponent();
@@ -25,17 +23,21 @@ namespace DVLD_UI.Detained_Licenses
 
         private void btnDetain_Click(object sender, EventArgs e)
         {
+            if(!this.ValidateChildren())
+            {
+                MessageBox.Show("Please, recheck the input information once again");
+                return;
+            }
+
             if (MessageBox.Show("Are you sure you want to detain this license?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
             }
 
-
-            _DetainID = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.Detain(Convert.ToSingle(tctboxFineFees.Text), clsGlobal.currentUser.UserID);
+            _DetainID = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.Detain(Convert.ToSingle(txtboxFineFees.Text), clsGlobal.currentUser.UserID);
             if (_DetainID == -1)
             {
-                MessageBox.Show("Faild to Detain License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
+                MessageBox.Show("Failed to Detain License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -44,7 +46,7 @@ namespace DVLD_UI.Detained_Licenses
 
             btnDetain.Enabled = false;
             ctrLocalDrivingLicenseInFOWithFilter1.FilterEnabled = false;
-            tctboxFineFees.Enabled = false;
+            txtboxFineFees.Enabled = false;
             linklblShowDetainedLicenseInFo.Enabled = true;
         }
 
@@ -63,19 +65,20 @@ namespace DVLD_UI.Detained_Licenses
             linklblShowLicenseHistory.Enabled = (_SelectedLicenseID != -1);
 
             if (_SelectedLicenseID == -1)
-
             {
+                btnDetain.Enabled = false;
                 return;
             }
 
             //ToDo: make sure the license is not detained already.
             if (ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.IsDetained)
             {
-                MessageBox.Show("Selected License i already detained, choose another one.", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Selected License is already detained, choose another one.", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnDetain.Enabled = false;
                 return;
             }
 
-            tctboxFineFees.Focus();
+            txtboxFineFees.Focus();
             btnDetain.Enabled = true;
         }
 
@@ -84,26 +87,23 @@ namespace DVLD_UI.Detained_Licenses
             ctrLocalDrivingLicenseInFOWithFilter1.Focus();
         }
 
-        private void tctboxFineFees_Validating(object sender, System.ComponentModel.CancelEventArgs e)
+        private void txtboxFineFees_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (string.IsNullOrEmpty(tctboxFineFees.Text.Trim()))
-            {
-                errorProvider1.SetError(tctboxFineFees, "Fees cannot be empty");
-            }
-
-            else
-            {
-                errorProvider1.SetError(tctboxFineFees, null);
-            }
-
-            if (!clsValidation.IsNumber(tctboxFineFees.Text))
+            if (string.IsNullOrEmpty(txtboxFineFees.Text.Trim()))
             {
                 e.Cancel = true;
-                errorProvider1.SetError(tctboxFineFees, "Invalid Number.");
+                errorProvider1.SetError(txtboxFineFees, "Fees cannot be empty");
+                return;
+            }
+
+            if (!clsValidation.IsNumber(txtboxFineFees.Text))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(txtboxFineFees, "Invalid Number.");
             }
             else
             {
-                errorProvider1.SetError(tctboxFineFees, null);
+                errorProvider1.SetError(txtboxFineFees, null);
             }
         }
     }

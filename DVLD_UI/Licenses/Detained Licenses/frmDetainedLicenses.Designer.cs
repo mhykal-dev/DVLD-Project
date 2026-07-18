@@ -38,7 +38,7 @@
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.lblLicenseID = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.tctboxFineFees = new System.Windows.Forms.TextBox();
+            this.txtboxFineFees = new System.Windows.Forms.TextBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label7 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -81,7 +81,7 @@
             this.groupBox1.Controls.Add(this.pictureBox6);
             this.groupBox1.Controls.Add(this.lblLicenseID);
             this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.tctboxFineFees);
+            this.groupBox1.Controls.Add(this.txtboxFineFees);
             this.groupBox1.Controls.Add(this.pictureBox3);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.pictureBox2);
@@ -157,13 +157,13 @@
             this.label9.TabIndex = 10;
             this.label9.Text = "License ID:";
             // 
-            // tctboxFineFees
+            // txtboxFineFees
             // 
-            this.tctboxFineFees.Location = new System.Drawing.Point(322, 138);
-            this.tctboxFineFees.Name = "tctboxFineFees";
-            this.tctboxFineFees.Size = new System.Drawing.Size(55, 20);
-            this.tctboxFineFees.TabIndex = 9;
-            this.tctboxFineFees.Validating += new System.ComponentModel.CancelEventHandler(this.tctboxFineFees_Validating);
+            this.txtboxFineFees.Location = new System.Drawing.Point(322, 138);
+            this.txtboxFineFees.Name = "txtboxFineFees";
+            this.txtboxFineFees.Size = new System.Drawing.Size(55, 20);
+            this.txtboxFineFees.TabIndex = 9;
+            this.txtboxFineFees.Validating += new System.ComponentModel.CancelEventHandler(this.txtboxFineFees_Validating);
             // 
             // pictureBox3
             // 
@@ -340,7 +340,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label lblDetainedID;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tctboxFineFees;
+        private System.Windows.Forms.TextBox txtboxFineFees;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.PictureBox pictureBox2;

@@ -30,7 +30,7 @@ namespace DVLD_UI.Licenses.Local_License
             {
 
                 MessageBox.Show("No Applicaiton with ID=" + _LocalDrivingLicenseApplicationID.ToString(), "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                _CloseFormSafely();
                 return;
             }
 
@@ -39,7 +39,7 @@ namespace DVLD_UI.Licenses.Local_License
             {
 
                 MessageBox.Show("Person Should Pass All Tests First.", "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                _CloseFormSafely();
                 return;
             }
 
@@ -48,16 +48,19 @@ namespace DVLD_UI.Licenses.Local_License
             {
 
                 MessageBox.Show("Person already has License before with License ID=" + LicenseID.ToString(), "Not Allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                this.Close();
+                _CloseFormSafely();
                 return;
 
             }
 
             ctrlDrivingLicenseApplicationInfo1.LoadApplicationInfoByLocalDrivingAppID(_LocalDrivingLicenseApplicationID);
+
+            this.BeginInvoke(new Action(() => txtNotes.Focus()));
         }
 
         private void btnIssueLicense_Click(object sender, EventArgs e)
         {
+            btnIssueLicense.Enabled = false;
             int LicenseID = _LocalDrivingLicenseApplication.IssueLicenseForTheFirtTime(txtNotes.Text.Trim(), clsGlobal.currentUser.UserID);
 
             if (LicenseID != -1)
@@ -71,7 +74,13 @@ namespace DVLD_UI.Licenses.Local_License
             {
                 MessageBox.Show("License Was not Issued ! ",
                  "Faild", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnIssueLicense.Enabled = true;
             }
+        }
+
+        private void _CloseFormSafely()
+        {
+            this.BeginInvoke(new Action(() => this.Close()));
         }
     }
 }
