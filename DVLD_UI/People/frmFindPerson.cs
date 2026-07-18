@@ -18,10 +18,15 @@ namespace DVLD_UI.People
 
         private void frmFindPerson_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if(ctrNewPersonCardWithFilter1.PersonID != -1)
+            if(ctrNewPersonCardWithFilter2.PersonID != -1)
             {
-                DataBack?.Invoke(this, ctrNewPersonCardWithFilter1.PersonID);
+                DataBack?.Invoke(this, ctrNewPersonCardWithFilter2.PersonID);
             }
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -258,8 +258,8 @@ namespace DVLD_UI.People
             using(Form frm = new frmAddUpdatePerson())
             {
                 frm.ShowDialog();
+                _RefreshPeopleList();
             }
-            _RefreshPeopleList();
         }
     }
 }

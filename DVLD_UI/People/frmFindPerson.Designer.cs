@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btnClose = new System.Windows.Forms.Button();
-            this.ctrNewPersonCardWithFilter1 = new DVLD_UI.People.User_Controls.CTRNewPersonCardWithFilter();
             this.ctrNewPersonCardWithFilter2 = new DVLD_UI.People.User_Controls.CTRNewPersonCardWithFilter();
             this.SuspendLayout();
             // 
@@ -43,15 +42,7 @@
             this.btnClose.TabIndex = 1;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
-            // 
-            // ctrNewPersonCardWithFilter1
-            // 
-            this.ctrNewPersonCardWithFilter1.FilterEnabled = true;
-            this.ctrNewPersonCardWithFilter1.Location = new System.Drawing.Point(12, 12);
-            this.ctrNewPersonCardWithFilter1.Name = "ctrNewPersonCardWithFilter1";
-            this.ctrNewPersonCardWithFilter1.ShowAddPerson = true;
-            this.ctrNewPersonCardWithFilter1.Size = new System.Drawing.Size(837, 401);
-            this.ctrNewPersonCardWithFilter1.TabIndex = 0;
+            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // ctrNewPersonCardWithFilter2
             // 
@@ -78,7 +69,6 @@
 
         #endregion
 
-        private User_Controls.CTRNewPersonCardWithFilter ctrNewPersonCardWithFilter1;
         private System.Windows.Forms.Button btnClose;
         private User_Controls.CTRNewPersonCardWithFilter ctrNewPersonCardWithFilter2;
     }

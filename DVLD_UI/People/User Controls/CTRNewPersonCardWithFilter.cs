@@ -1,12 +1,24 @@
 ﻿using PEOPLE_Business;
 using System;
 using System.ComponentModel;
+using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace DVLD_UI.People.User_Controls
 {
     public partial class CTRNewPersonCardWithFilter : UserControl
     {
+        public event Action<int> OnPersonSelectedev;
+        
+        protected virtual void OnPersonSelected(int PersonID)
+        {
+            Action <int> Handler = OnPersonSelectedev;
+
+            if( Handler != null )
+            {
+                Handler(PersonID);
+            }
+        }
 
         private bool _ShowAddPerson = true;
         public bool ShowAddPerson
@@ -66,6 +78,7 @@ namespace DVLD_UI.People.User_Controls
                     if(int.TryParse(txtFilterValue.Text.Trim(), out int PersonID))
                     {
                         ctrNewPersonCard1.LoadPersonInfo(PersonID);
+                        OnPersonSelected(PersonID);
                     }
 
                     break;

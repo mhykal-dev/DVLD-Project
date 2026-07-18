@@ -59,7 +59,7 @@
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.ctrNewPersonCard1);
             this.Name = "frmShowPersonInFo";
-            this.Text = "frmPersonCard";
+            this.Text = "frmShowPersonInFo";
             this.ResumeLayout(false);
 
         }

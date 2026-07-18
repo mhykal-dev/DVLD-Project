@@ -217,6 +217,7 @@
             this.cbCountry.Name = "cbCountry";
             this.cbCountry.Size = new System.Drawing.Size(167, 21);
             this.cbCountry.TabIndex = 11;
+            this.cbCountry.Validating += new System.ComponentModel.CancelEventHandler(this.cbCountry_Validating);
             // 
             // pictureBox8
             // 
@@ -381,6 +382,7 @@
             this.txtAddress.Name = "txtAddress";
             this.txtAddress.Size = new System.Drawing.Size(539, 94);
             this.txtAddress.TabIndex = 12;
+            this.txtAddress.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // label12
             // 
@@ -401,6 +403,7 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(167, 20);
             this.txtEmail.TabIndex = 10;
+            this.txtEmail.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmail_Validating);
             // 
             // label6
             // 
@@ -452,6 +455,7 @@
             this.txtNationalNo.Name = "txtNationalNo";
             this.txtNationalNo.Size = new System.Drawing.Size(167, 20);
             this.txtNationalNo.TabIndex = 5;
+            this.txtNationalNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtNationalNo_Validating);
             // 
             // label2
             // 
@@ -472,6 +476,7 @@
             this.txtLastName.Name = "txtLastName";
             this.txtLastName.Size = new System.Drawing.Size(167, 20);
             this.txtLastName.TabIndex = 4;
+            this.txtLastName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // txtThirdName
             // 
@@ -490,6 +495,7 @@
             this.txtSecondName.Name = "txtSecondName";
             this.txtSecondName.Size = new System.Drawing.Size(167, 20);
             this.txtSecondName.TabIndex = 2;
+            this.txtSecondName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // label1
             // 
@@ -510,6 +516,7 @@
             this.txtFirstName.Name = "txtFirstName";
             this.txtFirstName.Size = new System.Drawing.Size(167, 20);
             this.txtFirstName.TabIndex = 1;
+            this.txtFirstName.Validating += new System.ComponentModel.CancelEventHandler(this.ValidateEmptyTextBox);
             // 
             // pbPersonImage
             // 

@@ -101,6 +101,9 @@ namespace DVLD_UI.People
             txtThirdName.Text = _Person.ThirdName;
             txtLastName.Text = _Person.LastName;
             txtNationalNo.Text = _Person.NationalNo;
+            //
+            txtNationalNo.Enabled = false;
+            //
             dtpDateOfBirth.Value = _Person.DateOfBirth;
 
             if (_Person.Gender == 0)
@@ -198,7 +201,10 @@ namespace DVLD_UI.People
             _Person.SecondName = txtSecondName.Text.Trim();
             _Person.ThirdName = txtThirdName.Text.Trim();
             _Person.LastName = txtLastName.Text.Trim();
-            _Person.NationalNo = txtNationalNo.Text.Trim();
+
+            if(_Mode == enMode.AddNew)
+                _Person.NationalNo = txtNationalNo.Text.Trim();
+
             _Person.Email = txtEmail.Text.Trim();
             _Person.Phone = txtPhone.Text.Trim();
             _Person.Address = txtAddress.Text.Trim();
@@ -348,6 +354,24 @@ namespace DVLD_UI.People
             else
             {
                 errorProvider1.SetError(dtpDateOfBirth, null);
+            }
+        }
+
+        private void cbCountry_Validating(object sender, CancelEventArgs e)
+        {
+            if(cbCountry.SelectedIndex == -1)
+            {
+
+                e.Cancel= true;
+                errorProvider1.SetError(cbCountry, "Select A Country First");
+
+            }
+
+            else
+            {
+
+                errorProvider1.SetError(cbCountry, null);
+
             }
         }
     }

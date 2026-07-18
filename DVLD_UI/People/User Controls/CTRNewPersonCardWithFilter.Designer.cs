@@ -51,14 +51,13 @@
             // 
             // gbFilters
             // 
-            this.gbFilters.Controls.Add(this.btnAddNewPerson);
             this.gbFilters.Controls.Add(this.btnFind);
             this.gbFilters.Controls.Add(this.cbFilterBy);
             this.gbFilters.Controls.Add(this.txtFilterValue);
             this.gbFilters.Controls.Add(this.label1);
             this.gbFilters.Location = new System.Drawing.Point(3, 3);
             this.gbFilters.Name = "gbFilters";
-            this.gbFilters.Size = new System.Drawing.Size(819, 77);
+            this.gbFilters.Size = new System.Drawing.Size(598, 77);
             this.gbFilters.TabIndex = 17;
             this.gbFilters.TabStop = false;
             this.gbFilters.Text = "Filter";
@@ -69,7 +68,7 @@
             this.btnAddNewPerson.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btnAddNewPerson.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnAddNewPerson.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewPerson.Location = new System.Drawing.Point(594, 20);
+            this.btnAddNewPerson.Location = new System.Drawing.Point(608, 24);
             this.btnAddNewPerson.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnAddNewPerson.Name = "btnAddNewPerson";
             this.btnAddNewPerson.Size = new System.Drawing.Size(44, 37);
@@ -130,6 +129,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnAddNewPerson);
             this.Controls.Add(this.gbFilters);
             this.Controls.Add(this.ctrNewPersonCard1);
             this.Name = "CTRNewPersonCardWithFilter";

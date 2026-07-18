@@ -91,7 +91,7 @@ namespace DVLD_UI.People.User_Controls
             lblEmail.Text = _Person.Email;
             lblPhone.Text = _Person.Phone;
             lblDateOfBirth.Text = _Person.DateOfBirth.ToShortDateString();
-            lblCountry.Text = clsCountry.Find(_Person.NationalityCountryID).CountryName;
+            lblCountry.Text = _Person.CountryInfo?.CountryName ?? "Unknown";
             lblAddress.Text = _Person.Address;
             _LoadPersonImage();
         }
@@ -110,6 +110,7 @@ namespace DVLD_UI.People.User_Controls
             lblCountry.Text = "[????]";
             lblAddress.Text = "[????]";
             pbPersonImage.Image = Resources.Male_512;
+            llEditPersonInfo.Enabled = false;
         }
 
         private void llEditPersonInfo_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
