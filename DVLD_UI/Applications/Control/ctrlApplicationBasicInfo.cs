@@ -27,6 +27,7 @@ namespace DVLD_UI.Applications.User_Control
             {
                 ResetApplicationInfo();
                 MessageBox.Show("No Application with ApplicationID = " + ApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                llViewPersonInfo.Enabled = false;
             }
             else
                 _FillApplicationInfo();
@@ -43,6 +44,7 @@ namespace DVLD_UI.Applications.User_Control
             lblDate.Text = clsFormat.DateToShort(_Application.ApplicationDate);
             lblStatusDate.Text = clsFormat.DateToShort(_Application.LastStatusDate);
             lblCreatedByUser.Text = _Application.CreatedByUserInfo.UserName;
+            llViewPersonInfo.Enabled = true;
         }
 
         public void ResetApplicationInfo()
@@ -57,6 +59,7 @@ namespace DVLD_UI.Applications.User_Control
             lblDate.Text = "[????]";
             lblStatusDate.Text = "[????]";
             lblCreatedByUser.Text = "[????]";
+            llViewPersonInfo.Enabled = false;
 
         }
 
