@@ -10,7 +10,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
         //Define a custom event handler delegate with parameters.
         public event Action<int> OnLicenseSelected;
         //Create a protected method to raise the event with parameter.
-        protected virtual void PersonSelected(int LicenseID)
+        protected virtual void LicenseSelected(int LicenseID)
         {
             Action<int> handler = OnLicenseSelected;
             if (handler != null)
@@ -57,7 +57,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
             _LicenseID = ctrLocalDrivingLicenseInFO1.LicenseID;
             if (OnLicenseSelected != null && FilterEnabled)
                 // Raise the event with a parameter
-                OnLicenseSelected(_LicenseID);
+                LicenseSelected(_LicenseID);
         }
 
         private void txtLicenseID_KeyPress(object sender, KeyPressEventArgs e)
@@ -81,8 +81,10 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
                 return;
             }
 
-            _LicenseID = int.Parse(txtLicenseID.Text);
-            LoadLicenseInfo(_LicenseID);
+            if(int.TryParse(txtLicenseID.Text.Trim(), out _LicenseID))
+            {
+                LoadLicenseInfo(_LicenseID);
+            }
         }
 
         public void txtLicenseIDFocus()
@@ -96,12 +98,17 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
             {
                 e.Cancel = true;
                 errorProvider1.SetError(txtLicenseID, "This field is required!");
+                return;
             }
-            else
+
+            if(!int.TryParse(txtLicenseID.Text.Trim(), out _))
             {
-                //e.Cancel = false;
-                errorProvider1.SetError(txtLicenseID, null);
+                e.Cancel = true;
+                errorProvider1.SetError(txtLicenseID, "License ID must be a number!");
+                return;
             }
+
+            errorProvider1.SetError(txtLicenseID, null);
         }
     }
 }
