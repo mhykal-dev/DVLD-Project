@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace DVLD_UI.Local_Driving_License_Applications_List
 {
@@ -19,6 +20,8 @@ namespace DVLD_UI.Local_Driving_License_Applications_List
         private void frmShowLocalLicenseDetails_Load(object sender, System.EventArgs e)
         {
             ctrLocalDrivingLicenseInFO1.LoadInfo(_LicenseID);
+            if (ctrLocalDrivingLicenseInFO1.SelectedLicenseInfo == null)
+                MessageBox.Show("There Is No License For This LicenseID!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
