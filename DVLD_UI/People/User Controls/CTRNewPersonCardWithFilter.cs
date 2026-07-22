@@ -1,7 +1,6 @@
 ﻿using PEOPLE_Business;
 using System;
 using System.ComponentModel;
-using System.Security.Cryptography.X509Certificates;
 using System.Windows.Forms;
 
 namespace DVLD_UI.People.User_Controls
@@ -75,22 +74,24 @@ namespace DVLD_UI.People.User_Controls
             switch (cbFilterBy.Text)
             {
                 case "Person ID":
-                    if(int.TryParse(txtFilterValue.Text.Trim(), out int PersonID))
+                    if (int.TryParse(txtFilterValue.Text.Trim(), out int PersonID))
                     {
                         ctrNewPersonCard1.LoadPersonInfo(PersonID);
-                        OnPersonSelected(PersonID);
+                        OnPersonSelected(ctrNewPersonCard1.PersonID);
                     }
-
                     break;
 
                 case "National No.":
-                    ctrNewPersonCard1.LoadPersonInfo(txtFilterValue.Text);
+                    ctrNewPersonCard1.LoadPersonInfo(txtFilterValue.Text.Trim());
+                    OnPersonSelected(ctrNewPersonCard1.PersonID);
 
                     break;
+
 
                 default:
                     break;
             }
+
         }
 
         private void cbFilterBy_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,6 +153,7 @@ namespace DVLD_UI.People.User_Controls
             cbFilterBy.SelectedIndex = 1;
             txtFilterValue.Text = PersonID.ToString();
             ctrNewPersonCard1.LoadPersonInfo(PersonID);
+            OnPersonSelected(PersonID);
         }
 
         public void FilterFocus()
