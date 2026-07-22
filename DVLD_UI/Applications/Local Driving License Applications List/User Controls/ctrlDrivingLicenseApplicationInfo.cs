@@ -46,7 +46,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
                 _ResetLocalDrivingLicenseApplicationInfo();
 
 
-                MessageBox.Show("No Application with ApplicationID = " + LocalDrivingLicenseApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("No Application with ApplicationID = " + ApplicationID.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -55,15 +55,15 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.User_Cont
 
         private void _FillLocalDrivingLicenseApplicationInfo()
         {
-            _LicenseID = 1; //_LocalDrivingLicenseApplication.GetActiveLicenseID();
-
-            //incase there is license enable the show link.
+            _LicenseID = _LocalDrivingLicenseApplication.GetActiveLicenseID();
             llShowLicenceInfo.Enabled = (_LicenseID != -1);
+            _LocalDrivingLicenseApplicationID = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID;
 
 
             lblLocalDrivingLicenseApplicationID.Text = _LocalDrivingLicenseApplication.LocalDrivingLicenseApplicationID.ToString();
-            lblAppliedFor.Text = clsLicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID).ClassName;
-            lblPassedTests.Text = "1"; //_LocalDrivingLicenseApplication.GetPassedTestCount().ToString() + "/3";
+            clsLicenseClass licenseClass = clsLicenseClass.Find(_LocalDrivingLicenseApplication.LicenseClassID);
+            lblAppliedFor.Text = licenseClass?.ClassName ?? "Unknown";
+            lblPassedTests.Text = _LocalDrivingLicenseApplication.GetPassedTestCount().ToString() + "/3";
             ctrlApplicationBasicInfo1.LoadApplicationInfo(_LocalDrivingLicenseApplication.ApplicationID);
 
         }
