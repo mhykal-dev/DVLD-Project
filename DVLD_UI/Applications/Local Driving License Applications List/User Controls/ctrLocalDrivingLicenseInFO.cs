@@ -37,7 +37,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
                 if (File.Exists(ImagePath))
                     pbPersonImage.Load(ImagePath);
                 else
-                    MessageBox.Show("Could not find this image: = " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Could not find this image: " + ImagePath, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
         }
 
@@ -50,6 +50,7 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
                 MessageBox.Show("Could not find License ID = " + _LicenseID.ToString(),
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 _LicenseID = -1;
+                _ResetLicenseInfo();
                 return;
             }
 
@@ -71,6 +72,24 @@ namespace DVLD_UI.Local_Driving_License_Applications_List.User_Controls
 
 
 
+        }
+
+        private void _ResetLicenseInfo()
+        {
+            lblLicenseID.Text = "[????]";
+            lblIsActive.Text = "[????]";
+            lblIsDetained.Text = "[????]";
+            lblClass.Text = "[????]";
+            lblFullName.Text = "[????]";
+            lblNationalNo.Text = "[????]";
+            lblGender.Text = "[????]";
+            lblDateOfBirth.Text = "[????]";
+            lblDriverID.Text = "[????]";
+            lblIssueDate.Text = "[????]";
+            lblExpirationDate.Text = "[????]";
+            lblIssueReason.Text = "[????]";
+            lblNotes.Text = "[????]";
+            pbPersonImage.Image = Resources.Male_512;
         }
     }
 }
