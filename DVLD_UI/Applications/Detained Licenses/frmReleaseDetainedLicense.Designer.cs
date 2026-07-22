@@ -439,6 +439,7 @@
             this.Name = "frmReleaseDetainedLicense";
             this.Text = "frmReleaseDetainedLicense";
             this.Activated += new System.EventHandler(this.frmReleaseDetainedLicense_Activated);
+            this.Load += new System.EventHandler(this.frmReleaseDetainedLicense_Load);
             this.gpDetain.ResumeLayout(false);
             this.gpDetain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();

@@ -22,8 +22,9 @@ namespace DVLD_UI.Applications.Detained_Licenses
             InitializeComponent();
             _SelectedLicenseID = LicenseID;
 
-            ctrLocalDrivingLicenseInFOWithFilter1.LoadLicenseInfo(_SelectedLicenseID);
-            ctrLocalDrivingLicenseInFOWithFilter1.FilterEnabled = false;
+            //Claude, I'm Moving Those to the Form Loading event, Because it's prefered that the constructon to be left empty.
+            //ctrLocalDrivingLicenseInFOWithFilter1.LoadLicenseInfo(_SelectedLicenseID);
+            //ctrLocalDrivingLicenseInFOWithFilter1.FilterEnabled = false;
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -39,12 +40,13 @@ namespace DVLD_UI.Applications.Detained_Licenses
 
             llShowLicenseHistory.Enabled = (_SelectedLicenseID != -1);
 
+            btnRelease.Enabled = false;
+
             if (_SelectedLicenseID == -1)
             {
                 return;
             }
 
-            //ToDo: make sure the license is not detained already.
             if (!ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.IsDetained)
             {
                 MessageBox.Show("Selected License i is not detained, choose another one.", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -57,7 +59,6 @@ namespace DVLD_UI.Applications.Detained_Licenses
             lblDetainID.Text = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DetainedInfo.DetainID.ToString();
             lblLicenseID.Text = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.LicenseID.ToString();
 
-            lblCreatedByUser.Text = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DetainedInfo.CreatedByUserInfo.UserName;
             lblDetainDate.Text = clsFormat.DateToShort(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DetainedInfo.DetainDate);
             lblFineFees.Text = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DetainedInfo.FineFees.ToString();
             lblTotalFees.Text = (Convert.ToSingle(lblApplicationFees.Text) + Convert.ToSingle(lblFineFees.Text)).ToString();
@@ -78,7 +79,6 @@ namespace DVLD_UI.Applications.Detained_Licenses
             }
 
             int ApplicationID = -1;
-
 
             bool IsReleased = ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.ReleaseDetainedLicense(clsGlobal.currentUser.UserID, ref ApplicationID); ;
 
@@ -111,6 +111,12 @@ namespace DVLD_UI.Applications.Detained_Licenses
             {
                 frm.ShowDialog();
             }
+        }
+
+        private void frmReleaseDetainedLicense_Load(object sender, EventArgs e)
+        {
+            ctrLocalDrivingLicenseInFOWithFilter1.LoadLicenseInfo(_SelectedLicenseID);
+            ctrLocalDrivingLicenseInFOWithFilter1.FilterEnabled = false;
         }
     }
 }
