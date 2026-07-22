@@ -103,6 +103,7 @@
             this.ctrNewPersonCardWithFilter1.ShowAddPerson = true;
             this.ctrNewPersonCardWithFilter1.Size = new System.Drawing.Size(843, 386);
             this.ctrNewPersonCardWithFilter1.TabIndex = 6;
+            this.ctrNewPersonCardWithFilter1.OnPersonSelectedev += new System.Action<int>(this.ctrNewPersonCardWithFilter1_OnPersonSelectedev);
             // 
             // btnNext
             // 

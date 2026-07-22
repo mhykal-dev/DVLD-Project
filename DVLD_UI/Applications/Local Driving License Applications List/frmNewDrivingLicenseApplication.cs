@@ -39,7 +39,18 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             cmbClasses.DisplayMember = "ClassName";
             cmbClasses.ValueMember = "LicenseClassID";
 
-            cmbClasses.DataSource = clsLicenseClass.GelAllLicenseClasses();
+            try
+            {
+                cmbClasses.DataSource = clsLicenseClass.GelAllLicenseClasses();
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error While Loading The License Classes! : " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("This Form Will Be Closed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+                return;
+            }
         }
 
         private void _ResetDefualtValues()
@@ -79,7 +90,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             if (_LocalDrivingLicenseApplication == null)
             {
                 MessageBox.Show("No Application with ID = " + _LocalDrivingLicenseApplicationID, "Application Not Found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                this.Close();
+                this.BeginInvoke(new Action(() => this.Close()));
 
                 return;
             }
@@ -89,16 +100,19 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             lblApplicationDate.Text = clsFormat.DateToShort(_LocalDrivingLicenseApplication.ApplicationDate);
             cmbClasses.SelectedValue = _LocalDrivingLicenseApplication.LicenseClassID;
             lblFees.Text = _LocalDrivingLicenseApplication.PaidFees.ToString();
-            lblCreatedBy.Text = clsUser.Find(_LocalDrivingLicenseApplication.CreatedByUserID).UserName;
-        }
 
-        private void DataBackEvent(object sender, int PersonID)
-        {
-            // Handle the data received
-            _SelectedPersonID = PersonID;
-            ctrNewPersonCardWithFilter1.LoadPersonInFo(PersonID);
+            try
+            {
+                lblCreatedBy.Text = clsUser.Find(_LocalDrivingLicenseApplication.CreatedByUserID).UserName;
+            }
 
-
+            catch (Exception ex)
+            {
+                MessageBox.Show("Can't Find The User Who Created This Application", "Error", MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("This Form Will Be Closed!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.BeginInvoke(new Action(() => this.Close()));
+                return;
+            }
         }
 
         private void btnNext_Click(object sender, EventArgs e)
@@ -123,13 +137,14 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             {
                 MessageBox.Show("Please Select a Person", "Select a Person", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 ctrNewPersonCardWithFilter1.FilterFocus();
+                btnSave.Enabled = false;
+                tpApplicationInFo.Enabled = false;
             }
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -157,7 +172,7 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
 
             _LocalDrivingLicenseApplication.ApplicantPersonID = ctrNewPersonCardWithFilter1.PersonID; ;
             _LocalDrivingLicenseApplication.ApplicationDate = DateTime.Now;
-            _LocalDrivingLicenseApplication.ApplicationTypeID = 1;
+            _LocalDrivingLicenseApplication.ApplicationTypeID = (int)clsApplication.enApplicationType.NewDrivingLicense;
             _LocalDrivingLicenseApplication.ApplicationStatus = clsApplication.enApplicationStatus.New;
             _LocalDrivingLicenseApplication.LastStatusDate = DateTime.Now;
             _LocalDrivingLicenseApplication.PaidFees = Convert.ToSingle(lblFees.Text);
@@ -176,7 +191,9 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
 
             }
             else
+            {
                 MessageBox.Show("Error: Data Is not Saved Successfully.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void frmNewDrivingLicenseApplication_Load(object sender, EventArgs e)
@@ -189,18 +206,14 @@ namespace DVLD_UI.Applications.Local_Driving_License_Applications_List.Driving_L
             }
         }
 
-        private void ctrlPersonCardWithFilter1_OnPersonSelected(int obj)
-        {
-            _SelectedPersonID = obj;
-
-        }
-
         private void frmNewDrivingLicenseApplication_Activated(object sender, EventArgs e)
         {
             ctrNewPersonCardWithFilter1.FilterFocus();
         }
+
+        private void ctrNewPersonCardWithFilter1_OnPersonSelectedev(int obj)
+        {
+            _SelectedPersonID = obj;
+        }
     }
 }
-
-//MessageBox.Show($"This Person Is Already Have An Active Application With ID = {AppID}");
-//return;
