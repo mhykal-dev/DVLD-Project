@@ -18,7 +18,7 @@ namespace DVLD_UI.International_License_Applications
             InitializeComponent();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnClose_Click(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -31,8 +31,13 @@ namespace DVLD_UI.International_License_Applications
 
             linklblShowLicenseHistory.Enabled = (SelectedLicenseID != -1);
 
+            linklblShowLicenseInFo.Enabled = false;
+            _InternationalLicenseID = -1;
+
             if (SelectedLicenseID == -1)
             {
+                MessageBox.Show("There Is No License For This LicenseID!", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnIssue.Enabled = false;
                 return;
             }
 
@@ -42,6 +47,7 @@ namespace DVLD_UI.International_License_Applications
             if (ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.LicenseClass != 3)
             {
                 MessageBox.Show("Selected License should be Class 3, select another one.", "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                btnIssue.Enabled = false;
                 return;
             }
 
@@ -71,6 +77,12 @@ namespace DVLD_UI.International_License_Applications
 
         private void btnIssue_Click(object sender, EventArgs e)
         {
+            if (ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo == null)
+            {
+                MessageBox.Show("Please, Select A License First", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (MessageBox.Show("Are you sure you want to issue the license?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -96,7 +108,7 @@ namespace DVLD_UI.International_License_Applications
 
             if (!InternationalLicense.Save())
             {
-                MessageBox.Show("Faild to Issue International License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to Issue International License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return;
             }
