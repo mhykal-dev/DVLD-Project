@@ -1,6 +1,7 @@
 ﻿using Applications_Business;
 using ApplicationTypes_Business;
 using DVLD_UI.Global_Classes;
+using DVLD_UI.Licenses;
 using DVLD_UI.Local_Driving_License_Applications_List;
 using Licenses_Business;
 using System;
@@ -32,6 +33,11 @@ namespace DVLD_UI.Renew_Driving_License
                 return;
             }
 
+            if(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo == null)
+            {
+                MessageBox.Show("Please, Select A License First", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
             clsLicense NewLicense =
                 ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.RenewLicense(txtboxNotes.Text.Trim(),
@@ -47,7 +53,7 @@ namespace DVLD_UI.Renew_Driving_License
             lblApplicationID.Text = NewLicense.ApplicationID.ToString();
             _NewLicenseID = NewLicense.LicenseID;
             lblRenewedLicenseID.Text = _NewLicenseID.ToString();
-            MessageBox.Show("Licensed Renewed Successfully with ID=" + _NewLicenseID.ToString(), "License Issued", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("License Renewed Successfully with ID=" + _NewLicenseID.ToString(), "License Issued", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             btnRenew.Enabled = false;
             ctrLocalDrivingLicenseInFOWithFilter1.FilterEnabled = false;
@@ -65,10 +71,10 @@ namespace DVLD_UI.Renew_Driving_License
 
         private void linklblShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
-            //{
-            //    frm.ShowDialog();
-            //}
+            using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
+            {
+                frm.ShowDialog();
+            }
         }
 
         private void frmRenewLicense_Load(object sender, EventArgs e)
@@ -81,6 +87,7 @@ namespace DVLD_UI.Renew_Driving_License
             lblExpirationDate.Text = "???";
             lblApplicationFees.Text = clsApplicationType.Find((int)clsApplication.enApplicationType.RenewDrivingLicense).Fees.ToString();
             lblCreatedByUserName.Text = clsGlobal.currentUser.UserName;
+            btnRenew.Enabled = false;
         }
 
         private void ctrLocalDrivingLicenseInFOWithFilter1_OnLicenseSelected(int obj)
@@ -116,7 +123,7 @@ namespace DVLD_UI.Renew_Driving_License
             //check the license is not Active.
             if (!ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.IsActive)
             {
-                MessageBox.Show("Selected License is not Not Active, choose an active license."
+                MessageBox.Show("Selected License is not Active, choose an active license."
                     , "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnRenew.Enabled = false;
                 return;
