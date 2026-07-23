@@ -1,6 +1,7 @@
 ﻿using Applications_Business;
 using ApplicationTypes_Business;
 using DVLD_UI.Global_Classes;
+using DVLD_UI.Licenses;
 using DVLD_UI.Local_Driving_License_Applications_List;
 using Licenses_Business;
 using System;
@@ -56,24 +57,23 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
         private void linklblShowLicenseHistory_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            //using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
-            //{
-            //    frm.ShowDialog();
-            //}
+            using (Form frm = new frmShowLicensesHistory(ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.DriverInfo.PersonID))
+            {
+                frm.ShowDialog();
+            }
         }
 
-        private void rdbtnDamaged_CheckedChanged(object sender, EventArgs e)
+        private void _UpdateReplacementType(string title)
         {
-            lblTitle.Text = "Replacement for Damaged License";
-            this.Text = lblTitle.Text;
+            lblTitle.Text = title;
+            this.Text = title;
             lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
         }
 
-        private void rdbtnLost_CheckedChanged(object sender, EventArgs e)
+        private void rdbtnReplacementType_CheckedChanged(object sender, EventArgs e)
         {
-            lblTitle.Text = "Replacement for Lost License";
-            this.Text = lblTitle.Text;
-            lblApplicationFees.Text = clsApplicationType.Find(_GetApplicationTypeID()).Fees.ToString();
+            string title = rdbtnDamaged.Checked ? "Replacement for Damaged License" : "Replacement for Lost License";
+            _UpdateReplacementType(title);
         }
 
         private void frmReplaceLicense_Load(object sender, EventArgs e)
@@ -95,15 +95,16 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
             lblOldLiceseID.Text = SelectedLicenseID.ToString();
             linklblShowLicenseHistory.Enabled = (SelectedLicenseID != -1);
 
+            btnReplacement.Enabled = false;
+
             if (SelectedLicenseID == -1)
             {
                 return;
             }
 
-            //dont allow a replacement if is Active .
             if (!ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo.IsActive)
             {
-                MessageBox.Show("Selected License is not Not Active, choose an active license."
+                MessageBox.Show("Selected License is not Active, choose an active license."
                     , "Not allowed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnReplacement.Enabled = false;
                 return;
@@ -114,6 +115,12 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
         private void btnReplacement_Click(object sender, EventArgs e)
         {
+            if (ctrLocalDrivingLicenseInFOWithFilter1.SelectedLicenseInfo == null)
+            {
+                MessageBox.Show("Please, Select A License First", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             if (MessageBox.Show("Are you sure you want to Issue a Replacement for the license?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
             {
                 return;
@@ -125,7 +132,7 @@ namespace DVLD_UI.frmReplaceDamaged_LostDrivingLicenseApplication
 
             if (NewLicense == null)
             {
-                MessageBox.Show("Faild to Issue a replacemnet for this  License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Failed to Issue a replacement for this  License", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return;
             }

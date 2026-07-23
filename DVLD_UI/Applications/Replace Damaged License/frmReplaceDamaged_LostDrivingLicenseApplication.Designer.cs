@@ -250,9 +250,9 @@
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.Location = new System.Drawing.Point(559, 102);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(170, 24);
+            this.label15.Size = new System.Drawing.Size(158, 24);
             this.label15.TabIndex = 14;
-            this.label15.Text = "Expireation Date:";
+            this.label15.Text = "Expiration Date:";
             // 
             // label16
             // 
@@ -270,9 +270,9 @@
             this.label17.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.Location = new System.Drawing.Point(559, 20);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(197, 24);
+            this.label17.Size = new System.Drawing.Size(209, 24);
             this.label17.TabIndex = 12;
-            this.label17.Text = "Renewed Licese ID:";
+            this.label17.Text = "Renewed License ID:";
             // 
             // pictureBox4
             // 
@@ -396,6 +396,7 @@
             // 
             // btnReplacement
             // 
+            this.btnReplacement.Enabled = false;
             this.btnReplacement.Image = ((System.Drawing.Image)(resources.GetObject("btnReplacement.Image")));
             this.btnReplacement.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnReplacement.Location = new System.Drawing.Point(744, 863);
@@ -465,7 +466,7 @@
             this.rdbtnLost.TabStop = true;
             this.rdbtnLost.Text = "Lost";
             this.rdbtnLost.UseVisualStyleBackColor = true;
-            this.rdbtnLost.CheckedChanged += new System.EventHandler(this.rdbtnLost_CheckedChanged);
+            this.rdbtnLost.CheckedChanged += new System.EventHandler(this.rdbtnReplacementType_CheckedChanged);
             // 
             // rdbtnDamaged
             // 
@@ -477,7 +478,7 @@
             this.rdbtnDamaged.TabStop = true;
             this.rdbtnDamaged.Text = "Damaged ";
             this.rdbtnDamaged.UseVisualStyleBackColor = true;
-            this.rdbtnDamaged.CheckedChanged += new System.EventHandler(this.rdbtnDamaged_CheckedChanged);
+            this.rdbtnDamaged.CheckedChanged += new System.EventHandler(this.rdbtnReplacementType_CheckedChanged);
             // 
             // ctrLocalDrivingLicenseInFOWithFilter1
             // 
